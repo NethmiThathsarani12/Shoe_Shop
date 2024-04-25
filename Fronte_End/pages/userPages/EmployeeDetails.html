@@ -1,0 +1,587 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Admin Dashboard</title>
+    <link href="../../assets/icon/logo.png" rel="icon">
+
+    <meta content="Hello Shoe PVT" name="keywords">
+    <meta content="This is Hello shoe Web Project." name="description">
+    <meta content="Nethmi Thathsarani" name="author">
+    <meta content="Nethmi Thathsarani" name="owner">
+    <meta content="width=device-width initial-scale=1 maximum-scale=1 minimum-scale=1 user-scalable=no" name="viewport">
+    <meta content="green" name="theme-color">
+
+    <!-- Google Fonts -->
+    <link href="https://fonts.gstatic.com" rel="preconnect">
+    <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,600,600i,700,700i|Nunito:300,300i,400,400i,600,600i,700,700i|Poppins:300,300i,400,400i,500,500i,600,600i,700,700i"
+          rel="stylesheet">
+
+    <!-- Vendor CSS Files -->
+    <link href="../../assets/vendor/bootstrap-5.2.1-dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="../../assets/vendor/bootstrap-icons/bootstrap-icons.css" rel="stylesheet">
+    <link href="../../assets/vendor/boxicons/css/boxicons.min.css" rel="stylesheet">
+    <link href="../../assets/vendor/sweetalert2-11.6.16/sweetalert2.min.css" rel="stylesheet">
+
+    <!-- Template Dashboard CSS File -->
+    <link href="../../assets/css/dashboardStyle.css" rel="stylesheet">
+
+</head>
+<body>
+<!-- ======= Header ======= -->
+<header id="header" class="header fixed-top d-flex align-items-center">
+
+    <div class="d-flex align-items-center justify-content-between">
+        <a href="../UserDashBoard.html" class="logo d-flex align-items-center">
+            <span class="d-none d-lg-block">Hello <span>Shoe.</span></span>
+        </a>
+        <i class="bi bi-list toggle-sidebar-btn"></i>
+    </div><!-- End Logo -->
+
+    <nav class="header-nav ms-auto">
+        <ul class="d-flex align-items-center">
+
+            <li class="nav-item d-block d-lg-none">
+                <a class="nav-link nav-icon search-bar-toggle " href="#">
+                    <i class="bi bi-search"></i>
+                </a>
+            </li><!-- End Search Icon-->
+
+            <li class="nav-item dropdown">
+
+                <a class="nav-link nav-icon" href="#" data-bs-toggle="dropdown">
+                    <i class="bi bi-bell"></i>
+                    <span class="badge bg-primary badge-number">4</span>
+                </a><!-- End Notification Icon -->
+
+                <ul class="dropdown-menu dropdown-menu-end dropdown-menu-arrow notifications">
+                    <li class="dropdown-header">
+                        You have 4 new notifications
+                        <a href="#"><span class="badge rounded-pill bg-primary p-2 ms-2">View all</span></a>
+                    </li>
+                    <li>
+                        <hr class="dropdown-divider">
+                    </li>
+
+                    <li class="notification-item">
+                        <i class="bi bi-exclamation-circle text-warning"></i>
+                        <div>
+                            <h4>Lorem Ipsum</h4>
+                            <p>Quae dolorem earum veritatis oditseno</p>
+                            <p>30 min. ago</p>
+                        </div>
+                    </li>
+
+                    <li>
+                        <hr class="dropdown-divider">
+                    </li>
+
+                    <li class="notification-item">
+                        <i class="bi bi-x-circle text-danger"></i>
+                        <div>
+                            <h4>Atque rerum nesciunt</h4>
+                            <p>Quae dolorem earum veritatis oditseno</p>
+                            <p>1 hr. ago</p>
+                        </div>
+                    </li>
+
+                    <li>
+                        <hr class="dropdown-divider">
+                    </li>
+
+                    <li class="notification-item">
+                        <i class="bi bi-check-circle text-success"></i>
+                        <div>
+                            <h4>Sit rerum fuga</h4>
+                            <p>Quae dolorem earum veritatis oditseno</p>
+                            <p>2 hrs. ago</p>
+                        </div>
+                    </li>
+
+                    <li>
+                        <hr class="dropdown-divider">
+                    </li>
+
+                    <li class="notification-item">
+                        <i class="bi bi-info-circle text-primary"></i>
+                        <div>
+                            <h4>Dicta reprehenderit</h4>
+                            <p>Quae dolorem earum veritatis oditseno</p>
+                            <p>4 hrs. ago</p>
+                        </div>
+                    </li>
+
+                    <li>
+                        <hr class="dropdown-divider">
+                    </li>
+                    <li class="dropdown-footer">
+                        <a href="#">Show all notifications</a>
+                    </li>
+
+                </ul><!-- End Notification Dropdown Items -->
+
+            </li><!-- End Notification Nav -->
+
+            <li class="nav-item dropdown">
+
+                <a class="nav-link nav-icon" href="#" data-bs-toggle="dropdown">
+                    <i class="bi bi-chat-left-text"></i>
+                    <span class="badge bg-success badge-number">3</span>
+                </a><!-- End Messages Icon -->
+
+                <ul class="dropdown-menu dropdown-menu-end dropdown-menu-arrow messages">
+                    <li class="dropdown-header">
+                        You have 3 new messages
+                        <a href="#"><span class="badge rounded-pill bg-primary p-2 ms-2">View all</span></a>
+                    </li>
+                    <li>
+                        <hr class="dropdown-divider">
+                    </li>
+
+                    <li class="message-item">
+                        <a href="#">
+                            <img src="../assets/img/massage/messages-1.jpg" alt="" class="rounded-circle">
+                            <div>
+                                <h4>Maria Hudson</h4>
+                                <p>Velit asperiores et ducimus soluta repudiandae labore officia est ut...</p>
+                                <p>4 hrs. ago</p>
+                            </div>
+                        </a>
+                    </li>
+                    <li>
+                        <hr class="dropdown-divider">
+                    </li>
+
+                    <li class="message-item">
+                        <a href="#">
+                            <img src="../assets/img/massage/messages-2.jpg" alt="" class="rounded-circle">
+                            <div>
+                                <h4>Anna Nelson</h4>
+                                <p>Velit asperiores et ducimus soluta repudiandae labore officia est ut...</p>
+                                <p>6 hrs. ago</p>
+                            </div>
+                        </a>
+                    </li>
+                    <li>
+                        <hr class="dropdown-divider">
+                    </li>
+
+                    <li class="message-item">
+                        <a href="#">
+                            <img src="../assets/img/massage/messages-3.jpg" alt="" class="rounded-circle">
+                            <div>
+                                <h4>David Muldon</h4>
+                                <p>Velit asperiores et ducimus soluta repudiandae labore officia est ut...</p>
+                                <p>8 hrs. ago</p>
+                            </div>
+                        </a>
+                    </li>
+                    <li>
+                        <hr class="dropdown-divider">
+                    </li>
+
+                    <li class="dropdown-footer">
+                        <a href="#">Show all messages</a>
+                    </li>
+
+                </ul><!-- End Messages Dropdown Items -->
+
+            </li><!-- End Messages Nav -->
+
+            <li class="nav-item dropdown pe-3">
+
+                <a class="nav-link nav-profile d-flex align-items-center pe-0" href="#" data-bs-toggle="dropdown">
+                    <img src="../assets/img/massage/profile-img.jpg" alt="Profile" class="rounded-circle">
+                    <span class="d-none d-md-block dropdown-toggle ps-2">K.L Samson</span>
+                </a><!-- End Profile Iamge Icon -->
+
+                <ul class="dropdown-menu dropdown-menu-end dropdown-menu-arrow profile">
+                    <li class="dropdown-header">
+                        <h6>K.L Samson</h6>
+                        <span>Manager</span>
+                    </li>
+                    <li>
+                        <hr class="dropdown-divider">
+                    </li>
+
+                    <li>
+                        <a class="dropdown-item d-flex align-items-center" href="">
+                            <i class="bi bi-person"></i>
+                            <span>My Profile</span>
+                        </a>
+                    </li>
+                    <li>
+                        <hr class="dropdown-divider">
+                    </li>
+
+                    <li>
+                        <a class="dropdown-item d-flex align-items-center" href="">
+                            <i class="bi bi-gear"></i>
+                            <span>Account Settings</span>
+                        </a>
+                    </li>
+                    <li>
+                        <hr class="dropdown-divider">
+                    </li>
+
+                    <li>
+                        <a class="dropdown-item d-flex align-items-center" href="">
+                            <i class="bi bi-question-circle"></i>
+                            <span>Need Help?</span>
+                        </a>
+                    </li>
+                    <li>
+                        <hr class="dropdown-divider">
+                    </li>
+
+                    <li>
+                        <a class="dropdown-item d-flex align-items-center" href="login.html">
+                            <i class="bi bi-box-arrow-right"></i>
+                            <span>Sign Out</span>
+                        </a>
+                    </li>
+
+                </ul><!-- End Profile Dropdown Items -->
+            </li><!-- End Profile Nav -->
+
+        </ul>
+    </nav><!-- End Icons Navigation -->
+
+</header>
+<!-- End Header -->
+
+<!-- ======= Sidebar ======= -->
+<aside id="sidebar" class="sidebar">
+
+    <ul class="sidebar-nav" id="sidebar-nav">
+
+        <li class="nav-item">
+            <a class="nav-link " href="../UserDashBoard.html">
+                <i class="bi bi-grid"></i>
+                <span>Dashboard</span>
+            </a>
+        </li><!-- End Dashboard Nav -->
+
+        <li class="nav-item">
+            <a class="nav-link collapsed" data-bs-target="#forms-nav" data-bs-toggle="collapse" href="#">
+                <i class="bi bi-kanban"></i><span>Manage</span><i class="bi bi-chevron-down ms-auto"></i>
+            </a>
+            <ul id="forms-nav" class="nav-content collapse " data-bs-parent="#sidebar-nav">
+                <li>
+                    <a href="Orders.html">
+                        <i class="bi bi-circle"></i><span>Orders</span>
+                    </a>
+                </li>
+                <!--        <li>-->
+                <!--          <a href="adminPages/Employee.html">-->
+                <!--            <i class="bi bi-circle"></i><span>Employee</span>-->
+                <!--          </a>-->
+                <!--        </li>-->
+                <!--        <li>-->
+                <!--          <a href="adminPages/Supplier.html">-->
+                <!--            <i class="bi bi-circle"></i><span>Supplier</span>-->
+                <!--          </a>-->
+                <!--        </li>-->
+            </ul>
+        </li>
+        <!-- End Forms Nav -->
+
+        <li class="nav-item">
+            <a class="nav-link collapsed" data-bs-target="#components-nav" data-bs-toggle="collapse" href="#">
+                <i class="bi bi-layout-text-window-reverse"></i><span>Details</span><i
+                    class="bi bi-chevron-down ms-auto"></i>
+            </a>
+            <ul id="components-nav" class="nav-content collapse " data-bs-parent="#sidebar-nav">
+                <li>
+                    <a href="SupplierDetails.html">
+                        <i class="bi bi-circle"></i><span>Supplier Details</span>
+                    </a>
+                </li>
+                <li>
+                    <a href="EmployeeDetails.html">
+                        <i class="bi bi-circle"></i><span>Employee Details</span>
+                    </a>
+                </li>
+            </ul>
+        </li><!-- End View Nav -->
+
+        <!--    <li class="nav-item">-->
+        <!--      <a class="nav-link collapsed" href="adminPages/CusomerRequest.html" id="myDetailsSection">-->
+        <!--        <i class="bi bi-kanban"></i>-->
+        <!--        <span>Rent Request</span>-->
+        <!--      </a>-->
+        <!--    </li>-->
+
+        <!--    <li class="nav-item">-->
+        <!--      <a class="nav-link collapsed" href="adminPages/IncomeDetails.html" id="incomeDetails">-->
+        <!--        <i class="bi bi-kanban"></i>-->
+        <!--        <span>Income Details</span>-->
+        <!--      </a>-->
+        <!--    </li>-->
+
+        <li class="nav-item">
+            <a class="nav-link collapsed" href="../login.html">
+                <i class="bi bi-box-arrow-in-right"></i>
+                <span>LogOut</span>
+            </a>
+        </li>
+        <!-- End Login Page Nav -->
+
+    </ul>
+
+</aside>
+<!-- End Sidebar-->
+
+<!-- ======= Main ======= -->
+<main id="main" class="main">
+
+    <section class="container-fluid mt-3" id="manageEmployee">
+        <nav>
+            <ol class="breadcrumb">
+                <li class="breadcrumb-item"><a href="../UserDashBoard.html">Home</a></li>
+                <li class="breadcrumb-item active">Details / Employee</li>
+            </ol>
+        </nav>
+
+        <div class="row mt-3">
+            <div class="card info-card">
+                <div class="search-bar mt-4">
+                    <div class="search-form d-flex align-items-center">
+                        <input type="search" name="user_Id" id="search_Id" placeholder="Search" title="Enter search keyword">
+                        <button type="button" title="Search"><i class="bi bi-search"></i></button>
+                    </div>
+                </div>
+
+            </div>
+            <div class="card info-card">
+                <!-- View Customer Details Table Start -->
+                <div class="row mt-1 mt-md-2 mt-lg-4 mm-2 p-2 justify-content-around" style="height: 350px;">
+                    <div class="col-11 justify-content-around sectionBorder"
+                         style="height: 290px; background: white">
+                        <div class="table-responsive customerTableDiv overflow-auto " style="height: 300px;">
+                            <table class="table table-light table-striped table-bordered table-hover">
+                                <thead class="text-dark table-danger text-center  table-bordered sticky-top">
+                                <tr>
+                                    <th scope="col">Employee code</th>
+                                    <th scope="col">Employee name</th>
+                                    <th scope="col">Employee Profile Pic</th>
+                                    <th scope="col">Gender</th>
+                                    <th scope="col">Status</th>
+                                    <th scope="col">Designation</th>
+                                    <th scope="col">Access Role</th>
+                                    <th scope="col">DOB</th>
+                                    <th scope="col">Date of Join</th>
+                                    <th scope="col">Attached Branch</th>
+                                    <th scope="col">Address Line 01</th>
+                                    <th scope="col">Address Line 02</th>
+                                    <th scope="col">Address Line 03</th>
+                                    <th scope="col">Address Line 04</th>
+                                    <th scope="col">Address Line 05</th>
+                                    <th scope="col">ContactNo</th>
+                                    <th scope="col">Email</th>
+                                    <th scope="col">Inform In Emergency</th>
+                                    <th scope="col">Emergency Contact</th>
+                                </tr>
+                                </thead>
+                                <tbody id="customerTable"></tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+                <!-- View Customer Details Table End -->
+            </div>
+        </div>
+    </section>
+
+
+    <!-- End Page Title -->
+    <!--    <section class="section dashboard">-->
+    <!--        <div class="row">-->
+
+    <!--            &lt;!&ndash; Left side columns &ndash;&gt;-->
+    <!--            <div class="col-lg-12">-->
+    <!--                <div class="row">-->
+
+    <!--                    &lt;!&ndash; Car Card &ndash;&gt;-->
+    <!--                    <div class="col-xxl-4 col-md-6">-->
+    <!--                        <div class="card info-card car-card">-->
+    <!--                            <div class="card-body">-->
+    <!--                                <h5 class="card-title">Today <span>| Orders</span></h5>-->
+    <!--                                <div class="d-flex align-items-center">-->
+    <!--                                    <div class="card-icon rounded-circle d-flex align-items-center justify-content-center">-->
+    <!--                                        <i class="bi bi-car-front-fill"></i>-->
+    <!--                                    </div>-->
+    <!--                                    <div class="ps-3">-->
+    <!--                                        <h6 id="carCount">0</h6>-->
+    <!--                                    </div>-->
+    <!--                                </div>-->
+    <!--                            </div>-->
+    <!--                        </div>-->
+    <!--                    </div>-->
+    <!--                    &lt;!&ndash; End Car Card &ndash;&gt;-->
+
+    <!--                    &lt;!&ndash; Available Car Card &ndash;&gt;-->
+    <!--                    <div class="col-xxl-4 col-md-6">-->
+    <!--                        <div class="card info-card car-card">-->
+    <!--                            <div class="card-body">-->
+    <!--                                <h5 class="card-title">Today <span>| Supplier</span></h5>-->
+    <!--                                <div class="d-flex align-items-center">-->
+    <!--                                    <div class="card-icon rounded-circle d-flex align-items-center justify-content-center">-->
+    <!--                                        <i class="bi bi-car-front-fill"></i>-->
+    <!--                                    </div>-->
+    <!--                                    <div class="ps-3">-->
+    <!--                                        <h6 id="availableCarCount">0</h6>-->
+    <!--                                    </div>-->
+    <!--                                </div>-->
+    <!--                            </div>-->
+    <!--                        </div>-->
+    <!--                    </div>-->
+    <!--                    &lt;!&ndash; End Car Card &ndash;&gt;-->
+
+    <!--                    &lt;!&ndash; Reserved Car Card &ndash;&gt;-->
+    <!--                    <div class="col-xxl-4 col-md-6">-->
+    <!--                        <div class="card info-card car-card">-->
+    <!--                            <div class="card-body">-->
+    <!--                                <h5 class="card-title">All<span> | Employee</span></h5>-->
+    <!--                                <div class="d-flex align-items-center">-->
+    <!--                                    <div class="card-icon rounded-circle d-flex align-items-center justify-content-center">-->
+    <!--                                        <i class="bi bi-car-front-fill"></i>-->
+    <!--                                    </div>-->
+    <!--                                    <div class="ps-3">-->
+    <!--                                        <h6 id="reservedCarCount">0</h6>-->
+    <!--                                    </div>-->
+    <!--                                </div>-->
+    <!--                            </div>-->
+    <!--                        </div>-->
+    <!--                    </div>-->
+    <!--                    &lt;!&ndash; End Car Card &ndash;&gt;-->
+    <!--                </div>-->
+    <!--                <div class="img">-->
+    <!--                    <img class="testimg" src="../assets/img/AdminDashBoard.jpg" alt="">-->
+    <!--                </div>-->
+    <!--            </div>-->
+    <!--            &lt;!&ndash; End Left side columns &ndash;&gt;-->
+
+    <!--            &lt;!&ndash; Right side columns &ndash;&gt;-->
+    <!--            &lt;!&ndash;      <div class="col-lg-4">&ndash;&gt;-->
+
+    <!--            &lt;!&ndash;        &lt;!&ndash; Recent Activity &ndash;&gt;&ndash;&gt;-->
+    <!--            &lt;!&ndash;&lt;!&ndash;        <div class="card">&ndash;&gt;&ndash;&gt;-->
+    <!--            &lt;!&ndash;&lt;!&ndash;          <div class="filter">&ndash;&gt;&ndash;&gt;-->
+    <!--            &lt;!&ndash;&lt;!&ndash;            <a class="icon" href="#" data-bs-toggle="dropdown"><i class="bi bi-three-dots"></i></a>&ndash;&gt;&ndash;&gt;-->
+    <!--            &lt;!&ndash;&lt;!&ndash;            <ul class="dropdown-menu dropdown-menu-end dropdown-menu-arrow">&ndash;&gt;&ndash;&gt;-->
+    <!--            &lt;!&ndash;&lt;!&ndash;              <li class="dropdown-header text-start">&ndash;&gt;&ndash;&gt;-->
+    <!--            &lt;!&ndash;&lt;!&ndash;                <h6>Filter</h6>&ndash;&gt;&ndash;&gt;-->
+    <!--            &lt;!&ndash;&lt;!&ndash;              </li>&ndash;&gt;&ndash;&gt;-->
+
+    <!--            &lt;!&ndash;&lt;!&ndash;              <li><a class="dropdown-item" href="#">Today</a></li>&ndash;&gt;&ndash;&gt;-->
+    <!--            &lt;!&ndash;&lt;!&ndash;              <li><a class="dropdown-item" href="#">This Month</a></li>&ndash;&gt;&ndash;&gt;-->
+    <!--            &lt;!&ndash;&lt;!&ndash;              <li><a class="dropdown-item" href="#">This Year</a></li>&ndash;&gt;&ndash;&gt;-->
+    <!--            &lt;!&ndash;&lt;!&ndash;            </ul>&ndash;&gt;&ndash;&gt;-->
+    <!--            &lt;!&ndash;&lt;!&ndash;          </div>&ndash;&gt;&ndash;&gt;-->
+
+    <!--            &lt;!&ndash;&lt;!&ndash;          <div class="card-body">&ndash;&gt;&ndash;&gt;-->
+    <!--            &lt;!&ndash;&lt;!&ndash;            <h5 class="card-title">Recent Activity <span>| Today</span></h5>&ndash;&gt;&ndash;&gt;-->
+
+    <!--            &lt;!&ndash;&lt;!&ndash;            <div class="activity">&ndash;&gt;&ndash;&gt;-->
+
+    <!--            &lt;!&ndash;&lt;!&ndash;              <div class="activity-item d-flex">&ndash;&gt;&ndash;&gt;-->
+    <!--            &lt;!&ndash;&lt;!&ndash;                <div class="activite-label">40 min</div>&ndash;&gt;&ndash;&gt;-->
+    <!--            &lt;!&ndash;&lt;!&ndash;                <i class='bi bi-circle-fill activity-badge text-success align-self-start'></i>&ndash;&gt;&ndash;&gt;-->
+    <!--            &lt;!&ndash;&lt;!&ndash;                <div class="activity-content">&ndash;&gt;&ndash;&gt;-->
+    <!--            &lt;!&ndash;&lt;!&ndash;                  Add New Car <a href="#" class="fw-bold text-dark">Brand BMW</a>&ndash;&gt;&ndash;&gt;-->
+    <!--            &lt;!&ndash;&lt;!&ndash;                </div>&ndash;&gt;&ndash;&gt;-->
+    <!--            &lt;!&ndash;&lt;!&ndash;              </div>&ndash;&gt;&ndash;&gt;-->
+    <!--            &lt;!&ndash;&lt;!&ndash;              &lt;!&ndash; End activity item&ndash;&gt;&ndash;&gt;&ndash;&gt;-->
+
+    <!--            &lt;!&ndash;&lt;!&ndash;              <div class="activity-item d-flex">&ndash;&gt;&ndash;&gt;-->
+    <!--            &lt;!&ndash;&lt;!&ndash;                <div class="activite-label">56 min</div>&ndash;&gt;&ndash;&gt;-->
+    <!--            &lt;!&ndash;&lt;!&ndash;                <i class='bi bi-circle-fill activity-badge text-danger align-self-start'></i>&ndash;&gt;&ndash;&gt;-->
+    <!--            &lt;!&ndash;&lt;!&ndash;                <div class="activity-content">&ndash;&gt;&ndash;&gt;-->
+    <!--            &lt;!&ndash;&lt;!&ndash;                  C00-002 Customer Rent CAR-003&ndash;&gt;&ndash;&gt;-->
+    <!--            &lt;!&ndash;&lt;!&ndash;                </div>&ndash;&gt;&ndash;&gt;-->
+    <!--            &lt;!&ndash;&lt;!&ndash;              </div>&ndash;&gt;&ndash;&gt;-->
+    <!--            &lt;!&ndash;&lt;!&ndash;              &lt;!&ndash; End activity item&ndash;&gt;&ndash;&gt;&ndash;&gt;-->
+
+    <!--            &lt;!&ndash;&lt;!&ndash;              <div class="activity-item d-flex">&ndash;&gt;&ndash;&gt;-->
+    <!--            &lt;!&ndash;&lt;!&ndash;                <div class="activite-label">2 hrs</div>&ndash;&gt;&ndash;&gt;-->
+    <!--            &lt;!&ndash;&lt;!&ndash;                <i class='bi bi-circle-fill activity-badge text-primary align-self-start'></i>&ndash;&gt;&ndash;&gt;-->
+    <!--            &lt;!&ndash;&lt;!&ndash;                <div class="activity-content">&ndash;&gt;&ndash;&gt;-->
+    <!--            &lt;!&ndash;&lt;!&ndash;                  C00-010 Customer Rent CAR-007&ndash;&gt;&ndash;&gt;-->
+    <!--            &lt;!&ndash;&lt;!&ndash;                </div>&ndash;&gt;&ndash;&gt;-->
+    <!--            &lt;!&ndash;&lt;!&ndash;              </div>&ndash;&gt;&ndash;&gt;-->
+    <!--            &lt;!&ndash;&lt;!&ndash;              &lt;!&ndash; End activity item&ndash;&gt;&ndash;&gt;&ndash;&gt;-->
+
+    <!--            &lt;!&ndash;&lt;!&ndash;              <div class="activity-item d-flex">&ndash;&gt;&ndash;&gt;-->
+    <!--            &lt;!&ndash;&lt;!&ndash;                <div class="activite-label">40 min</div>&ndash;&gt;&ndash;&gt;-->
+    <!--            &lt;!&ndash;&lt;!&ndash;                <i class='bi bi-circle-fill activity-badge text-success align-self-start'></i>&ndash;&gt;&ndash;&gt;-->
+    <!--            &lt;!&ndash;&lt;!&ndash;                <div class="activity-content">&ndash;&gt;&ndash;&gt;-->
+    <!--            &lt;!&ndash;&lt;!&ndash;                  Add New Car <a href="#" class="fw-bold text-dark">Brand Banz</a>&ndash;&gt;&ndash;&gt;-->
+    <!--            &lt;!&ndash;&lt;!&ndash;                </div>&ndash;&gt;&ndash;&gt;-->
+    <!--            &lt;!&ndash;&lt;!&ndash;              </div>&ndash;&gt;&ndash;&gt;-->
+    <!--            &lt;!&ndash;&lt;!&ndash;              &lt;!&ndash; End activity item&ndash;&gt;&ndash;&gt;&ndash;&gt;-->
+
+    <!--            &lt;!&ndash;&lt;!&ndash;              <div class="activity-item d-flex">&ndash;&gt;&ndash;&gt;-->
+    <!--            &lt;!&ndash;&lt;!&ndash;                <div class="activite-label">2 days</div>&ndash;&gt;&ndash;&gt;-->
+    <!--            &lt;!&ndash;&lt;!&ndash;                <i class='bi bi-circle-fill activity-badge text-warning align-self-start'></i>&ndash;&gt;&ndash;&gt;-->
+    <!--            &lt;!&ndash;&lt;!&ndash;                <div class="activity-content">&ndash;&gt;&ndash;&gt;-->
+    <!--            &lt;!&ndash;&lt;!&ndash;                  C00-012 Customer Request a Rent CRI-007 Car.&ndash;&gt;&ndash;&gt;-->
+    <!--            &lt;!&ndash;&lt;!&ndash;                </div>&ndash;&gt;&ndash;&gt;-->
+    <!--            &lt;!&ndash;&lt;!&ndash;              </div>&ndash;&gt;&ndash;&gt;-->
+    <!--            &lt;!&ndash;&lt;!&ndash;              &lt;!&ndash; End activity item&ndash;&gt;&ndash;&gt;&ndash;&gt;-->
+
+    <!--            &lt;!&ndash;&lt;!&ndash;              <div class="activity-item d-flex">&ndash;&gt;&ndash;&gt;-->
+    <!--            &lt;!&ndash;&lt;!&ndash;                <div class="activite-label">2 Days</div>&ndash;&gt;&ndash;&gt;-->
+    <!--            &lt;!&ndash;&lt;!&ndash;                <i class='bi bi-circle-fill activity-badge text-success align-self-start'></i>&ndash;&gt;&ndash;&gt;-->
+    <!--            &lt;!&ndash;&lt;!&ndash;                <div class="activity-content">&ndash;&gt;&ndash;&gt;-->
+    <!--            &lt;!&ndash;&lt;!&ndash;                  Add New Car <a href="#" class="fw-bold text-dark">Brand Banz</a>&ndash;&gt;&ndash;&gt;-->
+    <!--            &lt;!&ndash;&lt;!&ndash;                </div>&ndash;&gt;&ndash;&gt;-->
+    <!--            &lt;!&ndash;&lt;!&ndash;              </div>&ndash;&gt;&ndash;&gt;-->
+    <!--            &lt;!&ndash;&lt;!&ndash;              &lt;!&ndash; End activity item&ndash;&gt;&ndash;&gt;&ndash;&gt;-->
+    <!--            &lt;!&ndash;&lt;!&ndash;            </div>&ndash;&gt;&ndash;&gt;-->
+
+    <!--            &lt;!&ndash;&lt;!&ndash;          </div>&ndash;&gt;&ndash;&gt;-->
+    <!--            &lt;!&ndash;&lt;!&ndash;        </div>&ndash;&gt;&ndash;&gt;-->
+    <!--            &lt;!&ndash;        &lt;!&ndash; End Recent Activity &ndash;&gt;&ndash;&gt;-->
+
+    <!--            &lt;!&ndash;      </div>&ndash;&gt;-->
+    <!--            &lt;!&ndash; End Right side columns &ndash;&gt;-->
+    <!--        </div>-->
+    <!--    </section>-->
+</main>
+<!-- End #main -->
+
+<!-- ======= Footer ======= -->
+<footer id="footer" class="footer">
+    <div class="copyright">
+        &copy; Copyright <strong><span>Hello Shoe PVT</span></strong>. All Rights Reserved
+    </div>
+    <div class="credits">
+        Designed by <a href="">Lasini Prabashi</a>
+    </div>
+</footer><!-- End Footer -->
+
+<a href="#" class="back-to-top d-flex align-items-center justify-content-center"><i
+        class="bi bi-arrow-up-short"></i></a>
+
+<!-- Vendor JS Files -->
+<script src="../../assets/vendor/apexcharts/apexcharts.min.js"></script>
+<script src="../../assets/vendor/bootstrap-5.2.1-dist/js/bootstrap.bundle.min.js"></script>
+<script src="../../assets/vendor/jQuery/jquery-3.6.1.min.js "></script>
+<script rel="script" src="../../assets/vendor/sweetalert2-11.6.16/sweetalert2.min.js"></script>
+
+<!-- Template Dashboard Main JS File -->
+<script src="../../assets/js/dashboardMain.js"></script>
+
+<!-- Controller JS File -->
+<script src="../../controller/Reg_UserController.js"></script>
+<script src="../../controller/DashBoardController.js"></script>
+
+
+<!-- Util JS File -->
+<script src="../../util/alert.js" rel="script"></script>
+<script src="../../util/validation.js" rel="script"></script>
+
+</body>
+</html>
