@@ -1,5 +1,5 @@
 
-let employeeBaseUrl = "http://localhost:8080/POS_Back_End_war/";
+let employeeBaseUrl = "http://localhost:8080/Back_End/";
 loadAllEmployee();
 
 $("#btnAddEmployee").attr('disabled', true);
@@ -116,3 +116,42 @@ function loadAllEmployee() {
         }
     });
 }
+
+$("#search_Id").on("keypress", function (event) {
+    if (event.which === 13) {
+        var search = $("#search_Id").val();
+        $("#employeeTable").empty();
+        $.ajax({
+            url: employeeBaseUrl + "employee/searchEmployee/?employee_Id="+ search,
+            method: "GET",
+            contentType: "application/json",
+            dataType: "json",
+            success: function (res) {
+                console.log(res);
+                $("#Employee_code").val(res.Employee_code);
+                $("#employee_name").val(res.employee_name);
+                $("#EProfile_pic").val(res.EProfile_pic);
+                $("#E_gender").val(res.E_gender);
+                $("#E_status").val(res.E_status);
+                $("#email").val(res.email);
+                $("#nic_No").val(res.nic_No);
+                $("#license_No").val(res.license_No);
+                $("#license_Img").prop(res.license_Img);
+                $("#driverAvailability").val(res.driverAvailability);
+                $("#role_Type").val(res.user.role_Type);
+                $("#user_Name").val(res.user.user_Name);
+                $("#password").val(res.user.password);
+
+
+                let row = "<tr><td>" + res.user_Id + "</td><td>" + res.name.firstName + "</td><td>" + res.name.lastName + "</td><td>" + res.contact_No + "</td><td>" + res.address + "</td><td>" + res.email + "</td><td>" + res.nic_No + "</td><td>" + res.license_No + "</td><td>" + res.driverAvailability + "</td><td>" + res.user.role_Type + "</td><td>" + res.user.user_Name + "</td><td>" + res.user.password + "</td></tr>";
+                $("#driverTable").append(row);
+            },
+            error: function (error) {
+                loadAllDrivers();
+                let message = JSON.parse(error.responseText).message;
+                emptyMassage(message);
+            }
+        })
+    }
+
+});
