@@ -1,5 +1,5 @@
 package lk.ijse.gdse66.spring.Back_End.enums;
 
-public enum Role {
-    ADMIN,USER
+public enum Level {
+    GOLD,SILVER,BRONZE,NEW
 }
