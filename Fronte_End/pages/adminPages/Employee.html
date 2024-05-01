@@ -367,47 +367,53 @@
                             <section id="sec1Employee" class="col-md-4 mt-3">
                                 <div class="mb-sm-0">
                                     <label class="form-label" for="Employee_code">Employee code</label>
-                                    <input type="text" name="Employee_code" class="form-control" readonly id="Employee_code"
+                                    <input type="text" name="code" class="form-control" readonly id="Employee_code"
                                            placeholder="E00-001">
                                     <span class="control-error"></span>
                                 </div>
                                 <div class="mb-sm-0 mt-3">
                                     <label class="form-label" for="employee_name">Employee name</label>
-                                    <input type="text" name="employee_name" class="form-control" id="employee_name"
+                                    <input type="text" name="name" class="form-control" id="employee_name"
                                            placeholder="Name">
                                     <span class="control-error"></span>
                                 </div>
                                 <div class="mb-sm-0 mt-3 col-md-11">
                                     <label class="form-label" for="EProfile_pic">Employee Profile Pic</label>
-                                    <input class="form-control" id="EProfile_pic" type="file" name="EProfile_pic">
+                                    <input class="form-control" id="EProfile_pic" type="file" name="pic">
                                     <span class="control-error"></span>
                                 </div>
                                 <div class="mb-sm-0 mt-3">
                                     <label class="form-label" for="E_gender">Gender</label>
-                                    <select class="form-control" id="E_gender" name="E_gender">
-                                        <option>Male</option>
-                                        <option>Female</option>
-                                        <option>Other</option>
+                                    <select class="form-control" id="E_gender" name="gender">
+                                        <option value="Male">Male</option>
+                                        <option value="Female">Female</option>
+                                        <option value="Others">Other</option>
                                     </select>
 
                                     <span class="control-error"></span>
                                 </div>
                                 <div class="mb-sm-0 mt-3">
                                     <label class="form-label" for="E_status">Status</label>
-                                    <input type="text" name="E_status" class="form-control" id="E_status"
+                                    <input type="text" name="status" class="form-control" id="E_status"
                                            placeholder="status">
                                     <span class="control-error"></span>
                                 </div>
                                 <div class="mb-sm-0 mt-3">
-                                    <label class="form-label" for="E_Designation">Designation</label>
-                                    <input type="text" name="E_Designation" class="form-control" id="E_Designation"
-                                           placeholder="Designation">
+                                    <label class="form-label" for="designation">designation</label>
+                                    <select class="form-control" id="designation" name="designation">
+                                        <option selected></option>
+                                        <option value="Manager">Manager</option>
+                                        <option value="Accountant">Accountant</option>
+                                        <option value="Senior Sales Assistant">Senior Sales Assistant</option>
+                                        <option value="SalesAssistant">SalesAssistant</option>
+                                    </select>
+
                                     <span class="control-error"></span>
                                 </div>
 
                                 <div class="mb-sm-0 mt-3">
-                                    <label class="form-label" for=" E_AccessRole"> Access Role</label>
-                                    <select class="form-control" id=" E_AccessRole" name=" E_AccessRole">
+                                    <label class="form-label" for="E_AccessRole"> Access Role</label>
+                                    <select class="form-control" id="E_AccessRole" name="role">
                                         <option>Admin</option>
                                         <option>User</option>
                                     </select>
@@ -416,7 +422,7 @@
                                 </div>
                                 <div class="mb-sm-0 mt-3">
                                     <label class="form-label" for="E_dob">DOB</label>
-                                    <input type="text" name="E_dob" class="form-control" id="E_dob"
+                                    <input type="text" name="birth" class="form-control" id="E_dob"
                                            placeholder="DOB">
                                     <span class="control-error"></span>
                                 </div>
@@ -425,13 +431,13 @@
                             <section id="sec2Employee" class="col-md-4 mt-3">
                                 <div class="mb-sm-0">
                                     <label class="form-label" for="E_DOF">Date of Join</label>
-                                    <input type="text" name="E_DOF" class="form-control" id="E_DOF"
+                                    <input type="text" name="joinDate" class="form-control" id="E_DOF"
                                            placeholder="Date of Join">
                                     <span class="control-error"></span>
                                 </div>
                                 <div class="mb-sm-0 mt-3">
                                     <label class="form-label" for="E_Attached">Attached Branch</label>
-                                    <input type="text" name="E_Attached" class="form-control" id="E_Attached"
+                                    <input type="text" name="branch" class="form-control" id="E_Attached"
                                            placeholder="Attached Branch">
                                     <span class="control-error"></span>
                                 </div>
@@ -463,8 +469,8 @@
                                     <span class="control-error"></span>
                                 </div>
                                 <div class="mb-sm-0 mt-3">
-                                    <label class="form-label" for=" E_ContactNo"> ContactNo</label>
-                                    <input type="text" name=" E_ContactNo" class="form-control" id=" E_ContactNo"
+                                    <label class="form-label" for="E_ContactNo"> ContactNo</label>
+                                    <input type="text" name="contact" class="form-control" id="E_ContactNo"
                                            placeholder=" ContactNo">
                                     <span class="control-error"></span>
                                 </div>
@@ -473,20 +479,20 @@
                             <section id="sec3Employee" class="col-md-4 mt-3">
                                 <div class="mb-sm-0">
                                     <label class="form-label" for="E_email">Email</label>
-                                    <input type="text" name="E_email" class="form-control" id="E_email"
+                                    <input type="text" name="email" class="form-control" id="E_email"
                                            placeholder="Email">
                                     <span class="control-error"></span>
                                 </div>
                                 <div class="mb-sm-0">
                                     <label class="form-label" for="ICE">Inform in case of
                                         emergency</label>
-                                    <input type="text" name="ICE" class="form-control" id="ICE">
+                                    <input type="text" name="person" class="form-control" id="ICE">
                                     <span class="control-error"></span>
                                 </div>
 
                                 <div class="mb-sm-0">
                                     <label class="form-label" for="E_E_contact">Emergency Contact</label>
-                                    <input type="text" name="E_E_contact" class="form-control" id="E_E_contact"
+                                    <input type="text" name="EmgContact" class="form-control" id="E_E_contact"
                                            placeholder="Emergency Contact">
                                     <span class="control-error"></span>
                                 </div>
@@ -542,6 +548,10 @@
                                         <th scope="col">Date of Join</th>
                                         <th scope="col">Attached Branch</th>
                                         <th scope="col">Address</th>
+                                        <th scope="col">Address</th>
+                                        <th scope="col">Address</th>
+                                        <th scope="col">Address</th>
+                                        <th scope="col">Address</th>
                                         <th scope="col">ContactNo</th>
                                         <th scope="col">Email</th>
                                         <th scope="col">Inform In Emergency</th>
@@ -577,13 +587,13 @@
         class="bi bi-arrow-up-short"></i></a>
 
 <!-- Vendor JS Files -->
-<script src="../../assets/vendor/apexcharts/apexcharts.min.js"></script>
+<!--<script src="../../assets/vendor/apexcharts/apexcharts.min.js"></script>-->
 <script src="../../assets/vendor/bootstrap-5.2.1-dist/js/bootstrap.bundle.min.js"></script>
 <script src="../../assets/vendor/jQuery/jquery-3.6.1.min.js "></script>
 <script rel="script" src="../../assets/vendor/sweetalert2-11.6.16/sweetalert2.min.js"></script>
 
 <!-- Template Dashboard Main JS File -->
-<script src="../../assets/js/dashboardMain.js"></script>
+
 
 <!-- Controller JS File -->
 <script src="../../controller/EmployeeController.js"></script>

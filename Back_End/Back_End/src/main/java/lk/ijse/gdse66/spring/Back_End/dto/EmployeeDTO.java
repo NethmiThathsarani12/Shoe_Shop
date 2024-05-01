@@ -1,12 +1,14 @@
 package lk.ijse.gdse66.spring.Back_End.dto;
 
 import lk.ijse.gdse66.spring.Back_End.embeded.Address;
+import lk.ijse.gdse66.spring.Back_End.enums.Designation;
 import lk.ijse.gdse66.spring.Back_End.enums.Gender;
 import lk.ijse.gdse66.spring.Back_End.enums.Role;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import lombok.ToString;
+import org.springframework.web.multipart.MultipartFile;
 
 import java.time.LocalDate;
 
@@ -16,12 +18,12 @@ import java.time.LocalDate;
 @ToString
 public class EmployeeDTO {
 
-
     private String code;
     private String name;
-    private String pic;
+    private String  pic;
     private Gender gender;
     private String status;
+    private Designation designation;
     private Role role;
     private LocalDate birth;
     private LocalDate joinDate ;
@@ -33,6 +35,4 @@ public class EmployeeDTO {
     private String EmgContact;
 
     private UserDTO user;
-
-
 }

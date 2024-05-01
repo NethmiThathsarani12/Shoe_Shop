@@ -12,7 +12,7 @@ public interface EmployeeService {
     void saveEmployee(EmployeeDTO dto);
     void updateEmployee(EmployeeDTO dto);
     void deleteEmployee(EmployeeDTO dto);
-    EmployeeDTO searchEmpId(String id);
+    Employee searchEmpId(String id);
     ArrayList<EmployeeDTO> loadAllEmployee();
 
     @ResponseBody
