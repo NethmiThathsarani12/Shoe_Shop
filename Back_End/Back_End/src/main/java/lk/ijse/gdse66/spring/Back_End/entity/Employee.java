@@ -10,7 +10,8 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 import lombok.ToString;
 
-import java.time.LocalDate;
+import java.sql.Date;
+
 
 @Entity
 @Data
@@ -22,6 +23,7 @@ public class Employee {
     @Id
     private String code;
     private String name;
+    @Column(columnDefinition = "LONGTEXT")
     private String pic;
     @Enumerated(EnumType.STRING)
     private Gender gender;
@@ -30,8 +32,10 @@ public class Employee {
     private Designation designation;
     @Enumerated(EnumType.STRING)
     private Role role;
-    private LocalDate birth;
-    private LocalDate joinDate ;
+    @Temporal(TemporalType.DATE)
+    private Date birth;
+    @Temporal(TemporalType.DATE)
+    private Date joinDate ;
     private String branch;
     @Embedded
     private Address address;

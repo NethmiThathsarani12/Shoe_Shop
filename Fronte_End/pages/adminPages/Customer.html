@@ -27,6 +27,7 @@
   <!-- Template Dashboard CSS File -->
   <link href="../../assets/css/dashboardStyle.css" rel="stylesheet">
 
+
 </head>
 <body>
 <!-- ======= Header ======= -->
@@ -368,23 +369,23 @@
 
                 <div class="mb-sm-0">
                   <label class="form-label" for="customer_code">Customer code</label>
-                  <input type="text" name="customer_code" class="form-control" readonly id="customer_code"
-                         placeholder="C00-001">
+                  <input type="text" name="code" class="form-control" readonly id="customer_code"
+                         placeholder="customer Id">
                   <span class="control-error"></span>
                 </div>
 
                 <div class="mb-sm-0 mt-3">
                   <label class="form-label" for="customer_name">Customer name</label>
-                  <input type="text" name="customer_name" class="form-control" id="customer_name"
+                  <input type="text" name="name" class="form-control" id="customer_name"
                          placeholder="Name">
                   <span class="control-error"></span>
                 </div>
                 <div class="mb-sm-0 mt-3">
                   <label class="form-label" for="customer_gender">Gender</label>
-                  <select class="form-control" id="customer_gender" name="customer_gender">
-                    <option>Male</option>
-                    <option>Female</option>
-                    <option>Other</option>
+                  <select class="form-control" id="customer_gender" name="gender">
+                    <option value="MALE">MALE</option>
+                    <option value="FEMALE">FEMALE</option>
+                    <option value="OTHERS">OTHERS</option>
                   </select>
 <!--                  <input type="text" name="lastName" class="form-control" id="lastName"-->
 <!--                         placeholder="Last Name">-->
@@ -392,27 +393,34 @@
                 </div>
                 <div class="mb-sm-0 mt-3">
                   <label class="form-label" for="customer_jdlc">Join date as a loyalty customer</label>
-                  <input type="text" name="customer_jdlc" class="form-control" id="customer_jdlc"
+                  <input type="date" name="loyaltyDate" class="form-control" id="customer_jdlc"
                          placeholder="Join date as a loyalty customer">
                   <span class="control-error"></span>
                 </div>
                 <div class="mb-sm-0 mt-3">
-                  <label class="form-label" for="customer_level">Level</label>
-                  <input type="text" name="customer_level" class="form-control" id="customer_level"
-                         placeholder="Level">
+                  <label class="form-label" for="level">Level</label>
+                  <select class="form-control" id="level" name="loyaltyLevel">
+                    <option value="GOLD">GOLD</option>
+                    <option value="SILVER">SILVER</option>
+                    <option value="BRONZE">BRONZE</option>
+                    <option value="NEW">NEW</option>
+
+                  </select>
+                  <!--                  <input type="text" name="lastName" class="form-control" id="lastName"-->
+                  <!--                         placeholder="Last Name">-->
                   <span class="control-error"></span>
                 </div>
 
                 <div class="mb-sm-0 mt-3">
                   <label class="form-label" for="customer_email">Email</label>
-                  <input type="text" name="customer_email" class="form-control" id="customer_email">
+                  <input type="text" name="email" class="form-control" id="customer_email">
                   <span class="control-error"></span>
                 </div>
 
                 <div class="mb-sm-0 mt-3">
                   <label class="form-label" for="customer_rpdt">Recent purchase date and
                     time</label>
-                  <input type="text" name="customer_rpdt" class="form-control" id="customer_rpdt">
+                  <input type="text" name="recentPurchaseDate" class="form-control" id="customer_rpdt">
                   <span class="control-error"></span>
                 </div>
 
@@ -421,52 +429,52 @@
               <section id="sec2Customer" class="col-md-4 mt-3">
                 <div class="mb-sm-0">
                   <label class="form-label" for="total_point">Total points</label>
-                  <input type="text" name="total_point" class="form-control" id="total_point"
+                  <input type="text" name="loyaltyPoints" class="form-control" id="total_point"
                          placeholder="Total Point">
                   <span class="control-error"></span>
                 </div>
                 <div class="mb-sm-0 mt-3">
                   <label class="form-label" for="customer_dob">DOB</label>
-                  <input type="text" name="customer_dob" class="form-control" id="customer_dob"
+                  <input type="date" name="dob" class="form-control" id="customer_dob"
                          placeholder="DOB">
                   <span class="control-error"></span>
                 </div>
                 <div class="mb-sm-0 mt-3">
                   <label class="form-label" for="c_address_01">Address 01</label>
-                  <input type="text" name="c_address_01" class="form-control" id="c_address_01"
+                  <input type="text" name="addressLine1" class="form-control" id="c_address_01"
                          placeholder="Address 01">
                   <span class="control-error"></span>
                 </div>
                 <div class="mb-sm-0 mt-3">
                   <label class="form-label" for="c_address_02">Address 02</label>
-                  <input type="text" name="c_address_02" class="form-control" id="c_address_02"
+                  <input type="text" name="addressLine2" class="form-control" id="c_address_02"
                          placeholder="Address 02">
                   <span class="control-error"></span>
                 </div>
-                <div class="mb-sm-0 mt-3">
-                  <label class="form-label" for="c_address_03">Address 03</label>
-                  <input type="text" name="c_address_03" class="form-control" id="c_address_03"
-                         placeholder="Address 03">
-                  <span class="control-error"></span>
-                </div>
+<!--                <div class="mb-sm-0 mt-3">-->
+<!--                  <label class="form-label" for="c_address_03">Address 03</label>-->
+<!--                  <input type="text" name="c_address_03" class="form-control" id="c_address_03"-->
+<!--                         placeholder="Address 03">-->
+<!--                  <span class="control-error"></span>-->
+<!--                </div>-->
 
-                <div class="mb-sm-0 mt-3">
-                  <label class="form-label" for="c_address_04">Address 04</label>
-                  <input type="text" name="c_address_04" class="form-control" id="c_address_04"
-                         placeholder="Address 04">
-                  <span class="control-error"></span>
-                </div>
+<!--                <div class="mb-sm-0 mt-3">-->
+<!--                  <label class="form-label" for="c_address_04">Address 04</label>-->
+<!--                  <input type="text" name="c_address_04" class="form-control" id="c_address_04"-->
+<!--                         placeholder="Address 04">-->
+<!--                  <span class="control-error"></span>-->
+<!--                </div>-->
 
-                <div class="mb-sm-0 mt-3">
-                  <label class="form-label" for="c_address_05">Address 05</label>
-                  <input type="text" name="c_address_05" class="form-control" id="c_address_05"
-                         placeholder="Address 05">
-                  <span class="control-error"></span>
-                </div>
+<!--                <div class="mb-sm-0 mt-3">-->
+<!--                  <label class="form-label" for="c_address_05">Address 05</label>-->
+<!--                  <input type="text" name="c_address_05" class="form-control" id="c_address_05"-->
+<!--                         placeholder="Address 05">-->
+<!--                  <span class="control-error"></span>-->
+<!--                </div>-->
 
                 <div class="mb-sm-0 mt-3">
                   <label class="form-label" for="c_contact_num">Contact Num</label>
-                  <input type="text" name="c_contact_num" class="form-control" id="c_contact_num"
+                  <input type="text" name="contact" class="form-control" id="c_contact_num"
                          placeholder="Contact Num">
                   <span class="control-error"></span>
                 </div>
@@ -526,9 +534,9 @@
                     <th scope="col">DOB</th>
                     <th scope="col">Address Line 01</th>
                     <th scope="col">Address Line 02</th>
-                    <th scope="col">Address Line 03</th>
-                    <th scope="col">Address Line 04</th>
-                    <th scope="col">Address Line 05</th>
+<!--                    <th scope="col">Address Line 03</th>-->
+<!--                    <th scope="col">Address Line 04</th>-->
+<!--                    <th scope="col">Address Line 05</th>-->
                     <th scope="col">Contact Number</th>
                     <th scope="col">Email</th>
                     <th scope="col">RP date and time</th>
@@ -573,9 +581,11 @@
 <script src="../../assets/js/dashboardMain.js"></script>
 
 <!-- Controller JS File -->
-<script src="../../controller/Reg_UserController.js"></script>
-<script src="../../controller/DashBoardController.js"></script>
 
+<!--<script src="../../controller/Reg_UserController.js"></script>-->
+<!--<script src="../../controller/DashBoardController.js"></script>-->
+
+<script src="../../controller/CustomerController.js"></script>
 
 <!-- Util JS File -->
 <script src="../../util/alert.js" rel="script"></script>

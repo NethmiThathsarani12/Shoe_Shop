@@ -22,16 +22,17 @@ public class EmployeeController {
     @ResponseStatus(HttpStatus.CREATED)
     @PostMapping
     public ResponseUtil saveEmployee(@ModelAttribute EmployeeDTO employeeDTO, Address address,String profilePic){
+        System.out.println(employeeDTO.toString());
+        System.out.println(employeeDTO.getAddress());
         employeeDTO.setAddress(address);
-        String profile = UtilMatter.convertBase64(profilePic);
-        employeeDTO.setPic(profile);
         service.saveEmployee(employeeDTO);
         return new ResponseUtil("OK", "Successfully Registered.!", null);
     }
 
     @ResponseStatus(HttpStatus.CREATED)
-    @PutMapping
+    @PutMapping(path = "update")
     public ResponseUtil updateEmployee(@ModelAttribute EmployeeDTO employeeDTO,Address address){
+
         employeeDTO.setAddress(address);
         service.updateEmployee(employeeDTO);
         return new ResponseUtil("OK", "Successfully Updated. :"+ employeeDTO.getCode(),null);
@@ -39,17 +40,17 @@ public class EmployeeController {
     }
 
     @ResponseStatus(HttpStatus.CREATED)
-    @DeleteMapping
+    @DeleteMapping(params = {"id"})
     public ResponseUtil deleteEmployee(@RequestBody EmployeeDTO dto){
         service.deleteEmployee(dto);
         return new ResponseUtil("OK", "Successfully Deleted. :"+ dto.getCode(),null);
     }
 
-//    @ResponseStatus(HttpStatus.CREATED)
-//    @GetMapping(path = "/searchEmployee", params = {"employee_Id"})
-//    public Employee searchEmpId(String employee_Id){
-//        return service.searchEmpId(employee_Id);
-//    }
+    @ResponseStatus(HttpStatus.CREATED)
+    @GetMapping(path = "/searchEmployee", params = {"employee_Id"})
+    public Employee searchEmpId(String employee_Id){
+        return service.searchEmpId(employee_Id);
+    }
 
     @ResponseStatus(HttpStatus.CREATED)
     @GetMapping
@@ -59,7 +60,7 @@ public class EmployeeController {
 
     @ResponseStatus(HttpStatus.CREATED)
     @GetMapping(path = "/EmployeeIdGenerate")
-    public @ResponseBody CustomDTO customerIdGenerate() {
+    public @ResponseBody CustomDTO employeeIdGenerate() {
         return service.employeeIdGenerate();
     }
 

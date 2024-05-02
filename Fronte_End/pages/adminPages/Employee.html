@@ -368,7 +368,7 @@
                                 <div class="mb-sm-0">
                                     <label class="form-label" for="Employee_code">Employee code</label>
                                     <input type="text" name="code" class="form-control" readonly id="Employee_code"
-                                           placeholder="E00-001">
+                                           placeholder="Emp ID">
                                     <span class="control-error"></span>
                                 </div>
                                 <div class="mb-sm-0 mt-3">
@@ -385,9 +385,9 @@
                                 <div class="mb-sm-0 mt-3">
                                     <label class="form-label" for="E_gender">Gender</label>
                                     <select class="form-control" id="E_gender" name="gender">
-                                        <option value="Male">Male</option>
-                                        <option value="Female">Female</option>
-                                        <option value="Others">Other</option>
+                                        <option value="MALE">MALE</option>
+                                        <option value="FEMALE">FEMALE</option>
+                                        <option value="OTHERS">OTHERS</option>
                                     </select>
 
                                     <span class="control-error"></span>
@@ -402,10 +402,10 @@
                                     <label class="form-label" for="designation">designation</label>
                                     <select class="form-control" id="designation" name="designation">
                                         <option selected></option>
-                                        <option value="Manager">Manager</option>
-                                        <option value="Accountant">Accountant</option>
-                                        <option value="Senior Sales Assistant">Senior Sales Assistant</option>
-                                        <option value="SalesAssistant">SalesAssistant</option>
+                                        <option value="MANAGER">MANAGER</option>
+                                        <option value="ACCOUNTED">ACCOUNTED</option>
+                                        <option value="SENIOR_SALE_ASSISTANT">SENIOR_SALE_ASSISTANT</option>
+                                        <option value="SALE_ASSISTANT">SALE_ASSISTANT</option>
                                     </select>
 
                                     <span class="control-error"></span>
@@ -414,15 +414,15 @@
                                 <div class="mb-sm-0 mt-3">
                                     <label class="form-label" for="E_AccessRole"> Access Role</label>
                                     <select class="form-control" id="E_AccessRole" name="role">
-                                        <option>Admin</option>
-                                        <option>User</option>
+                                        <option value="ADMIN">ADMIN</option>
+                                        <option value="USER">USER</option>
                                     </select>
 
                                     <span class="control-error"></span>
                                 </div>
                                 <div class="mb-sm-0 mt-3">
                                     <label class="form-label" for="E_dob">DOB</label>
-                                    <input type="text" name="birth" class="form-control" id="E_dob"
+                                    <input type="date" name="birth" class="form-control" id="E_dob"
                                            placeholder="DOB">
                                     <span class="control-error"></span>
                                 </div>
@@ -431,7 +431,7 @@
                             <section id="sec2Employee" class="col-md-4 mt-3">
                                 <div class="mb-sm-0">
                                     <label class="form-label" for="E_DOF">Date of Join</label>
-                                    <input type="text" name="joinDate" class="form-control" id="E_DOF"
+                                    <input type="date" name="joinDate" class="form-control" id="E_DOF"
                                            placeholder="Date of Join">
                                     <span class="control-error"></span>
                                 </div>
@@ -443,29 +443,29 @@
                                 </div>
                                 <div class="mb-sm-0 mt-3">
                                     <label class="form-label" for="E_address_1">Address 01</label>
-                                    <input type="text" name="E_address_1" class="form-control" id="E_address_1">
+                                    <input type="text" name="address1" class="form-control" id="E_address_1">
                                     <span class="control-error"></span>
                                 </div>
                                 <div class="mb-sm-0 mt-3">
                                     <label class="form-label" for="E_address_2">Address 02</label>
-                                    <input type="text" name="E_address_2" class="form-control" id="E_address_2">
+                                    <input type="text" name="address2" class="form-control" id="E_address_2">
                                     <span class="control-error"></span>
                                 </div>
                                 <div class="mb-sm-0 mt-3">
                                     <label class="form-label" for="E_address_3">Address 03</label>
-                                    <input type="text" name="E_address_3" class="form-control" id="E_address_3">
+                                    <input type="text" name="address3" class="form-control" id="E_address_3">
                                     <span class="control-error"></span>
                                 </div>
 
                                 <div class="mb-sm-0 mt-3">
                                     <label class="form-label" for="E_address_4">Address 04</label>
-                                    <input type="text" name="E_address_4" class="form-control" id="E_address_4">
+                                    <input type="text" name="address4" class="form-control" id="E_address_4">
                                     <span class="control-error"></span>
                                 </div>
 
                                 <div class="mb-sm-0 mt-3">
                                     <label class="form-label" for="E_address_5">Address 05</label>
-                                    <input type="text" name="E_address_5" class="form-control" id="E_address_5">
+                                    <input type="text" name="address5" class="form-control" id="E_address_5">
                                     <span class="control-error"></span>
                                 </div>
                                 <div class="mb-sm-0 mt-3">
@@ -492,10 +492,12 @@
 
                                 <div class="mb-sm-0">
                                     <label class="form-label" for="E_E_contact">Emergency Contact</label>
-                                    <input type="text" name="EmgContact" class="form-control" id="E_E_contact"
+                                    <input type="text" name="emgContact" class="form-control" id="E_E_contact"
                                            placeholder="Emergency Contact">
                                     <span class="control-error"></span>
                                 </div>
+
+                                <img id="img" src="../../assets/img/nethmi.jpg" width="300px">
                                 <!--                <div class="mb-sm-0">-->
                                 <!--                  <label for="role_Type" class="form-label">Role type</label>-->
                                 <!--&lt;!&ndash;                  <select class="form-control" id="role_Type" name="role_Type">&ndash;&gt;-->
@@ -548,10 +550,10 @@
                                         <th scope="col">Date of Join</th>
                                         <th scope="col">Attached Branch</th>
                                         <th scope="col">Address</th>
-                                        <th scope="col">Address</th>
-                                        <th scope="col">Address</th>
-                                        <th scope="col">Address</th>
-                                        <th scope="col">Address</th>
+<!--                                        <th scope="col">Address</th>-->
+<!--                                        <th scope="col">Address</th>-->
+<!--                                        <th scope="col">Address</th>-->
+<!--                                        <th scope="col">Address</th>-->
                                         <th scope="col">ContactNo</th>
                                         <th scope="col">Email</th>
                                         <th scope="col">Inform In Emergency</th>

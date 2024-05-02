@@ -3,6 +3,7 @@ package lk.ijse.gdse66.spring.Back_End.service.impl;
 import lk.ijse.gdse66.spring.Back_End.dto.CustomDTO;
 import lk.ijse.gdse66.spring.Back_End.dto.EmployeeDTO;
 import lk.ijse.gdse66.spring.Back_End.entity.Employee;
+import lk.ijse.gdse66.spring.Back_End.enums.Gender;
 import lk.ijse.gdse66.spring.Back_End.repo.EmployeeRepo;
 import lk.ijse.gdse66.spring.Back_End.service.EmployeeService;
 import org.modelmapper.ModelMapper;
@@ -25,13 +26,20 @@ public class EmployeeServiceImpl implements EmployeeService {
 
     @Override
     public void saveEmployee(EmployeeDTO dto) {
-
         if (repo.existsById(dto.getCode())) {
-            throw new RuntimeException("Employee Already Exist. Please enter another id..!");
+            throw new RuntimeException("Employee Already Exists. Please enter another id.");
         }
-        repo.save(mapper.map(dto, Employee.class));
 
+        // Map the EmployeeDTO to Employee entity
+        Employee employee = mapper.map(dto, Employee.class);
+
+        // Set the address for the employee
+        employee.setAddress(dto.getAddress());
+
+        // Save the employee to the repository
+        repo.save(employee);
     }
+
 
     @Override
     public void updateEmployee(EmployeeDTO dto) {
@@ -40,8 +48,6 @@ public class EmployeeServiceImpl implements EmployeeService {
             throw new RuntimeException("update failed! employeeId : "+ dto.getCode());
         }
         repo.save(mapper.map(dto, Employee.class));
-
-
 
     }
 

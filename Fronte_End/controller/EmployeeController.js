@@ -3,8 +3,8 @@ let baseUrl = "http://localhost:8080/Back_End/";
 loadAllEmployee();
 
 $("#btnAddEmployee").attr('disabled', false);
-$("#btnUpdateEmployee").attr('disabled', true);
-$("#btnDeleteEmployee").attr('disabled', true);
+$("#btnUpdateEmployee").attr('disabled', false);
+$("#btnDeleteEmployee").attr('disabled', false);
 
 
 function generateEmployeeID() {
@@ -17,14 +17,19 @@ function generateEmployeeID() {
         success: function (resp) {
             let id = resp.value;
             console.log("id" +id);
-            let tempId = parseInt(id.split("-")[1]);
-            tempId = tempId + 1;
-            if (tempId <= 9) {
-                $("#Employee_code").val("E00-00" + tempId);
-            } else if (tempId <= 99) {
-                $("#Employee_code").val("E00-0" + tempId);
-            } else {
-                $("#Employee_code").val("E00-" + tempId);
+
+            if (id === null){
+                $("#Employee_code").val("E00-001" );
+            }else {
+                let tempId = parseInt(id.split("-")[1]);
+                tempId = tempId + 1;
+                if (tempId <= 9) {
+                    $("#Employee_code").val("E00-00" + tempId);
+                } else if (tempId <= 99) {
+                    $("#Employee_code").val("E00-0" + tempId);
+                } else {
+                    $("#Employee_code").val("E00-" + tempId);
+                }
             }
         },
         error: function (ob, statusText, error) {
@@ -34,14 +39,28 @@ function generateEmployeeID() {
 }
 
 $("#btnAddEmployee").click(function () {
-    let formData = $("#employeeForm").serialize();
-    console.log(formData);
+
+        var image = $("#img");
+        var imageUrl = image.attr('src');
+        if (!imageUrl || imageUrl === '../../assets/img/nethmi.jpg') {
+            //alert("Error");
+            //swal("Error", "Take Item Photo.!", "error");
+        }
+
+    let formData = $("#employeeForm").serializeArray();
+    formData.push({name: "pic", value: imageUrl});
     $.ajax({
-        url: baseUrl + "employee", method: "post", data: formData, dataType: "json", success: function (res) {
+        url: baseUrl + "employee",
+        method: "POST",
+        data: formData,
+        dataType: "json",
+        success: function (res) {
             saveUpdateAlert("Employee", res.message);
             loadAllEmployee();
-        }, error: function (error) {
-            unSuccessUpdateAlert("Employee", JSON.parse(error.responseText).message);
+
+        },
+        error: function (xhr, status, error) {
+            unSuccessUpdateAlert("Employee", JSON.parse(xhr.responseText).message);
         }
     });
 });
@@ -69,23 +88,25 @@ function setTextFieldValues(code, name, pic, gender,status,designation,role,birt
     $("#E_E_contact").val(EmgContact);
 
     $("#Employee_code").focus();
-    checkValidity(employeeValidations);
+    // checkValidity(employeeValidations);
 
     $("#btnAddEmployee").attr('disabled', false);
-    $("#btnUpdateEmployee").attr('disabled', true);
-    $("#btnDeleteEmployee").attr('disabled', true);
+    $("#btnUpdateEmployee").attr('disabled', false);
+    $("#btnDeleteEmployee").attr('disabled', false);
 }
-
 function loadAllEmployee() {
     $("#employeeTable").empty();
     $.ajax({
-        url: baseUrl + "employee", method: "GET", dataType: "json", success: function (res) {
+        url: baseUrl + "employee",
+        method: "GET",
+        dataType: "json",
+        success: function (res) {
             console.log(res);
 
             for (let i of res.data) {
                 let code = i.code;
                 let name = i.name;
-                let pic = i.pic;
+                let pic = i.pic || ''; // Use empty string if pic is null
                 let gender = i.gender;
                 let status = i.status;
                 let designation = i.designation;
@@ -93,29 +114,38 @@ function loadAllEmployee() {
                 let birth = i.birth;
                 let joinDate = i.joinDate;
                 let branch = i.branch;
-                let E_address_1 = i.E_address_1;
-                let E_address_2 = i.E_address_2;
-                let E_address_3 = i.E_address_3;
-                let E_address_4 = i.E_address_4;
-                let E_address_5 = i.E_address_5;
+                let address = i.address || {}; // Use empty object if address is null
                 let contact = i.contact;
                 let email = i.email;
                 let person = i.person;
-                let EmgContact = i.EmgContact;
+                let EmgContact = i.emgContact;
 
-                let row = "<tr><td>" + code + "</td><td>" + name  + "</td><td>" + gender + "</td><td>" + status + "</td><td>" + designation + "</td><td>" + role + "</td><td>" + birth + "</td><td>" + joinDate + "</td><td>" + branch + "</td><td>" + E_address_1 + "</td></tr>" + E_address_2 + "</td></tr>"+ E_address_3 + "</td></tr>"+ E_address_4 + "</td></tr>"+ E_address_5 + "</td></tr>"+ contact + "</td></tr>"+ email + "</td></tr>"+ person + "</td></tr>"+ EmgContact + "</td></tr>";
+                // Access address properties correctly
+                let ad1 = address.address1 || '';
+                let ad2 = address.address2 || '';
+                let ad3 = address.address3 || '';
+                let ad4 = address.address4 || '';
+                let ad5 = address.address5 || '';
+
+                // Concatenate address properties
+                let addressColumn = `${ad1}, ${ad2}, ${ad3}, ${ad4}, ${ad5}`;
+
+                let row = `<tr><td>${code}</td><td>${name}</td><td>${gender}</td><td>${status}</td><td>${designation}</td><td>${role}</td><td>${birth}</td><td>${joinDate}</td><td>${branch}</td><td>${addressColumn}</td><td>${contact}</td><td>${email}</td><td>${person}</td><td>${EmgContact}</td></tr>`;
                 $("#employeeTable").append(row);
             }
-             blindClickEventsE();
+            blindClickEventsE();
             generateEmployeeID();
-            setTextFieldValues("", "", "", "", "", "", "", "", "", "", "","","","","","","","","");
+            setTextFieldValues("", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "");
             console.log(res.message);
-        }, error: function (error) {
+        },
+        error: function (error) {
             let message = JSON.parse(error.responseText).message;
             console.log(message);
         }
     });
 }
+
+
 
 
 function blindClickEventsE() {
@@ -211,3 +241,72 @@ $("#search_Id").on("keypress", function (event) {
     }
 
 });
+
+
+$("#btnUpdateEmployee").click(function () {
+    let formData = new FormData($("#employeeForm")[0]);
+    console.log(formData);
+    $.ajax({
+        url: baseUrl + "employee/update",
+        method: "put",
+        data: formData,
+        contentType: false,
+        processData: false,
+        success: function (res) {
+            console.log(res)
+            saveUpdateAlert("Employee", res.message);
+            loadAllEmployee();
+        },
+        error: function (error) {
+            unSuccessUpdateAlert("Employee", JSON.parse(error.responseText).message);
+        }
+    });
+});
+
+
+$("#btnDeleteEmployee").click(function () {
+    let id = $("#Employee_code").val();
+    $.ajax({
+        url: baseUrl + "employee?id=" + id , method: "delete", dataType: "json", success: function (resp) {
+            saveUpdateAlert("Employee", resp.message);
+            loadAllEmployee();
+        }, error: function (error) {
+            let message = JSON.parse(error.responseText).message;
+            unSuccessUpdateAlert("Employee", message);
+        }
+    });
+});
+
+
+$('#EProfile_pic').change(function() {
+    var fileInput = $('#EProfile_pic')[0];
+    var file = fileInput.files[0];
+
+    if (file && (file.type.includes('image') || file.type === 'image/gif')) {
+        var reader = new FileReader();
+        reader.onload = function (e) {
+
+            //itmCaptureClear();
+            $('#img').attr('src', e.target.result);
+        };
+        reader.readAsDataURL(file);
+       // $("#itmClear").prop("disabled", false);
+        $(this).val("");
+    } else {
+        //$('#itemImgFileError').text('Please upload an image or GIF.');
+        //$('#itemImgFileError').css("border", "1px solid #ced4da");
+    }
+
+});
+
+function setButtonState(value) {
+    if (value > 0) {
+        $("#btnAddEmployee").attr('disabled', true);
+        $("#btnUpdateEmployee").attr('disabled', true);
+        $("#btnDeleteEmployee").attr('disabled', true);
+    } else {
+        $("#btnAddEmployee").attr('disabled', false);
+        $("#btnUpdateEmployee").attr('disabled', false);
+        $("#btnDeleteEmployee").attr('disabled', false);
+    }
+}
