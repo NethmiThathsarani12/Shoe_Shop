@@ -13,7 +13,7 @@ import lombok.ToString;
 @ToString
 public class SupplierDTO {
 
-    private String supCode;
+    private String code;
     private String name;
     private Category category;
     private Address address;

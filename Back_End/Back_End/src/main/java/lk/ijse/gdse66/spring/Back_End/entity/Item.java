@@ -6,5 +6,5 @@ import jakarta.persistence.Id;
 @Entity
 public class Item {
     @Id
-    private String itemCode;
+    private String code;
 }

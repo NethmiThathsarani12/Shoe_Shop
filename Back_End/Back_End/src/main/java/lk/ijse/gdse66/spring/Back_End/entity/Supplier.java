@@ -10,15 +10,14 @@ import lombok.ToString;
 
 import java.util.List;
 
+@Entity
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-@ToString
-@Entity
 public class Supplier {
 
     @Id
-    private String supCode;
+    private String code;
     private String name;
     @Enumerated(EnumType.STRING)
     private Category category;
