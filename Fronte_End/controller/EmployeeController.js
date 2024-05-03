@@ -48,7 +48,7 @@ $("#btnAddEmployee").click(function () {
         }
 
     let formData = $("#employeeForm").serializeArray();
-    formData.push({name: "pic", value: imageUrl});
+    // formData.push({name: "pic", value: imageUrl});
     $.ajax({
         url: baseUrl + "employee",
         method: "POST",
@@ -146,13 +146,10 @@ function loadAllEmployee() {
 }
 
 
-
-
 function blindClickEventsE() {
-    $("#employeeTable>tr").on("click", function () {
+    $("#employeeTable").on("click", "tr", function () {
         let code = $(this).children().eq(0).text();
         let name = $(this).children().eq(1).text();
-        // let pic = $(this).children().eq(2).text();
         let gender = $(this).children().eq(2).text();
         let status = $(this).children().eq(3).text();
         let designation = $(this).children().eq(4).text();
@@ -160,22 +157,24 @@ function blindClickEventsE() {
         let birth = $(this).children().eq(6).text();
         let joinDate = $(this).children().eq(7).text();
         let branch = $(this).children().eq(8).text();
-        let address1 = $(this).children().eq(9).text();
-        let address2 = $(this).children().eq(10).text();
-        let address3 = $(this).children().eq(11).text();
-        let address4 = $(this).children().eq(12).text();
-        let address5 = $(this).children().eq(13).text();
-        let contact = $(this).children().eq(14).text();
-        let email = $(this).children().eq(15).text();
-        let person = $(this).children().eq(16).text();
-        let EmgContact = $(this).children().eq(17).text();
+        let addressColumn = $(this).children().eq(9).text(); // Assuming address is in one column
 
+        // Split address into individual components
+        let addressComponents = addressColumn.split(', ');
+        let address1 = addressComponents[0] || '';
+        let address2 = addressComponents[1] || '';
+        let address3 = addressComponents[2] || '';
+        let address4 = addressComponents[3] || '';
+        let address5 = addressComponents[4] || '';
 
-        console.log(code, name,  gender, status, designation,role , birth, joinDate, branch, address1,address2,address3,address4,address5,contact,email,person,EmgContact);
+        let contact = $(this).children().eq(10).text();
+        let email = $(this).children().eq(11).text();
+        let person = $(this).children().eq(12).text();
+        let EmgContact = $(this).children().eq(13).text();
 
+        // Set values to respective input fields
         $("#Employee_code").val(code);
         $("#employee_name").val(name);
-        // $("#EProfile_pic").val(pic);
         $("#E_gender").val(gender);
         $("#E_status").val(status);
         $("#designation").val(designation);
@@ -193,8 +192,11 @@ function blindClickEventsE() {
         $("#ICE").val(person);
         $("#E_E_contact").val(EmgContact);
     });
+
     $("#btnAddEmployee").attr('disabled', false);
 }
+
+
 
 $("#search_Id").on("keypress", function (event) {
     if (event.which === 13) {
@@ -242,32 +244,35 @@ $("#search_Id").on("keypress", function (event) {
 
 });
 
-
 $("#btnUpdateEmployee").click(function () {
-    let formData = new FormData($("#employeeForm")[0]);
+    let formData = $("#employeeForm").serialize();
+    // let empId = $("#Employee_code").val();
+    // formData += "&code=" + empId;
     console.log(formData);
+
+    // console.log(formData);
     $.ajax({
-        url: baseUrl + "employee/update",
-        method: "put",
+        url: baseUrl + "employee",
+        method: "PUT",
         data: formData,
-        contentType: false,
-        processData: false,
+        dataType: "json",
         success: function (res) {
             console.log(res)
-            saveUpdateAlert("Employee", res.message);
-            loadAllEmployee();
+            saveUpdateAlert("updated", res.message);
+            loadAllEmployee()
         },
         error: function (error) {
-            unSuccessUpdateAlert("Employee", JSON.parse(error.responseText).message);
+            unSuccessUpdateAlert("updated", JSON.parse(error.responseText).message);
         }
     });
 });
 
 
+
 $("#btnDeleteEmployee").click(function () {
     let id = $("#Employee_code").val();
     $.ajax({
-        url: baseUrl + "employee?id=" + id , method: "delete", dataType: "json", success: function (resp) {
+        url: baseUrl + "employee?code=" + id , method: "delete", dataType: "json", success: function (resp) {
             saveUpdateAlert("Employee", resp.message);
             loadAllEmployee();
         }, error: function (error) {

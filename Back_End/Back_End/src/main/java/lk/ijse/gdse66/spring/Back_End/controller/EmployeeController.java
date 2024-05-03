@@ -30,9 +30,9 @@ public class EmployeeController {
     }
 
     @ResponseStatus(HttpStatus.CREATED)
-    @PutMapping(path = "update")
+    @PutMapping
     public ResponseUtil updateEmployee(@ModelAttribute EmployeeDTO employeeDTO,Address address){
-
+        System.out.println(employeeDTO.toString());
         employeeDTO.setAddress(address);
         service.updateEmployee(employeeDTO);
         return new ResponseUtil("OK", "Successfully Updated. :"+ employeeDTO.getCode(),null);
@@ -40,10 +40,10 @@ public class EmployeeController {
     }
 
     @ResponseStatus(HttpStatus.CREATED)
-    @DeleteMapping(params = {"id"})
-    public ResponseUtil deleteEmployee(@RequestBody EmployeeDTO dto){
-        service.deleteEmployee(dto);
-        return new ResponseUtil("OK", "Successfully Deleted. :"+ dto.getCode(),null);
+    @DeleteMapping
+    public ResponseUtil deleteEmployee(@RequestParam String code){
+        service.deleteEmployee(code);
+        return new ResponseUtil("200", "Successfully Deleted. :"+ code,null);
     }
 
     @ResponseStatus(HttpStatus.CREATED)
