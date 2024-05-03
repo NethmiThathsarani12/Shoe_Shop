@@ -197,7 +197,6 @@ function blindClickEventsE() {
 }
 
 
-
 $("#search_Id").on("keypress", function (event) {
     if (event.which === 13) {
         var search = $("#search_Id").val();
@@ -209,40 +208,48 @@ $("#search_Id").on("keypress", function (event) {
             dataType: "json",
             success: function (res) {
                 console.log(res);
-                $("#Employee_code").val(res.code);
-                $("#employee_name").val(res.name);
-                $("#EProfile_pic").val(res.pic);
-                $("#E_gender").val(res.gender);
-                $("#E_status").val(res.status);
-                $("#designation").val(res.designation);
-                $("#E_AccessRole").val(res.role);
-                $("#E_dob").val(res.birth);
-                $("#E_DOF").val(res.joinDate);
-                $("#E_Attached").val(res.branch);
-                $("#E_address_1").val(res.E_address_1);
-                $("#E_address_2").val(res.E_address_2);
-                $("#E_address_3").val(res.E_address_3);
-                $("#E_address_4").val(res.E_address_4);
-                $("#E_address_5").val(res.E_address_5);
-                $("#E_ContactNo").val(res.contact);
-                $("#E_email").val(res.email);
-                $("#ICE").val(res.person);
-                $("#E_E_contact").val(res.EmgContact);
+                if (res) {
+                    $("#Employee_code").val(res.code);
+                    $("#employee_name").val(res.name);
+                    $("#EProfile_pic").val(res.pic);
+                    $("#E_gender").val(res.gender);
+                    $("#E_status").val(res.status);
+                    $("#designation").val(res.designation);
+                    $("#E_AccessRole").val(res.role);
+                    $("#E_dob").val(res.birth);
+                    $("#E_DOF").val(res.joinDate);
+                    $("#E_Attached").val(res.branch);
 
+                    // Accessing address properties correctly
+                    let address = res.address || {}; // Use empty object if address is null
+                    $("#E_address_1").val(address.address1 || '');
+                    $("#E_address_2").val(address.address2 || '');
+                    $("#E_address_3").val(address.address3 || '');
+                    $("#E_address_4").val(address.address4 || '');
+                    $("#E_address_5").val(address.address5 || '');
 
+                    $("#E_ContactNo").val(res.contact);
+                    $("#E_email").val(res.email);
+                    $("#ICE").val(res.person);
+                    $("#E_E_contact").val(res.emgContact);
 
-                let row = "<tr><td>" + res.code + "</td><td>" + res.name + "</td><td>" + res.pic + "</td><td>" + res.gender + "</td><td>" + res.status + "</td><td>" + res.designation + "</td><td>" + res.role + "</td><td>" + res.birth + "</td><td>" + res.joinDate + "</td><td>" + res.E_address_1 + "</td><td>" + res.E_address_2 + "</td><td>" + res.E_address_3 + "</td></tr>"+ "</td><td>" + res.E_address_4 + "</td><td>" + res.E_address_5+ "</td><td>" + res.contact+ "</td><td>" + res.email + "</td><td>" + res.person+ "</td><td>" + res.EmgContact +"</td></tr>";
-                $("#employeeTable").append(row);
+                    // Appending row to employee table
+                    let row = "<tr><td>" + res.code + "</td><td>" + res.name + "</td><td>" + res.pic + "</td><td>" + res.gender + "</td><td>" + res.status + "</td><td>" + res.designation + "</td><td>" + res.role + "</td><td>" + res.birth + "</td><td>" + res.joinDate + "</td><td>" + (address.address1 || '') + "</td><td>" + (address.address2 || '') + "</td><td>" + (address.address3 || '') + "</td><td>" + (address.address4 || '') + "</td><td>" + (address.address5 || '') + "</td><td>" + res.contact + "</td><td>" + res.email + "</td><td>" + res.person + "</td><td>" + res.emgContact + "</td></tr>";
+                    $("#employeeTable").append(row);
+                } else {
+                    // Handle case when no employee found
+                    emptyMassage("No employee found.");
+                }
             },
             error: function (error) {
                 loadAllEmployee();
                 let message = JSON.parse(error.responseText).message;
                 emptyMassage(message);
             }
-        })
+        });
     }
-
 });
+
 
 $("#btnUpdateEmployee").click(function () {
     let formData = $("#employeeForm").serialize();
