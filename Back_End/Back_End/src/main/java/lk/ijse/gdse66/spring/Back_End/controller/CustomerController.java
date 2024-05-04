@@ -2,6 +2,7 @@ package lk.ijse.gdse66.spring.Back_End.controller;
 
 import lk.ijse.gdse66.spring.Back_End.dto.CustomDTO;
 import lk.ijse.gdse66.spring.Back_End.dto.CustomerDTO;
+import lk.ijse.gdse66.spring.Back_End.embeded.Address;
 import lk.ijse.gdse66.spring.Back_End.service.CustomerService;
 import lk.ijse.gdse66.spring.Back_End.utill.ResponseUtil;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -18,16 +19,16 @@ public class CustomerController {
 
     @ResponseStatus(HttpStatus.CREATED)
     @PostMapping
-    public ResponseUtil saveCustomer(CustomerDTO dto){
-        service.saveCustomer(dto);
-        return new ResponseUtil("Ok","Successfully Registered.!", null);
+        public ResponseUtil saveCustomer(@ModelAttribute CustomerDTO dto, Address address){
+            System.out.println(dto.toString());
+            dto.setAddress(address);
+            service.saveCustomer(dto);
+            return new ResponseUtil("200", "Successfully Registered.!", null);
+        }
 
-    }
-
-    @ResponseStatus(HttpStatus.CREATED)
     @GetMapping
     public ResponseUtil getAllCustomer(){
-        return new ResponseUtil("OK", "Successfully Loaded. :", service.loadAllCustomer());
+        return new ResponseUtil("200", "Successfully Loaded. :", service.loadAllCustomer());
     }
 
     @ResponseStatus(HttpStatus.CREATED)
@@ -36,4 +37,21 @@ public class CustomerController {
     CustomDTO customerIdGenerate() {
         return service.customerIdGenerate();
     }
+
+    @ResponseStatus(HttpStatus.CREATED)
+    @PutMapping
+    public ResponseUtil updateCustomer(@ModelAttribute CustomerDTO customerDTO, Address address){
+        customerDTO.setAddress(address);
+        service.updateCustomer(customerDTO);
+        return new ResponseUtil("200", "Successfully Updated. :"+ customerDTO.getCode(),null);
+
+    }
+
+    @ResponseStatus(HttpStatus.CREATED)
+    @DeleteMapping
+    public ResponseUtil deleteCustomer(@RequestParam String code){
+        service.deleteCustomer(code);
+        return new ResponseUtil("200", "Successfully Deleted. :"+ code,null);
+    }
 }
+

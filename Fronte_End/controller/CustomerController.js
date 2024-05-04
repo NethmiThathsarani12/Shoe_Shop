@@ -1,142 +1,211 @@
-let cusBaseUrl = "http://localhost:8080/Back_End/";
-generateCustomerID();
 
-loadAllCustomer();
+    let cusBaseUrl = "http://localhost:8080/Back_End/";
 
+    // Load all customers and set purchaseDate to current date and time
+    loadAllCustomer();
 
+    function generateCustomerID() {
+        $("#customer_code").val("C00-001");
+        $.ajax({
+            url: cusBaseUrl + "customer/CustomerIdGenerate",
+            method: "GET",
+            contentType: "application/json",
+            dataType: "json",
+            success: function (resp) {
+                let id = resp.value;
+                console.log("id" +id);
 
-$("#btnAddCustomer").attr('disabled', false);
-$("#btnUpdateCustomer").attr('disabled', false);
-$("#btnDeleteCustomer").attr('disabled', false);
-
-function generateCustomerID() {
-    $("#customer_code").val("C00-001");
-    $.ajax({
-        url: cusBaseUrl + "customer/CustomerIdGenerate",
-        method: "GET",
-        contentType: "application/json",
-        dataType: "json",
-        success: function (resp) {
-            let id = resp.value;
-            console.log("id" +id);
-
-            if (id === null){
-                $("#customer_code").val("C00-001" );
-            }else {
-                let tempId = parseInt(id.split("-")[1]);
-                tempId = tempId + 1;
-                if (tempId <= 9) {
-                    $("#customer_code").val("C00-00" + tempId);
-                } else if (tempId <= 99) {
-                    $("#customer_code").val("C00-0" + tempId);
+                if (id === null){
+                    $("#customer_code").val("C00-001" );
                 } else {
-                    $("#customer_code").val("C00-" + tempId);
+                    let tempId = parseInt(id.split("-")[1]);
+                    tempId = tempId + 1;
+                    if (tempId <= 9) {
+                        $("#customer_code").val("C00-00" + tempId);
+                    } else if (tempId <= 99) {
+                        $("#customer_code").val("C00-0" + tempId);
+                    } else {
+                        $("#customer_code").val("C00-" + tempId);
+                    }
                 }
+            },
+            error: function (ob, statusText, error) {
+
             }
-        },
-        error: function (ob, statusText, error) {
-
-        }
-    });
-}
-$("#btnAddCustomer").click(function () {
-    // Get form data
-    let formData = new FormData($("#customerForm")[0]);
-
-    // Convert dates to proper format before sending
-    formData.set("dob", formatDate(formData.get("dob")));
-    formData.set("loyaltyDate", formatDate(formData.get("loyaltyDate")));
-    formData.set("recentPurchaseDate", formatTimestamp(formData.get("recentPurchaseDate")));
-
-    if(customer.recentPurchaseDate===null){
-        customer.recentPurchaseDate="No Purchases Yet";
+        });
     }
 
-    // Send AJAX request
-    $.ajax({
-        url: cusBaseUrl + "customer",
-        method: "post",
-        data: formData,
-        contentType: false,
-        processData: false,
-        success: function (res) {
-            console.log(res)
-            saveUpdateAlert("Customer", res.message);
-            // loadAllCustomer();
-        },
-        error: function (error) {
-            unSuccessUpdateAlert("Customer", JSON.parse(error.responseText).message);
-        }
-    });
-});
+    $("#btnAddCustomer").click(function () {
+        // Set purchaseDate field to current date and time
+        $('#purchaseDate').val(new Date().toISOString().slice(0, 19).replace('T', ' '));
 
-// Function to format date to yyyy-MM-dd
-function formatDate(date) {
-    let d = new Date(date);
-    let month = '' + (d.getMonth() + 1);
-    let day = '' + d.getDate();
-    let year = d.getFullYear();
-
-    if (month.length < 2) month = '0' + month;
-    if (day.length < 2) day = '0' + day;
-
-    return [year, month, day].join('-');
-}
-
-// Function to format timestamp to yyyy-MM-dd HH:mm:ss
-function formatTimestamp(timestamp) {
-    let d = new Date(timestamp);
-    let year = d.getFullYear();
-    let month = '' + (d.getMonth() + 1);
-    let day = '' + d.getDate();
-    let hours = '' + d.getHours();
-    let minutes = '' + d.getMinutes();
-    let seconds = '' + d.getSeconds();
-
-    if (month.length < 2) month = '0' + month;
-    if (day.length < 2) day = '0' + day;
-    if (hours.length < 2) hours = '0' + hours;
-    if (minutes.length < 2) minutes = '0' + minutes;
-    if (seconds.length < 2) seconds = '0' + seconds;
-
-    return [year, month, day].join('-') + ' ' + [hours, minutes, seconds].join(':');
-}
-
-
-
-
-function loadAllCustomer() {
-    $("#customerTable").empty();
-    $.ajax({
-        url: cusBaseUrl + "customer/loadAllEmployee", method: "GET", dataType: "json", success: function (res) {
-            console.log(res);
-
-            for (let i of res.data) {
-                let code = i.code;
-                let name = i.name;
-                let gender = i.gender;
-                let loyaltyDate = i.loyaltyDate;
-                let level = i.loyaltyLevel;
-                let email = i.email;
-                let recentPurchaseDate = i.recentPurchaseDate;
-                let loyaltyPoints = i.loyaltyPoints;
-                let dob = i.dob;
-                let addressLine1 = i.addressLine1;
-                let addressLine2 = i.addressLine2;
-                let contact = i.contact;
-
-
-                let row = "<tr><td>" + code + "</td><td>" + name + "</td><td>" + gender + "</td><td>" + loyaltyDate + "</td><td>" + level + "</td><td>" + email + "</td><td>" + recentPurchaseDate + "</td><td>" + loyaltyPoints + "</td><td>" + dob + "</td><td>" + addressLine1 + "</td><td>" + addressLine2 + "</td><td>" + contact + "</td></tr>";
-                $("#customerTable").append(row);
+        let formData = $("#customerForm").serializeArray();
+        $.ajax({
+            url: cusBaseUrl + "customer",
+            method: "POST",
+            data: formData,
+            dataType: "json",
+            success: function (res) {
+                saveUpdateAlert("Customer", res.message);
+                loadAllCustomer();
+            },
+            error: function (xhr, status, error) {
+                unSuccessUpdateAlert("Customer", JSON.parse(xhr.responseText).message);
             }
-            // blindClickEventsD();
-            generateCustomerID();
-            // setTextFieldValuesD("", "", "", "", "", "", "", "", "", "", "");
-            console.log(res.message);
-        }, error: function (error) {
-            let message = JSON.parse(error.responseText).message;
-            console.log(message);
-        }
-
+        });
     });
-}
+
+    function setTextFieldValuesC(code, name, gender, loyaltyDate, level, total_point, customer_dob, c_address_01, c_address_02, c_address_03, c_address_04, c_address_05, c_contact_num, customer_email, purchaseDate) {
+        $("#customer_code").val(code);
+        $("#customer_name").val(name);
+        $("#customer_gender").val(gender);
+        $("#customer_jdlc").val(loyaltyDate);
+        $("#level").val(level);
+        $("#total_point").val(total_point);
+        $("#customer_dob").val(customer_dob);
+        $("#c_address_01").val(c_address_01);
+        $("#c_address_02").val(c_address_02);
+        $("#c_address_03").val(c_address_03);
+        $("#c_address_04").val(c_address_04);
+        $("#c_address_05").val(c_address_05);
+        $("#c_contact_num").val(c_contact_num);
+        $("#customer_email").val(customer_email);
+        $("#purchaseDate").val(purchaseDate);
+
+        $("#customer_code").focus();
+        $("#btnAddCustomer").attr('disabled', false);
+        $("#btnUpdateCustomer").attr('disabled', false);
+        $("#btnDeleteCustomer").attr('disabled', false);
+    }
+
+    function loadAllCustomer() {
+        $("#customerTable").empty();
+        // Set purchaseDate field to current date and time
+        $('#purchaseDate').val(new Date().toISOString().slice(0, 19).replace('T', ' '));
+
+        $.ajax({
+            url: cusBaseUrl + "customer",
+            method: "GET",
+            dataType: "json",
+            success: function (res) {
+                for (let i of res.data) {
+                    let code = i.code;
+                    let name = i.name;
+                    let gender = i.gender;
+                    let loyaltyDate = i.loyaltyDate;
+                    let level = i.level;
+                    let loyaltyPoints = i.loyaltyPoints;
+                    let dob = i.dob;
+                    let address = i.address || {};
+                    let contact = i.contact;
+                    let email = i.email;
+                    let recentPurchaseDate = i.recentPurchaseDate;
+
+                    let ad1 = address.address1 || '';
+                    let ad2 = address.address2 || '';
+                    let ad3 = address.address3 || '';
+                    let ad4 = address.address4 || '';
+                    let ad5 = address.address5 || '';
+
+                    let addressColumn = `${ad1}, ${ad2}, ${ad3}, ${ad4}, ${ad5}`;
+
+                    let row = `<tr><td>${code}</td><td>${name}</td><td>${gender}</td><td>${loyaltyDate}</td><td>${level}</td><td>${loyaltyPoints}</td><td>${dob}</td><td>${addressColumn}</td><td>${contact}</td><td>${email}</td><td>${recentPurchaseDate}</td></tr>`;
+                    $("#customerTable").append(row);
+                }
+                blindClickEventsC();
+                generateCustomerID();
+                setTextFieldValuesC("", "", "", "", "", "", "", "", "", "", "", "", "", "", "");
+                console.log(res.message);
+            },
+            error: function (error) {
+                let message = JSON.parse(error.responseText).message;
+                console.log(message);
+            }
+        });
+    }
+
+
+    function blindClickEventsC() {
+        $("#customerTable").on("click", "tr", function () {
+            let code = $(this).children().eq(0).text();
+            let name = $(this).children().eq(1).text();
+            let gender = $(this).children().eq(2).text();
+            let loyaltyDate = $(this).children().eq(3).text();
+            let level = $(this).children().eq(4).text();
+            let loyaltyPoints = $(this).children().eq(5).text();
+            let dob = $(this).children().eq(6).text();
+            let addressColumn = $(this).children().eq(7).text(); // Assuming address is in one column
+
+            // Split address into individual components
+            let addressComponents = addressColumn.split(', ');
+            let address1 = addressComponents[0] || '';
+            let address2 = addressComponents[1] || '';
+            let address3 = addressComponents[2] || '';
+            let address4 = addressComponents[3] || '';
+            let address5 = addressComponents[4] || '';
+
+            let contact = $(this).children().eq(8).text();
+            let email = $(this).children().eq(9).text();
+            let purchaseDate = $(this).children().eq(10).text();
+
+            // Set values to respective input fields
+            $("#customer_code").val(code);
+            $("#customer_name").val(name);
+            $("#customer_gender").val(gender);
+            $("#customer_jdlc").val(loyaltyDate);
+            $("#level").val(level);
+            $("#total_point").val(loyaltyPoints);
+            $("#customer_dob").val(dob);
+            $("#c_address_01").val(address1);
+            $("#c_address_02").val(address2);
+            $("#c_address_03").val(address3);
+            $("#c_address_04").val(address4);
+            $("#c_address_05").val(address5);
+            $("#c_contact_num").val(contact);
+            $("#customer_email").val(email);
+            $("#purchaseDate").val(purchaseDate);
+
+            // Enable buttons
+            $("#btnAddCustomer").attr('disabled', false);
+            $("#btnUpdateCustomer").attr('disabled', false);
+            $("#btnDeleteCustomer").attr('disabled', false);
+        });
+    }
+
+    $("#btnUpdateCustomer").click(function () {
+        let formData = $("#customerForm").serialize();
+
+        $.ajax({
+            url: cusBaseUrl + "customer",
+            method: "PUT",
+            data: formData,
+            dataType: "json",
+            success: function (res) {
+                saveUpdateAlert("Customer updated", res.message);
+                loadAllCustomer();
+            },
+            error: function (xhr, status, error) {
+                unSuccessUpdateAlert("Customer update failed", JSON.parse(xhr.responseText).message);
+            }
+        });
+    });
+
+    $("#btnDeleteCustomer").click(function () {
+        let id = $("#customer_code").val();
+        $.ajax({
+            url: cusBaseUrl + "customer?code=" + id,
+            method: "DELETE",
+            dataType: "json",
+            success: function (resp) {
+                saveUpdateAlert("Customer", resp.message);
+                loadAllCustomer();
+            },
+            error: function (xhr, status, error) {
+                let message = JSON.parse(xhr.responseText).message;
+                unSuccessUpdateAlert("Customer", message);
+            }
+        });
+    });
+
+
+

@@ -10,5 +10,5 @@ public interface CustomerRepo extends JpaRepository<Customer,String> {
     String getLastIndex();
 
     @Query(value = "SELECT COUNT(code) FROM customer", nativeQuery = true)
-    int getSumEmployee();
+    int getSumCustomer();
 }

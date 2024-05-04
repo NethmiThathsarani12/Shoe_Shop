@@ -2,6 +2,7 @@ package lk.ijse.gdse66.spring.Back_End.service.impl;
 
 import lk.ijse.gdse66.spring.Back_End.dto.CustomDTO;
 import lk.ijse.gdse66.spring.Back_End.dto.CustomerDTO;
+import lk.ijse.gdse66.spring.Back_End.dto.SupplierDTO;
 import lk.ijse.gdse66.spring.Back_End.entity.Customer;
 import lk.ijse.gdse66.spring.Back_End.entity.Employee;
 import lk.ijse.gdse66.spring.Back_End.repo.CustomerRepo;
@@ -14,7 +15,6 @@ import org.springframework.transaction.annotation.Transactional;
 
 import java.util.ArrayList;
 
-
 @Service
 @Transactional
 public class CustomerServiceImpl implements CustomerService {
@@ -25,29 +25,40 @@ public class CustomerServiceImpl implements CustomerService {
     @Autowired
     private ModelMapper mapper;
 
+
     @Override
     public void saveCustomer(CustomerDTO dto) {
         if (repo.existsById(dto.getCode())){
-            throw new RuntimeException("Customer Already Exist. Please enter another id.");
+            throw new RuntimeException("Employee Already Exists. Please enter another id.");
+
         }
 
-        repo.save(mapper.map(dto,Customer.class));
+        Customer customer = mapper.map(dto,Customer.class);
 
+        customer.setAddress(dto.getAddress());
+
+        repo.save(customer);
 
     }
 
     @Override
     public void updateCustomer(CustomerDTO dto) {
-
+        if (!repo.existsById(dto.getCode())) {
+            throw new RuntimeException("update failed! customerId : "+ dto.getCode());
+        }
+        repo.save(mapper.map(dto, Customer.class));
     }
 
     @Override
-    public void deleteCustomer(CustomerDTO dto) {
-
+    public void deleteCustomer(String id) {
+        if (!repo.existsById(id)) {
+            throw new RuntimeException("Wrong ID..Please enter valid id..!");
+        }
+        repo.deleteById(id);
     }
 
     @Override
-    public Customer searchCus(String id) {
+    public Customer searchCusId(String id) {
         return null;
     }
 
@@ -63,7 +74,7 @@ public class CustomerServiceImpl implements CustomerService {
     }
 
     @Override
-    public CustomDTO getSumCustomer() {
+    public SupplierDTO getSumCustomer() {
         return null;
     }
 }

@@ -399,7 +399,7 @@
                 </div>
                 <div class="mb-sm-0 mt-3">
                   <label class="form-label" for="level">Level</label>
-                  <select class="form-control" id="level" name="loyaltyLevel">
+                  <select class="form-control" id="level" name="level">
                     <option value="GOLD">GOLD</option>
                     <option value="SILVER">SILVER</option>
                     <option value="BRONZE">BRONZE</option>
@@ -411,22 +411,6 @@
                   <span class="control-error"></span>
                 </div>
 
-                <div class="mb-sm-0 mt-3">
-                  <label class="form-label" for="customer_email">Email</label>
-                  <input type="text" name="email" class="form-control" id="customer_email">
-                  <span class="control-error"></span>
-                </div>
-
-                <div class="mb-sm-0 mt-3">
-                  <label class="form-label" for="customer_rpdt">Recent purchase date and
-                    time</label>
-                  <input type="text" name="recentPurchaseDate" class="form-control" id="customer_rpdt">
-                  <span class="control-error"></span>
-                </div>
-
-              </section>
-
-              <section id="sec2Customer" class="col-md-4 mt-3">
                 <div class="mb-sm-0">
                   <label class="form-label" for="total_point">Total points</label>
                   <input type="text" name="loyaltyPoints" class="form-control" id="total_point"
@@ -439,38 +423,48 @@
                          placeholder="DOB">
                   <span class="control-error"></span>
                 </div>
+
                 <div class="mb-sm-0 mt-3">
                   <label class="form-label" for="c_address_01">Address 01</label>
-                  <input type="text" name="addressLine1" class="form-control" id="c_address_01"
+                  <input type="text" name="address1" class="form-control" id="c_address_01"
                          placeholder="Address 01">
                   <span class="control-error"></span>
                 </div>
+
+
+
+              </section>
+
+              <section id="sec2Customer" class="col-md-4 mt-3">
+
+
+
                 <div class="mb-sm-0 mt-3">
                   <label class="form-label" for="c_address_02">Address 02</label>
-                  <input type="text" name="addressLine2" class="form-control" id="c_address_02"
+                  <input type="text" name="address2" class="form-control" id="c_address_02"
                          placeholder="Address 02">
                   <span class="control-error"></span>
                 </div>
-<!--                <div class="mb-sm-0 mt-3">-->
-<!--                  <label class="form-label" for="c_address_03">Address 03</label>-->
-<!--                  <input type="text" name="c_address_03" class="form-control" id="c_address_03"-->
-<!--                         placeholder="Address 03">-->
-<!--                  <span class="control-error"></span>-->
-<!--                </div>-->
+                <div class="mb-sm-0 mt-3">
+                  <label class="form-label" for="c_address_03">Address 03</label>
+                  <input type="text" name="address3" class="form-control" id="c_address_03"
+                         placeholder="Address 03">
+                  <span class="control-error"></span>
+                </div>
 
-<!--                <div class="mb-sm-0 mt-3">-->
-<!--                  <label class="form-label" for="c_address_04">Address 04</label>-->
-<!--                  <input type="text" name="c_address_04" class="form-control" id="c_address_04"-->
-<!--                         placeholder="Address 04">-->
-<!--                  <span class="control-error"></span>-->
-<!--                </div>-->
+                <div class="mb-sm-0 mt-3">
+                  <label class="form-label" for="c_address_04">Address 04</label>
+                  <input type="text" name="address4" class="form-control" id="c_address_04"
+                         placeholder="Address 04">
+                  <span class="control-error"></span>
+                </div>
 
-<!--                <div class="mb-sm-0 mt-3">-->
-<!--                  <label class="form-label" for="c_address_05">Address 05</label>-->
-<!--                  <input type="text" name="c_address_05" class="form-control" id="c_address_05"-->
-<!--                         placeholder="Address 05">-->
-<!--                  <span class="control-error"></span>-->
-<!--                </div>-->
+                <div class="mb-sm-0 mt-3">
+                  <label class="form-label" for="c_address_05">Address 05</label>
+                  <input type="text" name="address5" class="form-control" id="c_address_05"
+                         placeholder="Address 05">
+                  <span class="control-error"></span>
+                </div>
 
                 <div class="mb-sm-0 mt-3">
                   <label class="form-label" for="c_contact_num">Contact Num</label>
@@ -479,7 +473,18 @@
                   <span class="control-error"></span>
                 </div>
 
+                <div class="mb-sm-0 mt-3">
+                  <label class="form-label" for="customer_email">Email</label>
+                  <input type="text" name="email" class="form-control" id="customer_email">
+                  <span class="control-error"></span>
+                </div>
 
+                <div class="mb-sm-0 mt-3">
+                  <label class="form-label" for="purchaseDate">Recent purchase date and
+                    time</label>
+                  <input type="text" name="recentPurchaseDate" class="form-control" id="purchaseDate">
+                  <span class="control-error"></span>
+                </div>
 
               </section>
 
@@ -532,8 +537,8 @@
                     <th scope="col">Level</th>
                     <th scope="col">Total points</th>
                     <th scope="col">DOB</th>
-                    <th scope="col">Address Line 01</th>
-                    <th scope="col">Address Line 02</th>
+                    <th scope="col">Address</th>
+<!--                    <th scope="col">Address Line 02</th>-->
 <!--                    <th scope="col">Address Line 03</th>-->
 <!--                    <th scope="col">Address Line 04</th>-->
 <!--                    <th scope="col">Address Line 05</th>-->

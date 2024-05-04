@@ -162,4 +162,3 @@ $("#btnDeleteSupplier").click(function () {
     });
 });
 
-
