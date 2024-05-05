@@ -1,0 +1,21 @@
+package lk.ijse.gdse66.spring.Back_End.service;
+
+import lk.ijse.gdse66.spring.Back_End.dto.CustomDTO;
+import lk.ijse.gdse66.spring.Back_End.dto.EmployeeDTO;
+import lk.ijse.gdse66.spring.Back_End.dto.ItemDTO;
+import lk.ijse.gdse66.spring.Back_End.entity.Employee;
+import org.springframework.web.bind.annotation.ResponseBody;
+
+import java.util.ArrayList;
+
+public interface ItemService {
+
+    void saveItem(ItemDTO dto);
+    void updateItem(ItemDTO dto);
+    void deleteItem(String id);
+    Employee searchItemCode(String id);
+    ArrayList<EmployeeDTO> loadAllItem();
+
+    @ResponseBody
+    CustomDTO getSumItem();
+}
