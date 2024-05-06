@@ -61,12 +61,12 @@ public class EmployeeServiceImpl implements EmployeeService {
 
 
     @Override
-    public Employee searchEmpId(String id) {
+    public EmployeeDTO searchEmpId(String id) {
 
         if (!repo.existsById(id)){
             throw new RuntimeException("Wrong ID. Please enter Valid id..!");
         }
-        return mapper.map(repo.findById(id).get(),Employee.class);
+        return mapper.map(repo.findById(id).get(),EmployeeDTO.class);
     }
 
     @Override

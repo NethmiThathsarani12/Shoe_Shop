@@ -1,6 +1,7 @@
 package lk.ijse.gdse66.spring.Back_End.service.impl;
 
 import lk.ijse.gdse66.spring.Back_End.dto.CustomDTO;
+import lk.ijse.gdse66.spring.Back_End.dto.CustomerDTO;
 import lk.ijse.gdse66.spring.Back_End.dto.EmployeeDTO;
 import lk.ijse.gdse66.spring.Back_End.dto.ItemDTO;
 import lk.ijse.gdse66.spring.Back_End.entity.Employee;
@@ -54,8 +55,11 @@ public class ItemServiceImpl implements ItemService {
     }
 
     @Override
-    public Employee searchItemCode(String id) {
-        return null;
+    public ItemDTO searchItemCode(String id) {
+        if (!repo.existsById(id)) {
+            throw new RuntimeException("Wrong ID. Please enter Valid id..!");
+        }
+        return mapper.map(repo.findById(id).get(), ItemDTO.class);
     }
 
     @Override

@@ -48,7 +48,7 @@ public class EmployeeController {
 
     @ResponseStatus(HttpStatus.CREATED)
     @GetMapping(path = "/searchEmployee")
-    public Employee searchEmpId(@RequestParam("employee_Id") String employee_Id){
+    public EmployeeDTO searchEmpId(@RequestParam("code") String employee_Id){
         return service.searchEmpId(employee_Id);
     }
 

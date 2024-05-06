@@ -207,5 +207,49 @@
         });
     });
 
+    $("#search_CId").on("keypress", function (event) {
+        if (event.which === 13) {
+            var search = $("#search_CId").val();
+            $("#customerTable").empty();
+            $.ajax({
+                url: cusBaseUrl + "customer/searchCustomer",
+                method: "GET",
+                contentType: "application/json",
+                dataType: "json",
+                data: { code: search }, // Send the search parameter as an object
+                success: function (res) {
+                    console.log(res);
+                    if (res) {
+                        let code = res.code;
+                        let name = res.name;
+                        let gender = res.gender;
+                        let loyaltyDate = res.loyaltyDate;
+                        let level = res.level;
+                        let loyaltyPoints = res.loyaltyPoints;
+                        let dob = res.dob;
+                        let addressColumn = res.address || '';
+                        let contact = res.contact;
+                        let email = res.email;
+                        let recentPurchaseDate = res.recentPurchaseDate;
+
+                        let row = "<tr><td>" + code + "</td><td>" + name + "</td><td>" + gender + "</td><td>" + loyaltyDate + "</td><td>" + level + "</td><td>" + loyaltyPoints + "</td><td>" + dob + "</td><td>" + addressColumn + "</td><td>" + contact + "</td><td>" + email + "</td><td>" + recentPurchaseDate + "</td></tr>";
+                        $("#customerTable").append(row);
+                        blindClickEventsC();
+                    } else {
+                        // No data found
+                        console.log("No data found");
+                        // Handle this case if required
+                    }
+                },
+                error: function (xhr, status, error) {
+                    console.error("Error:", error);
+                    loadAllCustomer(); // Load all customers as fallback
+                    let message = xhr.responseJSON ? xhr.responseJSON.message : "An error occurred";
+                    emptyMassage(message);
+                }
+            });
+        }
+    });
+
 
 

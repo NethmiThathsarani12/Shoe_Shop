@@ -51,7 +51,7 @@ public class SupplierController {
 
     @ResponseStatus(HttpStatus.CREATED)
     @GetMapping(path = "/searchSupplier")
-    public SupplierDTO searchSupId(String code){
+    public SupplierDTO searchSupId(@RequestParam("code")String code){
         return service.searchSupId(code);
     }
 

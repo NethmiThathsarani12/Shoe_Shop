@@ -231,3 +231,42 @@ $('#inv_Item_pic').change(function() {
     }
 
 });
+
+$("#search_inv_Id").on("keypress", function (event) {
+    if (event.which === 13) {
+        var search = $("#search_inv_Id").val();
+        $("#inventoryTable").empty();
+        $.ajax({
+            url: itemBaseUrl + "item/searchItem?code=" + search,
+            method: "GET",
+            contentType: "application/json",
+            dataType: "json",
+            success: function (res) {
+                console.log(res);
+                let code = res.code;
+                let Name = res.name;
+                let qty = res.qty;
+                let category = res.shoeType; // Ensure category exists
+                let size = res.size;
+                let supplier = res.supplier?.code || '';
+                let supName = res.supName;
+                let salePrice = res.salePrice;
+                let buyPrice = res.buyPrice;
+                let expectedProfit = res.expectedProfit;
+                let profitMargin = res.profitMargin;
+                let status = res.status;
+
+                // Append the supplier name in the row construction
+                let row = `<tr><td>${code}</td><td>${Name}</td><td>${qty}</td><td>${category}</td><td>${size}</td><td>${supplier}</td><td>${supName}</td><td>${salePrice}</td><td>${buyPrice}</td><td>${expectedProfit}</td><td>${profitMargin}</td><td>${status}</td></tr>`;
+                $("#inventoryTable").append(row);
+                blindClickEventsI(); // Bind click events after adding rows
+            },
+            error: function (xhr) {
+                let message = JSON.parse(xhr.responseText).message;
+                emptyMassage(message); // Show error message
+                loadAllItem(); // Load all items as fallback
+            }
+        });
+    }
+});
+

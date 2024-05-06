@@ -2,6 +2,7 @@ package lk.ijse.gdse66.spring.Back_End.controller;
 
 
 import lk.ijse.gdse66.spring.Back_End.dto.ItemDTO;
+import lk.ijse.gdse66.spring.Back_End.dto.SupplierDTO;
 import lk.ijse.gdse66.spring.Back_End.service.ItemService;
 import lk.ijse.gdse66.spring.Back_End.utill.ResponseUtil;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -45,11 +46,11 @@ public class ItemController {
         return new ResponseUtil("200", "Successfully Deleted. :"+ code,null);
     }
 
-//    @ResponseStatus(HttpStatus.CREATED)
-//    @GetMapping(path = "/searchEmployee")
-//    public ItemDTO searchItemId(String code){
-//        return itemService.searchItemId(code);
-//    }
+    @ResponseStatus(HttpStatus.CREATED)
+    @GetMapping(path = "/searchItem")
+    public ItemDTO searchSupId(@RequestParam("code")String code){
+        return itemService.searchItemCode(code);
+    }
 
 
 

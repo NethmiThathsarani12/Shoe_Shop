@@ -58,8 +58,11 @@ public class CustomerServiceImpl implements CustomerService {
     }
 
     @Override
-    public Customer searchCusId(String id) {
-        return null;
+    public CustomerDTO searchCusId(String id) {
+        if (!repo.existsById(id)) {
+            throw new RuntimeException("Wrong ID. Please enter Valid id..!");
+        }
+        return mapper.map(repo.findById(id).get(), CustomerDTO.class);
     }
 
     @Override

@@ -2,6 +2,7 @@ package lk.ijse.gdse66.spring.Back_End.controller;
 
 import lk.ijse.gdse66.spring.Back_End.dto.CustomDTO;
 import lk.ijse.gdse66.spring.Back_End.dto.CustomerDTO;
+import lk.ijse.gdse66.spring.Back_End.dto.SupplierDTO;
 import lk.ijse.gdse66.spring.Back_End.embeded.Address;
 import lk.ijse.gdse66.spring.Back_End.service.CustomerService;
 import lk.ijse.gdse66.spring.Back_End.utill.ResponseUtil;
@@ -53,5 +54,12 @@ public class CustomerController {
         service.deleteCustomer(code);
         return new ResponseUtil("200", "Successfully Deleted. :"+ code,null);
     }
+
+    @ResponseStatus(HttpStatus.CREATED)
+    @GetMapping(path = "/searchCustomer")
+    public CustomerDTO searchCustomerId(@RequestParam("code") String code) {
+        return service.searchCusId(code);
+    }
+
 }
 

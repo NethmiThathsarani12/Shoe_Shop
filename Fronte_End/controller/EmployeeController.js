@@ -198,59 +198,59 @@ function blindClickEventsE() {
     $("#btnAddEmployee").attr('disabled', false);
 }
 
-
-$("#search_Id").on("keypress", function (event) {
-    if (event.which === 13) {
-        var search = $("#search_Id").val();
-        $("#employeeTable").empty();
-        $.ajax({
-            url: baseUrl + "employee/searchEmployee/?employee_Id="+ search,
-            method: "GET",
-            contentType: "application/json",
-            dataType: "json",
-            success: function (res) {
-                console.log(res);
-                if (res) {
-                    $("#Employee_code").val(res.code);
-                    $("#employee_name").val(res.name);
-                    $("#EProfile_pic").val(res.pic);
-                    $("#E_gender").val(res.gender);
-                    $("#E_status").val(res.status);
-                    $("#designation").val(res.designation);
-                    $("#E_AccessRole").val(res.role);
-                    $("#E_dob").val(res.birth);
-                    $("#E_DOF").val(res.joinDate);
-                    $("#E_Attached").val(res.branch);
-
-                    // Accessing address properties correctly
-                    let address = res.address || {}; // Use empty object if address is null
-                    $("#E_address_1").val(address.address1 || '');
-                    $("#E_address_2").val(address.address2 || '');
-                    $("#E_address_3").val(address.address3 || '');
-                    $("#E_address_4").val(address.address4 || '');
-                    $("#E_address_5").val(address.address5 || '');
-
-                    $("#E_ContactNo").val(res.contact);
-                    $("#E_email").val(res.email);
-                    $("#ICE").val(res.person);
-                    $("#E_E_contact").val(res.emgContact);
-
-                    // Appending row to employee table
-                    let row = "<tr><td>" + res.code + "</td><td>" + res.name + "</td><td>" + res.pic + "</td><td>" + res.gender + "</td><td>" + res.status + "</td><td>" + res.designation + "</td><td>" + res.role + "</td><td>" + res.birth + "</td><td>" + res.joinDate + "</td><td>" + (address.address1 || '') + "</td><td>" + (address.address2 || '') + "</td><td>" + (address.address3 || '') + "</td><td>" + (address.address4 || '') + "</td><td>" + (address.address5 || '') + "</td><td>" + res.contact + "</td><td>" + res.email + "</td><td>" + res.person + "</td><td>" + res.emgContact + "</td></tr>";
-                    $("#employeeTable").append(row);
-                } else {
-                    // Handle case when no employee found
-                    emptyMassage("No employee found.");
-                }
-            },
-            error: function (error) {
-                loadAllEmployee();
-                let message = JSON.parse(error.responseText).message;
-                emptyMassage(message);
-            }
-        });
-    }
-});
+//
+// $("#search_Id").on("keypress", function (event) {
+//     if (event.which === 13) {
+//         var search = $("#search_Id").val();
+//         $("#employeeTable").empty();
+//         $.ajax({
+//             url: baseUrl + "employee/searchEmployee/?employee_Id="+ search,
+//             method: "GET",
+//             contentType: "application/json",
+//             dataType: "json",
+//             success: function (res) {
+//                 console.log(res);
+//                 if (res) {
+//                     $("#Employee_code").val(res.code);
+//                     $("#employee_name").val(res.name);
+//                     $("#EProfile_pic").val(res.pic);
+//                     $("#E_gender").val(res.gender);
+//                     $("#E_status").val(res.status);
+//                     $("#designation").val(res.designation);
+//                     $("#E_AccessRole").val(res.role);
+//                     $("#E_dob").val(res.birth);
+//                     $("#E_DOF").val(res.joinDate);
+//                     $("#E_Attached").val(res.branch);
+//
+//                     // Accessing address properties correctly
+//                     let address = res.address || {}; // Use empty object if address is null
+//                     $("#E_address_1").val(address.address1 || '');
+//                     $("#E_address_2").val(address.address2 || '');
+//                     $("#E_address_3").val(address.address3 || '');
+//                     $("#E_address_4").val(address.address4 || '');
+//                     $("#E_address_5").val(address.address5 || '');
+//
+//                     $("#E_ContactNo").val(res.contact);
+//                     $("#E_email").val(res.email);
+//                     $("#ICE").val(res.person);
+//                     $("#E_E_contact").val(res.emgContact);
+//
+//                     // Appending row to employee table
+//                     let row = "<tr><td>" + res.code + "</td><td>" + res.name + "</td><td>" + res.pic + "</td><td>" + res.gender + "</td><td>" + res.status + "</td><td>" + res.designation + "</td><td>" + res.role + "</td><td>" + res.birth + "</td><td>" + res.joinDate + "</td><td>" + (address.address1 || '') + "</td><td>" + (address.address2 || '') + "</td><td>" + (address.address3 || '') + "</td><td>" + (address.address4 || '') + "</td><td>" + (address.address5 || '') + "</td><td>" + res.contact + "</td><td>" + res.email + "</td><td>" + res.person + "</td><td>" + res.emgContact + "</td></tr>";
+//                     $("#employeeTable").append(row);
+//                 } else {
+//                     // Handle case when no employee found
+//                     emptyMassage("No employee found.");
+//                 }
+//             },
+//             error: function (error) {
+//                 loadAllEmployee();
+//                 let message = JSON.parse(error.responseText).message;
+//                 emptyMassage(message);
+//             }
+//         });
+//     }
+// });
 
 
 $("#btnUpdateEmployee").click(function () {
@@ -313,14 +313,64 @@ $('#EProfile_pic').change(function() {
 
 });
 
-function setButtonState(value) {
-    if (value > 0) {
-        $("#btnAddEmployee").attr('disabled', true);
-        $("#btnUpdateEmployee").attr('disabled', true);
-        $("#btnDeleteEmployee").attr('disabled', true);
-    } else {
-        $("#btnAddEmployee").attr('disabled', false);
-        $("#btnUpdateEmployee").attr('disabled', false);
-        $("#btnDeleteEmployee").attr('disabled', false);
+$("#search_EmployeeId").on("keypress", function (event) {
+    if (event.which === 13) {
+        var search = $("#search_EmployeeId").val();
+        $("#employeeTable").empty();
+        $.ajax({
+            url: baseUrl + "employee/searchEmployee?code=" + search,
+            method: "GET",
+            contentType: "application/json",
+            dataType: "json",
+            data: { employee_Id: search }, // Send the search parameter as an object
+            success: function (res) {
+                console.log(res);
+                if (res) {
+                    let code = res.code;
+                    let name = res.name;
+                    let pic = res.pic;
+                    let gender = res.gender;
+                    let status = res.status;
+                    let designation = res.designation;
+                    let role = res.role;
+                    let birth = res.birth;
+                    let joinDate = res.joinDate;
+                    let address = res.address || '';
+                    let contact = res.contact;
+                    let email = res.email;
+                    let person = res.person;
+                    let EmgContact = res.emgContact;
+
+                    let ad1 = address.address1 || '';
+                    let ad2 = address.address2 || '';
+                    let ad3 = address.address3 || '';
+                    let ad4 = address.address4 || '';
+                    let ad5 = address.address5 || '';
+
+                    // Concatenate address properties
+                    let addressColumn = `${ad1}, ${ad2}, ${ad3}, ${ad4}, ${ad5}`;
+
+                    let row = "<tr><td>" + code + "</td><td>" + name  + "</td><td>" + gender + "</td><td>" + status + "</td><td>" + designation + "</td><td>" + role + "</td><td>" + birth + "</td><td>" + joinDate + "</td><td>" + addressColumn + "</td><td>" + contact + "</td><td>" + email + "</td><td>" + person + "</td><td>" + EmgContact + "</td></tr>";
+                    $("#employeeTable").append(row);
+                    blindClickEventsE();
+                } else {
+                    // No data found
+                    console.log("No data found");
+                    // Handle this case if required
+                }
+            },
+            error: function (xhr, status, error) {
+                console.error("Error:", error);
+                loadAllEmployee(); // Load all employees as fallback
+                let message = xhr.responseJSON ? xhr.responseJSON.message : "An error occurred";
+                emptyMassage(message);
+            }
+        });
     }
-}
+});
+
+
+
+
+
+
