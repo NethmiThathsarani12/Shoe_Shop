@@ -59,7 +59,7 @@ public class ItemServiceImpl implements ItemService {
     }
 
     @Override
-    public ArrayList<EmployeeDTO> loadAllItem() {
+    public ArrayList<ItemDTO> loadAllItem() {
         return mapper.map(repo.findAll(), new TypeToken<ArrayList<Item>>() {
         }.getType());
     }

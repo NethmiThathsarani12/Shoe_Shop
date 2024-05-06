@@ -54,11 +54,12 @@ public class SupplierServiceImpl implements SupplierService {
     }
 
     @Override
-    public Supplier searchSupId(String id) {
-        if (!repo.existsById(id)){
+    public SupplierDTO searchSupId(String id) {
+        if (!repo.existsById(id)) {
             throw new RuntimeException("Wrong ID. Please enter Valid id..!");
         }
-        return mapper.map(repo.findById(id).get(),Supplier.class);
+        return mapper.map(repo.findById(id).get(), SupplierDTO.class);
+
     }
 
     @Override

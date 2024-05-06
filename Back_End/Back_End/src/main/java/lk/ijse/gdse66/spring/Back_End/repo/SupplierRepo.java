@@ -10,5 +10,5 @@ public interface SupplierRepo extends JpaRepository<Supplier,String> {
     String getLastIndex();
 
     @Query(value = "SELECT COUNT(code) FROM supplier", nativeQuery = true)
-    int getSumEmployee();
+    int getSumSupplier();
 }

@@ -1,0 +1,233 @@
+let itemBaseUrl = "http://localhost:8080/Back_End/";
+
+loadAllItem();
+
+function setTextFieldValueI(code, Name, qty, itemPicture,category,size,supplier,supName,salePrice,buyPrice,expectedProfit,profitMargin,status) {
+    $("#item_code").val(code);
+    $("#inv_Item_Desc").val(Name);
+    $("#inv_qty").val(qty);
+    $("#inv_Item_pic").val(itemPicture);
+    $("#inv_Category").val(category);
+    $("#size").val(size);
+    $("#inv_Supplier_Code").val(supplier);
+    $("#inv_Supplier_name").val(supName);
+    $("#inv_Unit_price").val(salePrice);
+    $("#unit_price_Buy").val(buyPrice);
+    $("#Expected_Profit").val(expectedProfit);
+    $("#Profit_margin").val(profitMargin);
+    $("#Inv_Status").val(status);
+
+
+    $("#item_code").focus();
+    // checkValidity(employeeValidations);
+
+    $("#btnAddInventory").attr('disabled', false);
+    $("#btnUpdateInventory").attr('disabled', false);
+    $("#btnDeleteInventory").attr('disabled', false);
+}
+
+
+
+
+$("#btnAddInventory").click(function () {
+
+    var image = $("#img");
+    var imageUrl = image.attr('src');
+    if (!imageUrl || imageUrl === '../../assets/img/nethmi.jpg') {
+        //alert("Error");
+        //swal("Error", "Take Item Photo.!", "error");
+    }
+
+    let formData = $("#InventoryForm").serializeArray();
+    formData.push({name: "itemPicture", value: imageUrl});
+    $.ajax({
+        url: itemBaseUrl + "item",
+        method: "POST",
+        data: formData,
+        dataType: "json",
+        success: function (res) {
+            saveUpdateAlert("Item", res.message);
+            loadAllItem()
+
+        },
+        error: function (xhr, status, error) {
+            unSuccessUpdateAlert("Item", JSON.parse(xhr.responseText).message);
+        }
+    });
+});
+
+
+$("#inv_Supplier_Code").empty();
+$.ajax({
+    url: itemBaseUrl + "supplier",
+    method: "GET",
+    dataType: "json",
+    success: function (res) {
+        console.log(res);
+        // setDates();
+
+        for (let i of res.data) {
+            let code = i.code;
+
+            $("#inv_Supplier_Code").append(`<option>${code}</option>`);
+        }
+        // generateOrderID();
+        console.log(res.message);
+    },
+    error: function (error) {
+        let message = JSON.parse(error.responseText).message;
+        console.log(message);
+    }
+
+});
+
+$("#inv_Supplier_Code").change(function () {
+    var search = $("#inv_Supplier_Code").val();
+    $.ajax({
+        url: itemBaseUrl + "supplier/searchSupplier?code=" + search, // Added "=" here
+        method: "GET",
+        contentType: "application/json",
+        dataType: "json",
+        success: function (res) {
+            console.log(res);
+            $("#inv_Supplier_name").val(res.name);
+        },
+        error: function (error) {
+            let message = JSON.parse(error.responseText).message;
+            console.log(message);
+        }
+    });
+});
+function loadAllItem() {
+    $("#inventoryTable").empty();
+    $.ajax({
+        url: itemBaseUrl + "item",
+        method: "GET",
+        dataType: "json",
+        success: function (res) {
+            console.log(res);
+
+            for (let i of res.data) {
+                let code = i.code;
+                let name = i.name;
+                let qty = i.qty;
+                let itemPicture = i.itemPicture || '';
+                let category = i.shoeType  // Ensure category exists
+                let size = i.size;
+                let supplier = i.supplier;
+                let supName = i.supName; // Here's the supplier name
+                let salePrice = i.salePrice;
+                let buyPrice = i.buyPrice;
+                let expectedProfit = i.expectedProfit;
+                let profitMargin = i.profitMargin;
+                let status = i.status;
+
+                let supId = supplier?.code || '';
+
+                // Append the supplier name in the row construction
+                let row = `<tr><td>${code}</td><td>${name}</td><td>${qty}</td><td>${category}</td><td>${size}</td><td>${supId}</td><td>${supName}</td><td>${salePrice}</td><td>${buyPrice}</td><td>${expectedProfit}</td><td>${profitMargin}</td><td>${status}</td></tr>`;
+                $("#inventoryTable").append(row);
+            }
+            blindClickEventsI();
+            setTextFieldValueI("", "", "", "", "", "", "", "", "", "", "", "", "");
+            console.log(res.message);
+        },
+        error: function (error) {
+            let message = JSON.parse(error.responseText).message;
+            console.log(message);
+        }
+    });
+}
+
+
+
+
+function blindClickEventsI() {
+    $("#inventoryTable").on("click", "tr", function () {
+        let code = $(this).children().eq(0).text();
+        let Name = $(this).children().eq(1).text();
+        let qty = $(this).children().eq(2).text();
+        let category = $(this).children().eq(3).text();
+        let size = $(this).children().eq(4).text();
+        let supplier = $(this).children().eq(5).text();
+        let supName = $(this).children().eq(6).text();
+        let salePrice = $(this).children().eq(7).text();
+        let buyPrice = $(this).children().eq(8).text();
+        let expectedProfit = $(this).children().eq(9).text();
+        let profitMargin = $(this).children().eq(10).text();
+        let status = $(this).children().eq(11).text();
+
+        // Set values to respective input fields
+        setTextFieldValueI(code, Name, qty, "", category, size, supplier, supName, salePrice, buyPrice, expectedProfit, profitMargin, status);
+    });
+
+    $("#btnAddInventory").attr('disabled', false);
+    $("#btnUpdateInventory").attr('disabled', false);
+    $("#btnDeleteInventory").attr('disabled', false);
+}
+
+$("#btnUpdateInventory").click(function () {
+    var image = $("#img");
+    var imageUrl = image.attr('src');
+    if (!imageUrl || imageUrl === '../../assets/img/nethmi.jpg') {
+        // Handle error scenario
+    }
+
+    let formData = $("#InventoryForm").serializeArray();
+    formData.push({name: "itemPicture", value: imageUrl});
+    $.ajax({
+        url: itemBaseUrl + "item",
+        method: "PUT",
+        data: formData,
+        dataType: "json",
+        success: function (res) {
+            saveUpdateAlert("Item", res.message);
+            loadAllItem()
+        },
+        error: function (xhr, status, error) {
+            unSuccessUpdateAlert("Item", JSON.parse(xhr.responseText).message);
+        }
+    });
+});
+
+$("#btnDeleteInventory").click(function () {
+    let code = $("#item_code").val();
+    $.ajax({
+        url: itemBaseUrl + "item?code=" + code,
+        method: "DELETE",
+        dataType: "json",
+        success: function (resp) {
+            saveUpdateAlert("Item", resp.message);
+            loadAllItem();
+        },
+        error: function (error) {
+            let message = JSON.parse(error.responseText).message;
+            unSuccessUpdateAlert("Item", message);
+        }
+    });
+});
+
+
+
+
+
+$('#inv_Item_pic').change(function() {
+    var fileInput = $('#inv_Item_pic')[0];
+    var file = fileInput.files[0];
+
+    if (file && (file.type.includes('image') || file.type === 'image/gif')) {
+        var reader = new FileReader();
+        reader.onload = function (e) {
+
+            //itmCaptureClear();
+            $('#img').attr('src', e.target.result);
+        };
+        reader.readAsDataURL(file);
+        // $("#itmClear").prop("disabled", false);
+        $(this).val("");
+    } else {
+        //$('#itemImgFileError').text('Please upload an image or GIF.');
+        //$('#itemImgFileError').css("border", "1px solid #ced4da");
+    }
+
+});

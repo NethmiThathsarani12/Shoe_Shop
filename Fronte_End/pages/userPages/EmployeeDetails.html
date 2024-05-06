@@ -27,6 +27,7 @@
     <!-- Template Dashboard CSS File -->
     <link href="../../assets/css/dashboardStyle.css" rel="stylesheet">
 
+
 </head>
 <body>
 <!-- ======= Header ======= -->
@@ -356,38 +357,42 @@
             </div>
             <div class="card info-card">
                 <!-- View Customer Details Table Start -->
-                <div class="row mt-1 mt-md-2 mt-lg-4 mm-2 p-2 justify-content-around" style="height: 350px;">
-                    <div class="col-11 justify-content-around sectionBorder"
-                         style="height: 290px; background: white">
-                        <div class="table-responsive customerTableDiv overflow-auto " style="height: 300px;">
-                            <table class="table table-light table-striped table-bordered table-hover">
-                                <thead class="text-dark table-danger text-center  table-bordered sticky-top">
-                                <tr>
-                                    <th scope="col">Employee code</th>
-                                    <th scope="col">Employee name</th>
-                                    <th scope="col">Employee Profile Pic</th>
-                                    <th scope="col">Gender</th>
-                                    <th scope="col">Status</th>
-                                    <th scope="col">Designation</th>
-                                    <th scope="col">Access Role</th>
-                                    <th scope="col">DOB</th>
-                                    <th scope="col">Date of Join</th>
-                                    <th scope="col">Attached Branch</th>
-                                    <th scope="col">Address Line 01</th>
-                                    <th scope="col">Address Line 02</th>
-                                    <th scope="col">Address Line 03</th>
-                                    <th scope="col">Address Line 04</th>
-                                    <th scope="col">Address Line 05</th>
-                                    <th scope="col">ContactNo</th>
-                                    <th scope="col">Email</th>
-                                    <th scope="col">Inform In Emergency</th>
-                                    <th scope="col">Emergency Contact</th>
-                                </tr>
-                                </thead>
-                                <tbody id="customerTable"></tbody>
-                            </table>
+                <div class="card info-card">
+                    <!-- View Customer Details Table Start -->
+                    <div class="row mt-1 mt-md-2 mt-lg-4 mm-2 p-2 justify-content-around" style="height: 350px;">
+                        <div class="col-11 justify-content-around sectionBorder"
+                             style="height: 290px; background: white">
+                            <div class="table-responsive customerTableDiv overflow-auto " style="height: 300px;">
+                                <table class="table table-light table-striped table-bordered table-hover">
+                                    <thead class="text-dark table-danger text-center  table-bordered sticky-top">
+                                    <tr>
+                                        <th scope="col">Employee code</th>
+                                        <th scope="col">Employee name</th>
+                                        <!--                                        <th scope="col">Employee Profile Pic</th>-->
+                                        <th scope="col">Gender</th>
+                                        <th scope="col">Status</th>
+                                        <th scope="col">Designation</th>
+                                        <th scope="col">Access Role</th>
+                                        <th scope="col">DOB</th>
+                                        <th scope="col">Date of Join</th>
+                                        <th scope="col">Attached Branch</th>
+                                        <th scope="col">Address</th>
+                                        <!--                                        <th scope="col">Address</th>-->
+                                        <!--                                        <th scope="col">Address</th>-->
+                                        <!--                                        <th scope="col">Address</th>-->
+                                        <!--                                        <th scope="col">Address</th>-->
+                                        <th scope="col">ContactNo</th>
+                                        <th scope="col">Email</th>
+                                        <th scope="col">Inform In Emergency</th>
+                                        <th scope="col">Emergency Contact</th>
+                                    </tr>
+                                    </thead>
+                                    <tbody id="employeeTable"></tbody>
+                                </table>
+                            </div>
                         </div>
                     </div>
+                    <!-- View Customer Details Table End -->
                 </div>
                 <!-- View Customer Details Table End -->
             </div>
@@ -575,8 +580,7 @@
 <script src="../../assets/js/dashboardMain.js"></script>
 
 <!-- Controller JS File -->
-<script src="../../controller/Reg_UserController.js"></script>
-<script src="../../controller/DashBoardController.js"></script>
+<script src="../../controller/EmployeeDetailController.js"></script>
 
 
 <!-- Util JS File -->

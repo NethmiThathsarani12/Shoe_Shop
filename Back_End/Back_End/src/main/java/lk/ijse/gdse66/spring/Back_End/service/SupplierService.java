@@ -14,7 +14,7 @@ public interface SupplierService {
     void saveSupplier(SupplierDTO dto);
     void updateSupplier(SupplierDTO dto);
     void deleteSupplier(String id);
-    Supplier searchSupId(String id);
+    SupplierDTO searchSupId(String id);
     ArrayList<SupplierDTO> loadAllSupplier();
 
     @ResponseBody

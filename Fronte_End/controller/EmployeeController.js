@@ -94,6 +94,8 @@ function setTextFieldValues(code, name, pic, gender,status,designation,role,birt
     $("#btnUpdateEmployee").attr('disabled', false);
     $("#btnDeleteEmployee").attr('disabled', false);
 }
+
+
 function loadAllEmployee() {
     $("#employeeTable").empty();
     $.ajax({
