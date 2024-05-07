@@ -46,10 +46,16 @@ public class EmployeeController {
         return new ResponseUtil("200", "Successfully Deleted. :"+ code,null);
     }
 
-    @ResponseStatus(HttpStatus.CREATED)
+//    @ResponseStatus(HttpStatus.CREATED)
+//    @GetMapping(path = "/searchEmployee")
+//    public EmployeeDTO searchEmpId(@RequestParam("code") String employee_Id){
+//        return service.searchEmpId(employee_Id);
+//    }
+
     @GetMapping(path = "/searchEmployee")
-    public EmployeeDTO searchEmpId(@RequestParam("code") String employee_Id){
-        return service.searchEmpId(employee_Id);
+    @ResponseStatus(HttpStatus.CREATED)
+    public EmployeeDTO searchEmpId(@RequestParam String code, @RequestParam String name){
+        return service.searchEmpId(code, name); // Adjusted method call
     }
 
     @ResponseStatus(HttpStatus.CREATED)

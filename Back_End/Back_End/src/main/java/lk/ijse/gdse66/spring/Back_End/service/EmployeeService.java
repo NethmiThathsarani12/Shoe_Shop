@@ -12,7 +12,8 @@ public interface EmployeeService {
     void saveEmployee(EmployeeDTO dto);
     void updateEmployee(EmployeeDTO dto);
     void deleteEmployee(String id);
-    EmployeeDTO searchEmpId(String id);
+//    EmployeeDTO searchEmpId(String id);
+EmployeeDTO searchEmpId(String code, String name);
     ArrayList<EmployeeDTO> loadAllEmployee();
 
     @ResponseBody

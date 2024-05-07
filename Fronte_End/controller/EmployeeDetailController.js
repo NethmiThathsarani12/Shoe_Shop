@@ -59,11 +59,14 @@ $("#search_EmployeeId").on("keypress", function (event) {
         var search = $("#search_EmployeeId").val();
         $("#employeeTable").empty();
         $.ajax({
-            url: baseUrl + "employee/searchEmployee?code=" + search,
+            url: baseUrl + "employee/searchEmployee",
             method: "GET",
+            data: {
+                code: search, // Provide the 'code' parameter
+                name: search  // Provide the 'name' parameter
+            },
             contentType: "application/json",
             dataType: "json",
-            data: { employee_Id: search }, // Send the search parameter as an object
             success: function (res) {
                 console.log(res);
                 if (res) {
@@ -100,11 +103,15 @@ $("#search_EmployeeId").on("keypress", function (event) {
                     // Handle this case if required
                 }
             },
-            error: function (xhr, status, error) {
-                console.error("Error:", error);
-                loadAllEmployee(); // Load all employees as fallback
-                let message = xhr.responseJSON ? xhr.responseJSON.message : "An error occurred";
-                emptyMassage(message);
+            error: function (error) {
+                loadAllEmployee();
+                let message = JSON.parse(error.responseText).message;
+                Swal.fire({
+                    icon: "error",
+                    title: "Request failed",
+                    showConfirmButton: false,
+                    timer: 1500
+                });
             }
         });
     }

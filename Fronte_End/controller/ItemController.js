@@ -1,8 +1,9 @@
 let itemBaseUrl = "http://localhost:8080/Back_End/";
 
+
 loadAllItem();
 
-function setTextFieldValueI(code, Name, qty, itemPicture,category,size,supplier,supName,salePrice,buyPrice,expectedProfit,profitMargin,status) {
+function setTextFieldValueI(code, Name, qty, itemPicture, category, size, supplier, supName, salePrice, buyPrice, expectedProfit, profitMargin, status) {
     $("#item_code").val(code);
     $("#inv_Item_Desc").val(Name);
     $("#inv_qty").val(qty);
@@ -17,25 +18,18 @@ function setTextFieldValueI(code, Name, qty, itemPicture,category,size,supplier,
     $("#Profit_margin").val(profitMargin);
     $("#Inv_Status").val(status);
 
-
     $("#item_code").focus();
-    // checkValidity(employeeValidations);
 
     $("#btnAddInventory").attr('disabled', false);
     $("#btnUpdateInventory").attr('disabled', false);
     $("#btnDeleteInventory").attr('disabled', false);
 }
 
-
-
-
 $("#btnAddInventory").click(function () {
-
     var image = $("#img");
     var imageUrl = image.attr('src');
     if (!imageUrl || imageUrl === '../../assets/img/nethmi.jpg') {
-        //alert("Error");
-        //swal("Error", "Take Item Photo.!", "error");
+        // Handle error scenario
     }
 
     let formData = $("#InventoryForm").serializeArray();
@@ -47,8 +41,8 @@ $("#btnAddInventory").click(function () {
         dataType: "json",
         success: function (res) {
             saveUpdateAlert("Item", res.message);
-            loadAllItem()
-
+            // calculateExpectedProfit(); // Calculate expected profit after adding item
+            loadAllItem();
         },
         error: function (xhr, status, error) {
             unSuccessUpdateAlert("Item", JSON.parse(xhr.responseText).message);
@@ -56,40 +50,31 @@ $("#btnAddInventory").click(function () {
     });
 });
 
-
 $("#inv_Supplier_Code").empty();
 $.ajax({
     url: itemBaseUrl + "supplier",
     method: "GET",
     dataType: "json",
     success: function (res) {
-        console.log(res);
-        // setDates();
-
         for (let i of res.data) {
             let code = i.code;
-
             $("#inv_Supplier_Code").append(`<option>${code}</option>`);
         }
-        // generateOrderID();
-        console.log(res.message);
     },
     error: function (error) {
         let message = JSON.parse(error.responseText).message;
         console.log(message);
     }
-
 });
 
 $("#inv_Supplier_Code").change(function () {
     var search = $("#inv_Supplier_Code").val();
     $.ajax({
-        url: itemBaseUrl + "supplier/searchSupplier?code=" + search, // Added "=" here
+        url: itemBaseUrl + "supplier/searchSupplier?code=" + search,
         method: "GET",
         contentType: "application/json",
         dataType: "json",
         success: function (res) {
-            console.log(res);
             $("#inv_Supplier_name").val(res.name);
         },
         error: function (error) {
@@ -98,6 +83,7 @@ $("#inv_Supplier_Code").change(function () {
         }
     });
 });
+
 function loadAllItem() {
     $("#inventoryTable").empty();
     $.ajax({
@@ -105,32 +91,28 @@ function loadAllItem() {
         method: "GET",
         dataType: "json",
         success: function (res) {
-            console.log(res);
-
             for (let i of res.data) {
                 let code = i.code;
                 let name = i.name;
                 let qty = i.qty;
                 let itemPicture = i.itemPicture || '';
-                let category = i.shoeType  // Ensure category exists
+                let category = i.shoeType;
                 let size = i.size;
                 let supplier = i.supplier;
-                let supName = i.supName; // Here's the supplier name
+                let supName = i.supName;
                 let salePrice = i.salePrice;
                 let buyPrice = i.buyPrice;
-                let expectedProfit = i.expectedProfit;
+                let expectedProfit = i.expectedProfit; // Use the provided expected profit
                 let profitMargin = i.profitMargin;
                 let status = i.status;
 
                 let supId = supplier?.code || '';
 
-                // Append the supplier name in the row construction
                 let row = `<tr><td>${code}</td><td>${name}</td><td>${qty}</td><td>${category}</td><td>${size}</td><td>${supId}</td><td>${supName}</td><td>${salePrice}</td><td>${buyPrice}</td><td>${expectedProfit}</td><td>${profitMargin}</td><td>${status}</td></tr>`;
                 $("#inventoryTable").append(row);
             }
             blindClickEventsI();
             setTextFieldValueI("", "", "", "", "", "", "", "", "", "", "", "", "");
-            console.log(res.message);
         },
         error: function (error) {
             let message = JSON.parse(error.responseText).message;
@@ -138,9 +120,6 @@ function loadAllItem() {
         }
     });
 }
-
-
-
 
 function blindClickEventsI() {
     $("#inventoryTable").on("click", "tr", function () {
@@ -157,7 +136,6 @@ function blindClickEventsI() {
         let profitMargin = $(this).children().eq(10).text();
         let status = $(this).children().eq(11).text();
 
-        // Set values to respective input fields
         setTextFieldValueI(code, Name, qty, "", category, size, supplier, supName, salePrice, buyPrice, expectedProfit, profitMargin, status);
     });
 
@@ -182,7 +160,7 @@ $("#btnUpdateInventory").click(function () {
         dataType: "json",
         success: function (res) {
             saveUpdateAlert("Item", res.message);
-            loadAllItem()
+            loadAllItem();
         },
         error: function (xhr, status, error) {
             unSuccessUpdateAlert("Item", JSON.parse(xhr.responseText).message);
@@ -207,10 +185,6 @@ $("#btnDeleteInventory").click(function () {
     });
 });
 
-
-
-
-
 $('#inv_Item_pic').change(function() {
     var fileInput = $('#inv_Item_pic')[0];
     var file = fileInput.files[0];
@@ -218,18 +192,13 @@ $('#inv_Item_pic').change(function() {
     if (file && (file.type.includes('image') || file.type === 'image/gif')) {
         var reader = new FileReader();
         reader.onload = function (e) {
-
-            //itmCaptureClear();
             $('#img').attr('src', e.target.result);
         };
         reader.readAsDataURL(file);
-        // $("#itmClear").prop("disabled", false);
         $(this).val("");
     } else {
-        //$('#itemImgFileError').text('Please upload an image or GIF.');
-        //$('#itemImgFileError').css("border", "1px solid #ced4da");
+        // Handle error scenario
     }
-
 });
 
 $("#search_inv_Id").on("keypress", function (event) {
@@ -242,31 +211,53 @@ $("#search_inv_Id").on("keypress", function (event) {
             contentType: "application/json",
             dataType: "json",
             success: function (res) {
-                console.log(res);
                 let code = res.code;
                 let Name = res.name;
                 let qty = res.qty;
-                let category = res.shoeType; // Ensure category exists
+                let category = res.shoeType;
                 let size = res.size;
                 let supplier = res.supplier?.code || '';
                 let supName = res.supName;
                 let salePrice = res.salePrice;
                 let buyPrice = res.buyPrice;
-                let expectedProfit = res.expectedProfit;
+                let expectedProfit = salePrice - buyPrice; // Calculate expected profit
                 let profitMargin = res.profitMargin;
                 let status = res.status;
 
-                // Append the supplier name in the row construction
                 let row = `<tr><td>${code}</td><td>${Name}</td><td>${qty}</td><td>${category}</td><td>${size}</td><td>${supplier}</td><td>${supName}</td><td>${salePrice}</td><td>${buyPrice}</td><td>${expectedProfit}</td><td>${profitMargin}</td><td>${status}</td></tr>`;
                 $("#inventoryTable").append(row);
-                blindClickEventsI(); // Bind click events after adding rows
+                blindClickEventsI();
             },
             error: function (xhr) {
                 let message = JSON.parse(xhr.responseText).message;
-                emptyMassage(message); // Show error message
-                loadAllItem(); // Load all items as fallback
+                emptyMassage(message);
+                loadAllItem();
             }
         });
     }
 });
+
+function profitMargin() {
+    let salePrice = parseFloat($("#inv_Unit_price").val());
+    let buyPrice = parseFloat($("#unit_price_Buy").val());
+
+    if (!isNaN(salePrice) && !isNaN(buyPrice)) {
+        let profit = salePrice - buyPrice;
+        let profitMargin = Math.round((profit / salePrice) * 100);
+        profitMargin = profitMargin.toFixed(1);
+        $("#Expected_Profit").val(profit);
+        $("#Profit_margin").val(profitMargin);
+    } else {
+        $("#Expected_Profit").val('');
+        $("#Profit_margin").val('');
+    }
+}
+ // Attach an event listener to the buyPrice input field
+$("#unit_price_Buy").on("input", function() {
+    // Call the profitMargin function
+    profitMargin();
+});
+
+
+
 
