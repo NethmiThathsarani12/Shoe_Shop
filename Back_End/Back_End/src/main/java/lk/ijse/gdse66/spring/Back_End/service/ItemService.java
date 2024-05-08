@@ -13,7 +13,8 @@ public interface ItemService {
     void saveItem(ItemDTO dto);
     void updateItem(ItemDTO dto);
     void deleteItem(String id);
-    ItemDTO searchItemCode(String id);
+//    ItemDTO searchItemCode(String id);
+  ItemDTO searchItemId(String code, String name);
     ArrayList<ItemDTO> loadAllItem();
 
     @ResponseBody

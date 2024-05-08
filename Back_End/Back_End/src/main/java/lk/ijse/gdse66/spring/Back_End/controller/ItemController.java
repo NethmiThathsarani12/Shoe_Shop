@@ -1,6 +1,7 @@
 package lk.ijse.gdse66.spring.Back_End.controller;
 
 
+import lk.ijse.gdse66.spring.Back_End.dto.EmployeeDTO;
 import lk.ijse.gdse66.spring.Back_End.dto.ItemDTO;
 import lk.ijse.gdse66.spring.Back_End.dto.SupplierDTO;
 import lk.ijse.gdse66.spring.Back_End.service.ItemService;
@@ -46,12 +47,11 @@ public class ItemController {
         return new ResponseUtil("200", "Successfully Deleted. :"+ code,null);
     }
 
-    @ResponseStatus(HttpStatus.CREATED)
     @GetMapping(path = "/searchItem")
-    public ItemDTO searchSupId(@RequestParam("code")String code){
-        return itemService.searchItemCode(code);
+    @ResponseStatus(HttpStatus.CREATED)
+    public ItemDTO searchItemId(@RequestParam String code, @RequestParam String name){
+        return itemService.searchItemId(code, name); // Adjusted method call
     }
-
 
 
 }

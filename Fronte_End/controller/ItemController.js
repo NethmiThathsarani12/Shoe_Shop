@@ -201,13 +201,56 @@ $('#inv_Item_pic').change(function() {
     }
 });
 
+//
+// $("#search_inv_Id").on("keypress", function (event) {
+//     if (event.which === 13) {
+//         var search = $("#search_inv_Id").val();
+//         $("#inventoryTable").empty();
+//         $.ajax({
+//             url: itemBaseUrl + "item/searchItem?code=" + search,
+//             method: "GET",
+//             contentType: "application/json",
+//             dataType: "json",
+//             success: function (res) {
+//                 let code = res.code;
+//                 let Name = res.name;
+//                 let qty = res.qty;
+//                 let category = res.shoeType;
+//                 let size = res.size;
+//                 let supplier = res.supplier?.code || '';
+//                 let supName = res.supName;
+//                 let salePrice = res.salePrice;
+//                 let buyPrice = res.buyPrice;
+//                 let expectedProfit = salePrice - buyPrice; // Calculate expected profit
+//                 let profitMargin = res.profitMargin;
+//                 let status = res.status;
+//
+//                 let row = `<tr><td>${code}</td><td>${Name}</td><td>${qty}</td><td>${category}</td><td>${size}</td><td>${supplier}</td><td>${supName}</td><td>${salePrice}</td><td>${buyPrice}</td><td>${expectedProfit}</td><td>${profitMargin}</td><td>${status}</td></tr>`;
+//                 $("#inventoryTable").append(row);
+//                 blindClickEventsI();
+//             },
+//             error: function (xhr) {
+//                 let message = JSON.parse(xhr.responseText).message;
+//                 emptyMassage(message);
+//                 loadAllItem();
+//             }
+//         });
+//     }
+// });
+
+
 $("#search_inv_Id").on("keypress", function (event) {
     if (event.which === 13) {
         var search = $("#search_inv_Id").val();
         $("#inventoryTable").empty();
+
         $.ajax({
-            url: itemBaseUrl + "item/searchItem?code=" + search,
+            url: itemBaseUrl + "item/searchItem",
             method: "GET",
+            data: {
+                code: search,
+                name: search
+            },
             contentType: "application/json",
             dataType: "json",
             success: function (res) {
@@ -228,14 +271,22 @@ $("#search_inv_Id").on("keypress", function (event) {
                 $("#inventoryTable").append(row);
                 blindClickEventsI();
             },
-            error: function (xhr) {
-                let message = JSON.parse(xhr.responseText).message;
-                emptyMassage(message);
+            error: function (error) {
                 loadAllItem();
+                let message = JSON.parse(error.responseText).message;
+                Swal.fire({
+                    icon: "error",
+                    title: "Request failed",
+                    showConfirmButton: false,
+                    timer: 1500
+                });
             }
         });
     }
 });
+
+
+
 
 function profitMargin() {
     let salePrice = parseFloat($("#inv_Unit_price").val());

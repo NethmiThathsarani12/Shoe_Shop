@@ -2,6 +2,7 @@ package lk.ijse.gdse66.spring.Back_End.service.impl;
 
 import lk.ijse.gdse66.spring.Back_End.dto.CustomDTO;
 import lk.ijse.gdse66.spring.Back_End.dto.CustomerDTO;
+import lk.ijse.gdse66.spring.Back_End.dto.EmployeeDTO;
 import lk.ijse.gdse66.spring.Back_End.dto.SupplierDTO;
 import lk.ijse.gdse66.spring.Back_End.entity.Customer;
 import lk.ijse.gdse66.spring.Back_End.entity.Employee;
@@ -57,12 +58,21 @@ public class CustomerServiceImpl implements CustomerService {
         repo.deleteById(id);
     }
 
+//    @Override
+//    public CustomerDTO searchCusId(String id) {
+//        if (!repo.existsById(id)) {
+//            throw new RuntimeException("Wrong ID. Please enter Valid id..!");
+//        }
+//        return mapper.map(repo.findById(id).get(), CustomerDTO.class);
+//    }
+
     @Override
-    public CustomerDTO searchCusId(String id) {
-        if (!repo.existsById(id)) {
-            throw new RuntimeException("Wrong ID. Please enter Valid id..!");
+    public CustomerDTO searchCusId(String code, String name) {
+        Customer customer = repo.findCustomerByCodeOrName(code, name);
+        if (customer == null) {
+            throw new RuntimeException("Employee not found with code: " + code + " or name: " + name);
         }
-        return mapper.map(repo.findById(id).get(), CustomerDTO.class);
+        return mapper.map(customer, CustomerDTO.class);
     }
 
     @Override

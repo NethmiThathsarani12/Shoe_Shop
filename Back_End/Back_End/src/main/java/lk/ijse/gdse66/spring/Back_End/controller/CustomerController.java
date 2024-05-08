@@ -2,6 +2,7 @@ package lk.ijse.gdse66.spring.Back_End.controller;
 
 import lk.ijse.gdse66.spring.Back_End.dto.CustomDTO;
 import lk.ijse.gdse66.spring.Back_End.dto.CustomerDTO;
+import lk.ijse.gdse66.spring.Back_End.dto.EmployeeDTO;
 import lk.ijse.gdse66.spring.Back_End.dto.SupplierDTO;
 import lk.ijse.gdse66.spring.Back_End.embeded.Address;
 import lk.ijse.gdse66.spring.Back_End.service.CustomerService;
@@ -55,10 +56,16 @@ public class CustomerController {
         return new ResponseUtil("200", "Successfully Deleted. :"+ code,null);
     }
 
-    @ResponseStatus(HttpStatus.CREATED)
+//    @ResponseStatus(HttpStatus.CREATED)
+//    @GetMapping(path = "/searchCustomer")
+//    public CustomerDTO searchCustomerId(@RequestParam("code") String code) {
+//        return service.searchCusId(code);
+//    }
+
     @GetMapping(path = "/searchCustomer")
-    public CustomerDTO searchCustomerId(@RequestParam("code") String code) {
-        return service.searchCusId(code);
+    @ResponseStatus(HttpStatus.CREATED)
+    public CustomerDTO searchCusId(@RequestParam String code, @RequestParam String name){
+        return service.searchCusId(code, name); // Adjusted method call
     }
 
 }
