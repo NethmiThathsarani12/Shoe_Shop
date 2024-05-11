@@ -258,60 +258,41 @@
   <ul class="sidebar-nav" id="sidebar-nav">
 
     <li class="nav-item">
-      <a class="nav-link " href="../adminDashBoard.html">
-        <i class="bi bi-grid"></i>
+      <a class="nav-link " href="../adminDashboard.html">
+        <i class="bi bi-kanban"></i>
         <span>Dashboard</span>
       </a>
     </li><!-- End Dashboard Nav -->
 
     <li class="nav-item">
-      <a class="nav-link collapsed" data-bs-target="#forms-nav" data-bs-toggle="collapse" href="#">
-        <i class="bi bi-kanban"></i><span>Manage</span><i class="bi bi-chevron-down ms-auto"></i>
+      <!--<a class="nav-link collapsed" data-bs-target="#forms-nav" data-bs-toggle="collapse" href="#">
+          <i class="bi bi-kanban"></i><span>Manage</span><i class="bi bi-chevron-down ms-auto"></i>
+      </a>-->
+
+    <li class="nav-item">
+      <a class="nav-link collapsed" href="../adminPages/Customer.html">
+        <i class="bi bi-kanban"></i>
+        <span>Customer</span>
       </a>
-      <ul id="forms-nav" class="nav-content collapse " data-bs-parent="#sidebar-nav">
-        <li>
-          <a href="../adminPages/Customer.html">
-            <i class="bi bi-circle"></i><span>Customer</span>
-          </a>
-        </li>
-        <li>
-          <a href="../adminPages/Employee.html">
-            <i class="bi bi-circle"></i><span>Employee</span>
-          </a>
-        </li>
-        <li>
-          <a href="../adminPages/Supplier.html">
-            <i class="bi bi-circle"></i><span>Supplier</span>
-          </a>
-        </li>
-        <li>
-          <a href="../adminPages/Inventory.html">
-            <i class="bi bi-circle"></i><span>Inventory</span>
-          </a>
-        </li>
-      </ul>
     </li>
-    <!-- End Forms Nav -->
-
-<!--    <li class="nav-item">-->
-<!--      <a class="nav-link collapsed" data-bs-target="#components-nav" data-bs-toggle="collapse" href="#">-->
-<!--        <i class="bi bi-layout-text-window-reverse"></i><span>Details</span><i-->
-<!--              class="bi bi-chevron-down ms-auto"></i>-->
-<!--      </a>-->
-<!--      <ul id="components-nav" class="nav-content collapse " data-bs-parent="#sidebar-nav">-->
-<!--        <li>-->
-<!--          <a href="PaymentDetails.html">-->
-<!--            <i class="bi bi-circle"></i><span>Payment Details</span>-->
-<!--          </a>-->
-<!--        </li>-->
-<!--        <li>-->
-<!--          <a href="RentDetails.html">-->
-<!--            <i class="bi bi-circle"></i><span>Rent Details</span>-->
-<!--          </a>-->
-<!--        </li>-->
-<!--      </ul>-->
-<!--    </li>&lt;!&ndash; End View Nav &ndash;&gt;-->
-
+    <li class="nav-item">
+      <a class="nav-link collapsed" href="../adminPages/Employee.html">
+        <i class="bi bi-kanban"></i>
+        <span>Employee</span>
+      </a>
+    </li>
+    <li class="nav-item">
+      <a class="nav-link collapsed" href="../adminPages/Supplier.html">
+        <i class="bi bi-kanban"></i>
+        <span>Supplier</span>
+      </a>
+    </li>
+    <li class="nav-item">
+      <a class="nav-link collapsed" href="../adminPages/Inventory.html">
+        <i class="bi bi-kanban"></i>
+        <span>Inventory</span>
+      </a>
+    </li>
     <li class="nav-item">
       <a class="nav-link collapsed" href="AdminSetting.html" id="myDetailsSection">
         <i class="bi bi-kanban"></i>
@@ -319,16 +300,16 @@
       </a>
     </li>
 
-<!--    <li class="nav-item">-->
-<!--      <a class="nav-link collapsed" href="IncomeDetails.html" id="incomeDetails">-->
-<!--        <i class="bi bi-kanban"></i>-->
-<!--        <span>Income Details</span>-->
-<!--      </a>-->
-<!--    </li>-->
+    <!--        <li class="nav-item">-->
+    <!--            <a class="nav-link collapsed" href="IncomeDetails.html" id="incomeDetails">-->
+    <!--                <i class="bi bi-kanban"></i>-->
+    <!--                <span>Income Details</span>-->
+    <!--            </a>-->
+    <!--        </li>-->
 
     <li class="nav-item">
       <a class="nav-link collapsed" href="../login.html">
-        <i class="bi bi-box-arrow-in-right"></i>
+        <i class="bi bi-kanban"></i>
         <span>LogOut</span>
       </a>
     </li>
@@ -528,7 +509,7 @@
                  style="height: 290px; background: white">
               <div class="table-responsive customerTableDiv overflow-auto " style="height: 300px;">
                 <table class="table table-light table-striped table-bordered table-hover">
-                  <thead class="text-dark table-danger text-center  table-bordered sticky-top">
+                  <thead class="text-white table-dark text-center  table-bordered sticky-top">
                   <tr>
                     <th scope="col">Customer Code</th>
                     <th scope="col">Customer Name</th>
@@ -538,10 +519,6 @@
                     <th scope="col">Total points</th>
                     <th scope="col">DOB</th>
                     <th scope="col">Address</th>
-<!--                    <th scope="col">Address Line 02</th>-->
-<!--                    <th scope="col">Address Line 03</th>-->
-<!--                    <th scope="col">Address Line 04</th>-->
-<!--                    <th scope="col">Address Line 05</th>-->
                     <th scope="col">Contact Number</th>
                     <th scope="col">Email</th>
                     <th scope="col">RP date and time</th>

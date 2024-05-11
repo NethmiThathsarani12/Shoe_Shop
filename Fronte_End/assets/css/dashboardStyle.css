@@ -478,7 +478,7 @@ form .form-label, .input-group-text {
     font-size: 1em;
     margin-bottom: 2px;
     font-weight: bolder;
-    color: #012970;
+
 }
 
 form .form-control {
@@ -655,7 +655,7 @@ form .btn {
     scrollbar-width: thin;
     scrollbar-color: #aab7cf transparent;
     box-shadow: 0 0 20px rgba(1, 41, 112, 0.1);
-    background-color: #fff;
+    background-color: #e6e6e6;
 }
 
 @media (max-width: 1199px) {
@@ -704,16 +704,20 @@ form .btn {
     padding: 0;
     margin: 0;
     list-style: none;
+
 }
 
 .sidebar-nav li {
     padding: 0;
     margin: 0;
     list-style: none;
+    background-color: #BBBFCA;
 }
 
 .sidebar-nav .nav-item {
     margin-bottom: 5px;
+
+
 }
 
 .sidebar-nav .nav-heading {
@@ -732,6 +736,8 @@ form .btn {
     color: #4154f1;
     transition: 0.3s;
     background: #f6f9ff;
+    /*background-color: #BBBFCA;*/
+
     padding: 10px 15px;
     border-radius: 4px;
 }
@@ -743,7 +749,7 @@ form .btn {
 }
 
 .sidebar-nav .nav-link.collapsed {
-    color: #012970;
+    color: #14120d;
     background: #fff;
 }
 
@@ -1068,3 +1074,7 @@ form .btn {
     width: 100%;
     height: 20%;
 }
+
+/*.card info-card {*/
+/*    background-color: #B6BBC4*/
+/*}*/
