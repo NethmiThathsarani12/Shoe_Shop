@@ -128,10 +128,10 @@
                     </div>
                 </div>
                 <div class="row mt-1">
-<!--                    <div class="col-12 col-md-6 col-lg-6">-->
-<!--                        <label class="fw-bold" for="customerAddress">Address :</label>-->
-<!--                        <input class="form-control border-dark" disabled id="customerAddress" type="text">-->
-<!--                    </div>-->
+                    <div class="col-12 col-md-6 col-lg-6">
+                        <label class="fw-bold" for="cashierName">Cashier Name</label>
+                        <input class="form-control border-dark"  id="cashierName" type="text">
+                    </div>
 <!--                    <div class="col-12 col-md-6 col-lg-6">-->
 <!--                        <label class="fw-bold" for="customerSalary">Salary :</label>-->
 <!--                        <input class="form-control border-dark" disabled id="customerSalary" type="text">-->
@@ -209,9 +209,18 @@
                         <label class="fw-bold" for="txtBalance">Balance :</label>
                         <input class="form-control border-dark" disabled id="txtBalance" type="number">
                     </div>
+
                     <div class="col-12 col-md-6 col-lg-6 mt-4">
                         <button class="btn btn-primary rounded-2" id="btnPurchase" type="submit">Purchase</button>
+                        <!-- Adding a non-breaking space for spacing -->
+<!--                        <button class="btn btn-primary rounded-2" id="btnCard" type="submit">Card</button>-->
                     </div>
+                    <div class="col-12 col-md-6 col-lg-6 mt-4">
+                        <button class="btn btn-outline-light rounded-2" id="btnCard" type="submit" style="width: 260px; background-color: #12807e" >Card</button>
+                        <!-- Adding a non-breaking space for spacing -->
+                        <!--                        <button class="btn btn-primary rounded-2" id="btnCard" type="submit">Card</button>-->
+                    </div>
+
                 </div>
             </div>
             <!-- Order Details Section End -->
@@ -221,6 +230,7 @@
                 <button class="btn btn-danger rounded-2 bold sectionBorder" id="btnClearAll" type="button">Clear Details
                 </button>
             </div>
+
             <!--clear All Button Section end-->
 
             <!-- View Cart Details Table Start -->
