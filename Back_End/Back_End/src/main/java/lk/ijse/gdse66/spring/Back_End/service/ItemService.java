@@ -19,4 +19,6 @@ public interface ItemService {
 
     @ResponseBody
     CustomDTO getSumItem();
+
+    ItemDTO searchItemId(String id);
 }

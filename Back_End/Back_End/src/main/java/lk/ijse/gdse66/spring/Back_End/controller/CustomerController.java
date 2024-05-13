@@ -68,5 +68,11 @@ public class CustomerController {
         return service.searchCusId(code, name); // Adjusted method call
     }
 
+    @ResponseStatus(HttpStatus.CREATED)
+    @GetMapping(path = "/searchCus")
+    public CustomerDTO searchCustId(String code){
+        return service.searchCustId(code);
+    }
+
 }
 

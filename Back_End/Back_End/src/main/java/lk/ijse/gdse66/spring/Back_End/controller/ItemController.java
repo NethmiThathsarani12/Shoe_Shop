@@ -53,5 +53,11 @@ public class ItemController {
         return itemService.searchItemId(code, name); // Adjusted method call
     }
 
+    @ResponseStatus(HttpStatus.CREATED)
+    @GetMapping(path = "/searchItemId")
+    public ItemDTO searchItemId(String code){
+        return itemService.searchItemId(code);
+    }
+
 
 }

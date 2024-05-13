@@ -23,4 +23,6 @@ CustomerDTO searchCusId(String code, String name);
     CustomDTO customerIdGenerate();
     @ResponseBody
     SupplierDTO getSumCustomer();
+
+    CustomerDTO searchCustId(String id);
 }

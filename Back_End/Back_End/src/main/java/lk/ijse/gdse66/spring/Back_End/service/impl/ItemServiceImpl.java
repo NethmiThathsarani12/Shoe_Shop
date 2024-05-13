@@ -17,6 +17,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.ArrayList;
+import java.util.Optional;
 
 @Service
 @Transactional
@@ -81,5 +82,14 @@ public class ItemServiceImpl implements ItemService {
     @Override
     public CustomDTO getSumItem() {
         return new CustomDTO(repo.getSumItem());
+    }
+
+    @Override
+    public ItemDTO searchItemId(String code) {
+        Optional<Item> item = repo.findById(code);
+        if (item == null) {
+            throw new RuntimeException("item not found with code: " + code);
+        }
+        return mapper.map(item, ItemDTO.class);
     }
 }
