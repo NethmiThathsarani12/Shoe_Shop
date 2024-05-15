@@ -28,6 +28,7 @@
     <link href="../../assets/css/dashboardStyle.css" rel="stylesheet">
 
 
+
 </head>
 <body>
 <header id="header" class="header fixed-top d-flex align-items-center">
@@ -99,48 +100,77 @@
 
 <main id="main" class="main">
 
-    <!-- ======= Customer Manage ======= -->
-    <div class="pageTitle" id="pagetwo">
+    <!--<section class="container-fluid mt-3" id="manageEmployee">-->
+    <!--<nav>
+        <ol class="breadcrumb">
+            <li class="breadcrumb-item"><a href="../UserDashBoard.html">Home</a></li>
+            <li class="breadcrumb-item active">Details / Employee</li>
+        </ol>
+    </nav>-->
+
+    <!-- Order Header Start -->
+    <div class="container d-flex flex-grow-1 flex-column">
+        <h1>Sales Manage</h1>
+        <!--        <div class="position-relative d-inline-block mt-3 mt-lg-4 mt-md-4">-->
+        <!--            <h2 id="H1-2" style="font-family: 'Arial Rounded MT Bold',serif"><i-->
+        <!--                    class="bi bi-cart"></i> Place Order-->
+        <!--            </h2>-->
+        <!--        </div>-->
+    </div>
+    <!-- Order Header End -->
+
+    <!-- Order Header Section Start -->
+    <div class="container d-flex flex-grow-1 flex-column sectionBorder" style="background-color: #dfe4ea">
+        <div class="position-relative d-inline-block mt-3 mt-lg-4 mt-md-4">
+            <!-- <h6 id="H6-2">Home > Place Order</h6>-->
+            <hr>
+        </div>
+        <!-- Order Header Section End -->
+
+        <!-- Order Details Section Start -->
         <div class="row justify-content-around" style="height: min-content">
 
             <!-- Order Invoice Details Section Start -->
-            <div class="col-10 col-md-5 col-lg-4 p-3 mt-3 rounded-3 sectionBorder" style="background-color: #e6e6e6">
-                <h5 class="text-center p-2 text-light rounded-3" style="background: #275e27">Sales Details</h5>
+            <div class="col-10 col-md-5 col-lg-4 p-3 mt-3 rounded-3 sectionBorder" style="background-color: #c8cfc8">
+                <h5 class="text-center p-2 text-light rounded-3" style="background: #378CE7">Sale Details</h5>
                 <div class="row mt-1">
                     <div class="col-12 col-md-6 col-lg-6">
-                        <label class="fw-bold" for="orderId">Sale ID </label>
-                        <input class="form-control border-dark" id="orderId" type="text">
+                        <label class="fw-bold" for="oid">SALE ID </label>
+                        <input class="form-control border-dark" id="oid" type="text" >
                     </div>
                     <div class="col-12 col-md-6 col-lg-6">
-                        <label class="fw-bold" for="oDate">Sale Date </label>
+                        <label class="fw-bold" for="oDate">ORDER DATE</label>
                         <input class="form-control border-dark" id="oDate" type="text">
                     </div>
                 </div>
                 <div class="row mt-1">
                     <div class="col-12 col-md-6 col-lg-6">
-                        <label class="fw-bold" for="Customer_Id">Customer ID </label>
+                        <label class="fw-bold" for="Customer_Id">CUSTOMER ID :</label>
                         <select aria-label="Default select example" class="form-select border-dark" id="Customer_Id"
                                 value="Customer ID">
                         </select>
                     </div>
                     <div class="col-12 col-md-6 col-lg-6">
-                        <label class="fw-bold" for="cusName">Customer Name </label>
+                        <label class="fw-bold" for="cusName">NAME :</label>
                         <input class="form-control border-dark" disabled id="cusName" type="text">
                     </div>
                 </div>
                 <div class="row mt-1">
-
-<!--                    <div class="col-12 col-md-6 col-lg-6">-->
-<!--                        <label class="fw-bold" for="customerSalary">Salary :</label>-->
-<!--                        <input class="form-control border-dark" disabled id="customerSalary" type="text">-->
-<!--                    </div>-->
+                    <!--                    <div class="col-12 col-md-6 col-lg-6">-->
+                    <!--                        <label class="fw-bold" for="customerAddress">ADDRESS :</label>-->
+                    <!--                        <input class="form-control border-dark" disabled id="customerAddress" type="text">-->
+                    <!--                    </div>-->
+                    <!--                    <div class="col-12 col-md-6 col-lg-6">-->
+                    <!--                        <label class="fw-bold" for="customerSalary">Salary :</label>-->
+                    <!--                        <input class="form-control border-dark" disabled id="customerSalary" type="text">-->
+                    <!--                    </div>-->
                 </div>
             </div>
             <!-- Order Invoice Details Section End -->
 
             <!-- Order Item Details Section Start -->
-            <div class="col-10 col-md-5 col-lg-4 p-3 mt-3 rounded-3 sectionBorder" style="background-color: #e6e6e6">
-                <h5 class="text-center p-2 text-light rounded-3" style="background: #275e27">Item Details</h5>
+            <div class="col-10 col-md-5 col-lg-4 p-3 mt-3 rounded-3 sectionBorder" style="background-color: #c8cfc8">
+                <h5 class="text-center p-2 text-light rounded-3" style="background: #378CE7">Item Details</h5>
                 <div class="row mt-1">
                     <div class="col-12 col-md-6 col-lg-6">
                         <label class="fw-bold" for="Item_Code">Item Code :</label>
@@ -170,19 +200,28 @@
                         <strong class="control-error" id="lblCheckQty"></strong>
                     </div>
                     <div class="col-12 col-md-6 col-lg-6 mt-4 ">
-                        <button class="btn btn-success rounded-2" id="btnAddToCart" type="button">Add To Cart</button>
+                        <button class="btn btn-primary rounded-2" id="btnAddToCart" type="button">Add To Cart</button>
                     </div>
+                </div>
+
+                <div class="row mt-1">
                     <div class="col-12 col-md-6 col-lg-6">
                         <label class="fw-bold" for="cashierName">Cashier Name</label>
-                        <input class="form-control border-dark"  id="cashierName" type="text" style="width: 360px">
+                        <input class="form-control border-dark"  id="cashierName" type="text" >
                     </div>
+
+                    <div class="col-12 col-md-6 col-lg-6">
+                        <label class="fw-bold" for="point">Point</label>
+                        <input class="form-control border-dark"  id="point" type="text">
+                    </div>
+
                 </div>
             </div>
             <!-- Order Item Details Section End -->
 
             <!-- Order Details Section Start -->
-            <div class="col-10 col-md-5 col-lg-3 p-3 mt-3 rounded-3 sectionBorder" style="background-color: #e6e6e6">
-                <h5 class="text-center bg-primary p-2 text-light rounded-3">Payment Details</h5>
+            <div class="col-10 col-md-5 col-lg-3 p-3 mt-3 rounded-3 sectionBorder" style="background-color: #dce3dc">
+                <h5 class="text-center  p-2 text-light rounded-3" style="background: #378CE7">Payment Details</h5>
                 <div class="row mt-1">
                     <div class="col-12 col-md-6 col-lg-6">
                         <label class="fw-bold" for="txtTotal">Total :</label>
@@ -199,18 +238,27 @@
                         <label class="fw-bold" for="txtSubTotal">Sub Total :</label>
                         <input class="form-control border-dark" disabled id="txtSubTotal" type="number">
                     </div>
+
                     <div class="col-12 col-md-6 col-lg-6">
-                        <label class="fw-bold" for="payment">Payment</label>
-                        <select class="form-control border-dark" id="payment" name="payment">
+                        <label class="fw-bold" for="Payment">Payment</label>
+                        <select  class="form-control border-dark" id="Payment" name="Payment">
+                            <option selected></option>
                             <option value="CARD">CARD</option>
                             <option value="CASH">CASH</option>
                         </select>
+                        <!--                  <input type="text" name="lastName" class="form-control" id="lastName"-->
+                        <!--                         placeholder="Last Name">-->
+                        <span class="control-error"></span>
                     </div>
+                </div>
+
+                <div class="row mt-1">
                     <div class="col-12 col-md-6 col-lg-6">
                         <label class="fw-bold" for="txtCash">Cash :</label>
                         <input class="form-control border-dark" id="txtCash" type="text">
                         <strong class="control-error" id="lblCheckSubtotal"></strong>
                     </div>
+
                     <div class="col-12 col-md-6 col-lg-6">
                         <label class="fw-bold" for="txtBalance">Balance :</label>
                         <input class="form-control border-dark" disabled id="txtBalance" type="number">
@@ -219,39 +267,41 @@
 
                 <div class="row mt-1">
                     <div class="col-12 col-md-6 col-lg-6">
-                        <label class="fw-bold" for="buyQty">Card No :</label>
-                        <input class="form-control border-dark" id="cardNUm" type="text">
-                        <strong class="control-error" id="lblCardNum"></strong>
+                        <label class="fw-bold" for="txtCardId">Card No</label>
+                        <input class="form-control border-dark" id="txtCardId" type="text">
                     </div>
-
-<!--                    <strong class="control-error" id="lbl"></strong>-->
                     <div class="col-12 col-md-6 col-lg-6">
-                        <label class="fw-bold" for="buyQty">Bank :</label>
-                        <input class="form-control border-dark" id="bankId" type="text">
-                        <strong class="control-error" id="lblBankId"></strong>
-                    </div>
-
-                    <div class="col-12 col-md-6 col-lg-6 mt-4">
-                        <button class="btn btn-primary rounded-2" id="btnPurchase" type="submit">Purchase</button>
-                        <!-- Adding a non-breaking space for spacing -->
-<!--                        <button class="btn btn-primary rounded-2" id="btnCard" type="submit">Card</button>-->
-                    </div>
-
-                    <div class="col-12 col-md-6 col-lg-6 mt-4">
-                        <button class="btn btn-outline-light rounded-2" id="btnCard" type="submit" style="width: 100px; background-color: #12807e" >Card</button>
-                        <!-- Adding a non-breaking space for spacing -->
-                        <!--                        <button class="btn btn-primary rounded-2" id="btnCard" type="submit">Card</button>-->
+                        <label class="fw-bold" for="txtBankName">Bank name</label>
+                        <input class="form-control border-dark" id="txtBankName" type="text">
                     </div>
 
                 </div>
+
+
+                <div class="row mt-1">
+                    <div class="d-grid col-12 col-md-5 mt-4">
+                        <button class="btn btn-success rounded-2 bold sectionBorder" id="btnPurchase" type="button">Purchase
+                        </button>
+                    </div>
+
+                    <div class="d-grid col-12 col-md-2 mt-4">
+                        <button class="btn btn-primary rounded-2 bold sectionBorder" id="btnCard" type="button">Card
+                        </button>
+                    </div>
+                </div>
+
             </div>
             <!-- Order Details Section End -->
 
             <!--clear All Button Section Start-->
             <div class="d-grid col-12 col-md-2 mt-4">
-                <button class="btn btn-danger rounded-2 bold sectionBorder" id="btnClearAll" type="button">Clear Details
+                <button class="btn btn-danger rounded-2 bold sectionBorder" id="btnClearAll" type="button">Clear All
+
                 </button>
             </div>
+
+
+
 
             <!--clear All Button Section end-->
 
@@ -277,8 +327,11 @@
             <!-- View Cart Details Table End -->
 
         </div>
+        <!-- Order Details Section End -->
     </div>
-    <!-- End Customer Manage -->
+
+
+    <!--    </section>-->
 
 </main>
 
@@ -305,6 +358,7 @@
 
 <!-- Controller JS File -->
 <script src="../../controller/OrderCotroller.js"></script>
+
 
 
 <!-- Util JS File -->

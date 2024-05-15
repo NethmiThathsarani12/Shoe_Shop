@@ -1,5 +1,6 @@
 package lk.ijse.gdse66.spring.Back_End.entity;
 
+
 import jakarta.persistence.*;
 import lk.ijse.gdse66.spring.Back_End.embeded.Address;
 import lk.ijse.gdse66.spring.Back_End.enums.Gender;
@@ -17,10 +18,8 @@ import java.util.List;
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-@ToString
 @Entity
 public class Customer {
-
     @Id
     private String code;
     private String name;
@@ -39,7 +38,12 @@ public class Customer {
     private String email;
     private String recentPurchaseDate;
 
-    @OneToMany(cascade = CascadeType.ALL,fetch = FetchType.LAZY,mappedBy = "customerName")
-    private List<Sales> sales = new ArrayList<>();
+//    @OneToMany(cascade = CascadeType.ALL,fetch = FetchType.LAZY,mappedBy = "customer")
+//    private List<Sales> sales = new ArrayList<>();
 
 }
+
+
+
+
+

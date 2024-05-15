@@ -6,9 +6,7 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import lombok.ToString;
-import org.hibernate.annotations.CreationTimestamp;
 
-import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -19,17 +17,17 @@ import java.util.List;
 @ToString
 public class Sales {
     @Id
-    private String oId;
+    private String oid;
     private String purchaseDate;
     private Double total;
     @Enumerated(EnumType.STRING)
     private Payment paymentMethod;
     private Integer totalPoints;
     private String cashier;
-    @ManyToOne
-    @JoinColumn(name = "customer_name", nullable = false)
-    private Customer customerName;
+    @ManyToOne(cascade = {CascadeType.REFRESH, CascadeType.DETACH})
+    @JoinColumn(name = "customer_name",referencedColumnName = "code", nullable = false)
+    private Customer customer;
 
-    @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY, mappedBy = "oId")
+    @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY, mappedBy = "sale")
     private List<SaleDetails> saleDetails = new ArrayList<>();
 }

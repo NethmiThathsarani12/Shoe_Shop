@@ -12,7 +12,7 @@ import lombok.ToString;
 public class SaleDetailsDTO {
 
     private String oId;
-    private String code;
+    private String itemCode;
     private int qty;
     private double unitPrice;
 

@@ -1,41 +1,52 @@
 let orderBaseUrl = "http://localhost:8080/Back_End/";
 
+
 generateOrderID();
 
+$("#btnPurchase").attr('disabled', true);
+/*$("#btnAddToCart").attr('disabled', true);*/
+
 function generateOrderID() {
-    $("#customer_code").val("SAI-001");
     $.ajax({
-        url: orderBaseUrl + "orders/OrderIdGenerate",
+        url: orderBaseUrl+"orders/OrderIdGenerate",
         method: "GET",
         contentType: "application/json",
         dataType: "json",
         success: function (resp) {
             let id = resp.value;
-            console.log("id" +id);
+            console.log("id" + id);
 
-            if (id === null){
-                $("#orderId").val("SAI-001" );
+            if (id === null) {
+                $("#oid").val("O00-001");
             } else {
                 let tempId = parseInt(id.split("-")[1]);
                 tempId = tempId + 1;
                 if (tempId <= 9) {
-                    $("#orderId").val("SAI-00" + tempId);
+                    $("#oid").val("O00-00" + tempId);
                 } else if (tempId <= 99) {
-                    $("#orderId").val("SAI-0" + tempId);
+                    $("#oid").val("O00-0" + tempId);
                 } else {
-                    $("#orderId").val("SAI-" + tempId);
+                    $("#oid").val("O00-" + tempId);
                 }
             }
         },
         error: function (ob, statusText, error) {
-
+            console.log(ob);
+            console.log(statusText);
+            console.log(error);
+            Swal.fire({
+                icon: "error",
+                title: "Request failed",
+                showConfirmButton: false,
+                timer: 1500
+            });
         }
     });
 }
 
 $("#Customer_Id").empty();
 $.ajax({
-    url:  orderBaseUrl + "customer",
+    url: orderBaseUrl+ "customer",
     method: "GET",
     dataType: "json",
     success: function (res) {
@@ -58,7 +69,7 @@ $.ajax({
 $("#Customer_Id").click(function () {
     var search = $("#Customer_Id").val();
     $.ajax({
-        url: orderBaseUrl+"customer/searchCus?code="+ search,
+        url:orderBaseUrl+ "customer/searchCus?code="+ search,
         method: "GET",
         contentType: "application/json",
         dataType: "json",
@@ -98,7 +109,7 @@ $.ajax({
 $("#Item_Code").click(function () {
     var search = $("#Item_Code").val();
     $.ajax({
-        url: orderBaseUrl+ "item/searchItemId?code="+ search,
+        url:orderBaseUrl+ "item/searchItemId?code="+ search,
         method: "GET",
         contentType: "application/json",
         dataType: "json",
@@ -130,65 +141,54 @@ function updateDateTime() {
     let formattedTime = `${String(hours).padStart(2, '0')}:${String(minutes).padStart(2, '0')}:${String(seconds).padStart(2, '0')}`;
 
     $('#oDate').val(`${formattedDate} ${formattedTime}`);
+
 }
 
 updateDateTime();
 
-setInterval(updateDateTime, 1000);
-
+setInterval(updateDateTime,1000);
 
 let itemCode;
 let itemName;
 let itemPrice;
 let itemQty;
 let itemOrderQty;
-
 let total = 0;
 let discount = 0;
 let subTotal = 0;
-
 let tableRow = [];
-$("#btnAddToCart").on("click", function () {
 
+$("#btnAddToCart").on("click", function () {
     let duplicate = false;
     for (let i = 0; i < $("#tblAddToCart tr").length; i++) {
         if ($("#Item_Code option:selected").text() === $("#tblAddToCart tr").children(':nth-child(1)')[i].innerText) {
             duplicate = true;
-
         }
     }
     if (duplicate !== true) {
-
         loadCartTableDetail();
         reduceQty($("#buyQty").val());
         calcTotal($("#buyQty").val() * $("#itemPrice").val());
         $('#Item_Code,#itemName,#itemPrice,#qtyOnHand,#buyQty').val("");
         $("#btnAddToCart").attr('disabled', false);
     } else if (duplicate === true) {
-
         manageQtyOnHand(tableRow.children(':nth-child(4)').text(), $("#buyQty").val());
         $(tableRow).children(':nth-child(4)').text($("#buyQty").val());
-
         manageTotal(tableRow.children(':nth-child(5)').text(), $("#buyQty").val() * $("#itemPrice").val());
         $(tableRow).children(':nth-child(5)').text($("#buyQty").val() * $("#itemPrice").val());
-
     }
-
     $("#tblAddToCart>tr").click('click', function () {
-
         tableRow = $(this);
         let itemCode = $(this).children(":eq(0)").text();
         let itemName = $(this).children(":eq(1)").text();
         let unitPrice = $(this).children(":eq(2)").text();
         let qty = $(this).children(":eq(3)").text();
         let total = $(this).children(":eq(4)").text();
-
         $("#Item_Code").val(itemCode);
         $("#itemName").val(itemName);
         $("#itemPrice").val(unitPrice);
         $("#buyQty").val(qty);
         $("#txtTotal").val(total);
-
     });
 });
 
@@ -208,31 +208,26 @@ function manageQtyOnHand(preQty, nowQty) {
     var preQty = parseInt(preQty);
     var nowQty = parseInt(nowQty);
     let avaQty = parseInt($("#qtyOnHand").val());
-
     avaQty = avaQty + preQty;
     avaQty = avaQty - nowQty;
-
     $("#qtyOnHand").val(avaQty);
 }
 
 function manageTotal(preTotal, nowTotal) {
     total -= preTotal;
     total += nowTotal;
-
     $("#txtTotal").val(total);
 }
-
 $("#tblAddToCart").empty();
+
 function loadCartTableDetail() {
     itemCode = $("#Item_Code").val();
     itemName = $("#itemName").val();
     itemPrice = $("#itemPrice").val();
     itemQty = $("#qtyOnHand").val();
     itemOrderQty = $("#buyQty").val();
-
     let total = itemPrice * itemOrderQty;
     let row = `<tr><td>${itemCode}</td><td>${itemName}</td><td>${itemPrice}</td><td>${itemOrderQty}</td><td>${total}</td></tr>`;
-
     $("#tblAddToCart").append(row);
 }
 
@@ -243,4 +238,96 @@ $(document).on("change keyup blur", "#txtDiscount", function () {
 
     $("#txtSubTotal").val(subTotal);
 });
+
+$(document).on("change keyup blur", "#txtCash", function () {
+    let cash = $("#txtCash").val();
+    let balance = cash - subTotal;
+    $("#txtBalance").val(balance);
+    if (balance < 0) {
+        $("#lblCheckSubtotal").parent().children('strong').text(balance + " : plz enter valid Balance");
+        $("#btnPurchase").attr('disabled', true);
+    } else {
+        $("#lblCheckSubtotal").parent().children('strong').text("");
+        $("#btnPurchase").attr('disabled', false);
+    }
+});
+
+
+$("#btnPurchase").click(function () {
+
+    var SaleDetails = [];
+    for (let i = 0; i < $("#tblAddToCart tr").length; i++) {
+        var detailOb = {
+            oid: $("#oid").val(),
+            itemCode: $("#tblAddToCart tr").children(':nth-child(1)')[i].innerText,
+            qty: $("#tblAddToCart tr").children(':nth-child(4)')[i].innerText,
+            unitPrice: $("#tblAddToCart tr").children(':nth-child(5)')[i].innerText
+        }
+        SaleDetails.push(detailOb);
+    }
+    var saleId = $("#oid").val();
+
+    if (!saleId) {
+        alert("Order ID must not be null");
+        return;
+    }
+
+    var customerCode = $("#Customer_Id").val();
+    var customerName = $("#cusName").val();
+
+    if (!customerCode || !customerName) {
+        alert("Customer information must not be null");
+        return;
+    }
+    var date = $("#oDate").val();
+    var payment = $("#Payment").val();
+    var total = $("#txtTotal").val();
+    var totalPoint = $("#point").val();
+    var cashierName = $("#cashierName").val();
+
+
+    var orderOb = {
+        oid: saleId,
+        purchaseDate: date,
+        total: total,
+        paymentMethod:payment,
+        cashier: cashierName,
+        customer: {
+            code: customerCode,
+            name: customerName
+        },
+        saleDetails: SaleDetails
+    };
+
+
+
+    /* console.log(orderOb)
+     console.log(SaleDetails)*/
+
+    $.ajax({
+        url:orderBaseUrl+ "orders",
+        method: "POST",
+        contentType: "application/json",
+        dataType: "json",
+        data: JSON.stringify(orderOb),
+        success: function (res) {
+            saveUpdateAlert("Sale", res.message);
+            generateOrderID();
+
+        },
+        error: function (error) {
+            let message = JSON.parse(error.responseText).message;
+            unSuccessUpdateAlert("Sale", message);
+        }
+    });
+
+    /*   clearDetails();*/
+    $("#tblAddToCart").empty();
+    $("#btnPurchase").attr('disabled', true);
+    $("#btnAddToCart").attr('disabled', true);
+    total = 0;
+});
+
+
+
 

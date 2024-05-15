@@ -4,32 +4,28 @@ import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-import lombok.ToString;
-
-import java.util.ArrayList;
-import java.util.List;
 
 @Entity
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-@IdClass(SaleDetailPK.class)
+@IdClass(SaleDetail_PK.class)
 public class SaleDetails {
 
+   @Id
+    private String oid;
     @Id
-    private String oId;
-    @Id
-    private String code;
+    private String itemCode;
 
 
     private int qty;
     private double unitPrice;
 
-    @ManyToOne
-    @JoinColumn(name = "oId",insertable = false,updatable = false)
-    private Sales sale_id;
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "oid",referencedColumnName = "oid",insertable = false, updatable = false)
+    private Sales sale;
 
-    @ManyToOne
-    @JoinColumn(name = "code",referencedColumnName = "code",insertable = false,updatable = false)
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "code",referencedColumnName = "code")
     private Item items;
 }

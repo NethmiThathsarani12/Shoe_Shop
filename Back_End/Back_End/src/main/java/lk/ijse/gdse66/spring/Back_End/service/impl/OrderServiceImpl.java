@@ -1,8 +1,11 @@
 package lk.ijse.gdse66.spring.Back_End.service.impl;
 
+import jakarta.persistence.EntityNotFoundException;
 import lk.ijse.gdse66.spring.Back_End.dto.CustomDTO;
 import lk.ijse.gdse66.spring.Back_End.dto.SaleDetailsDTO;
 import lk.ijse.gdse66.spring.Back_End.dto.SalesDTO;
+import lk.ijse.gdse66.spring.Back_End.entity.Item;
+import lk.ijse.gdse66.spring.Back_End.entity.SaleDetails;
 import lk.ijse.gdse66.spring.Back_End.entity.Sales;
 import lk.ijse.gdse66.spring.Back_End.repo.CustomerRepo;
 import lk.ijse.gdse66.spring.Back_End.repo.ItemRepo;
@@ -16,6 +19,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.ArrayList;
+import java.util.Optional;
 
 @Service
 @Transactional
@@ -25,25 +29,46 @@ public class OrderServiceImpl implements OrderService {
     private OrderRepo repo;
 
     @Autowired
-    private OrderDetailsRepo orRepo;
-
-    @Autowired
     private ItemRepo itemRepo;
 
     @Autowired
-    private CustomerRepo customerRepo;
+    private OrderDetailsRepo saleDetailsRepo;
 
     @Autowired
- private ModelMapper mapper;
+    private ModelMapper mapper;
 
-    @Override
     public void placeOrder(SalesDTO dto) {
-        Sales sales = mapper.map(dto,Sales.class);
-        if (repo.existsById(sales.getOId())){
-            throw new RuntimeException("Sales" + sales.getOId()+"Already added.!");
+        if (repo.existsById(dto.getOid())){
+            throw new RuntimeException("Order Id "+ dto.getOid()+ "Already Exist.Please Enter another id..!");
         }
-        repo.save(sales);
+        Sales sales = mapper.map(dto, Sales.class);
+
+        Sales save = repo.save(sales);
+
+        for (SaleDetailsDTO saleDetailsDTO : dto.getSaleDetails()) {
+            if (saleDetailsDTO.getItemCode() == null) {
+                throw new IllegalArgumentException("Code must not be null for sale details");
+            }
+
+            // Map DTO to entity
+            SaleDetails saleDetails = new SaleDetails();
+            saleDetails.setQty(saleDetailsDTO.getQty());
+            saleDetails.setUnitPrice(saleDetailsDTO.getUnitPrice());
+            saleDetails.setItemCode(saleDetailsDTO.getItemCode());
+            saleDetails.setOid(saleDetailsDTO.getOId());
+
+            // Save entity to database
+            saleDetailsRepo.save(saleDetails);
+        }
+        for (SaleDetails sd : save.getSaleDetails()) {
+            Item item = itemRepo.findById(sd.getItemCode()).get();
+            item.setQty(item.getQty() - sd.getQty());
+            itemRepo.save(item);
+        }
     }
+
+
+
 
     @Override
     public ArrayList<SalesDTO> LoadOrders() {
@@ -53,7 +78,7 @@ public class OrderServiceImpl implements OrderService {
 
     @Override
     public ArrayList<SaleDetailsDTO> LoadOrderDetails() {
-        return mapper.map(orRepo.findAll(), new TypeToken<ArrayList<SaleDetailsDTO>>() {
+        return mapper.map(saleDetailsRepo.findAll(), new TypeToken<ArrayList<SaleDetailsDTO>>() {
         }.getType());
     }
 
@@ -65,5 +90,22 @@ public class OrderServiceImpl implements OrderService {
     @Override
     public CustomDTO getSumOrders() {
         return null;
+    }
+
+    @Override
+    public SaleDetails getOrderById(String id) {
+        // Check if the id is null or empty before invoking findById
+        if (id == null || id.isEmpty()) {
+            throw new IllegalArgumentException("ID must not be null or empty");
+        }
+
+
+        Optional<SaleDetails> optionalSaleDetails = saleDetailsRepo.findById(id);
+
+        if (optionalSaleDetails.isPresent()) {
+            return optionalSaleDetails.get();
+        } else {
+            throw new EntityNotFoundException("Order with id " + id + " not found");
+        }
     }
 }

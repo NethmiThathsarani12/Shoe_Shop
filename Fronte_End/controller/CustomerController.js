@@ -1,5 +1,4 @@
-
-    let cusBaseUrl = "http://localhost:8080/Back_End/";
+let cusBaseUrl = "http://localhost:8080/Back_End/";
 
     // Load all customers and set purchaseDate to current date and time
     loadAllCustomer();
