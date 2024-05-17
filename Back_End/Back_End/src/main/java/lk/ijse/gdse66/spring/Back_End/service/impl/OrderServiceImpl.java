@@ -4,6 +4,7 @@ import jakarta.persistence.EntityNotFoundException;
 import lk.ijse.gdse66.spring.Back_End.dto.CustomDTO;
 import lk.ijse.gdse66.spring.Back_End.dto.SaleDetailsDTO;
 import lk.ijse.gdse66.spring.Back_End.dto.SalesDTO;
+import lk.ijse.gdse66.spring.Back_End.entity.Customer;
 import lk.ijse.gdse66.spring.Back_End.entity.Item;
 import lk.ijse.gdse66.spring.Back_End.entity.SaleDetails;
 import lk.ijse.gdse66.spring.Back_End.entity.Sales;
@@ -32,17 +33,21 @@ public class OrderServiceImpl implements OrderService {
     private ItemRepo itemRepo;
 
     @Autowired
+    private CustomerRepo customerRepo;
+
+    @Autowired
     private OrderDetailsRepo saleDetailsRepo;
 
     @Autowired
     private ModelMapper mapper;
 
+    @Override
     public void placeOrder(SalesDTO dto) {
-        if (repo.existsById(dto.getOid())){
-            throw new RuntimeException("Order Id "+ dto.getOid()+ "Already Exist.Please Enter another id..!");
+        if (repo.existsById(dto.getOid())) {
+            throw new RuntimeException("Order Id " + dto.getOid() + " already exists. Please enter another id!");
         }
-        Sales sales = mapper.map(dto, Sales.class);
 
+        Sales sales = mapper.map(dto, Sales.class);
         Sales save = repo.save(sales);
 
         for (SaleDetailsDTO saleDetailsDTO : dto.getSaleDetails()) {
@@ -60,10 +65,24 @@ public class OrderServiceImpl implements OrderService {
             // Save entity to database
             saleDetailsRepo.save(saleDetails);
         }
+
+        // Update item quantities and customer loyalty points
         for (SaleDetails sd : save.getSaleDetails()) {
-            Item item = itemRepo.findById(sd.getItemCode()).get();
+            Item item = itemRepo.findById(sd.getItemCode()).orElseThrow(() ->
+                    new RuntimeException("Item not found with code: " + sd.getItemCode())
+            );
             item.setQty(item.getQty() - sd.getQty());
             itemRepo.save(item);
+
+            // Check if the unit price is greater than 800
+            if (sd.getUnitPrice() > 800) {
+                // Update customer loyalty points
+                Customer customer = customerRepo.findById(dto.getCustomer().getCode()).orElseThrow(() ->
+                        new RuntimeException("Customer not found with code: " + dto.getCustomer().getCode())
+                );
+                customer.setLoyaltyPoints(customer.getLoyaltyPoints() + 1);
+                customerRepo.save(customer);
+            }
         }
     }
 

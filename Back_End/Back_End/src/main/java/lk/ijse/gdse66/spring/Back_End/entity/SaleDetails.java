@@ -6,7 +6,6 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 @Entity
-@Data
 @AllArgsConstructor
 @NoArgsConstructor
 @IdClass(SaleDetail_PK.class)
@@ -28,4 +27,52 @@ public class SaleDetails {
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "code",referencedColumnName = "code")
     private Item items;
+
+ public String getOid() {
+  return oid;
+ }
+
+ public String getItemCode() {
+  return itemCode;
+ }
+
+ public int getQty() {
+  return qty;
+ }
+
+ public double getUnitPrice() {
+  return unitPrice;
+ }
+
+ public Sales getSale() {
+  return sale;
+ }
+
+ public Item getItems() {
+  return items;
+ }
+
+ public void setOid(String oid) {
+  this.oid = oid;
+ }
+
+ public void setItemCode(String itemCode) {
+  this.itemCode = itemCode;
+ }
+
+ public void setQty(int qty) {
+  this.qty = qty;
+ }
+
+ public void setUnitPrice(double unitPrice) {
+  this.unitPrice = unitPrice;
+ }
+
+ public void setSale(Sales sale) {
+  this.sale = sale;
+ }
+
+ public void setItems(Item items) {
+  this.items = items;
+ }
 }

@@ -6,11 +6,26 @@ import lombok.NoArgsConstructor;
 
 import java.io.Serializable;
 
-@Data
+
 @AllArgsConstructor
 @NoArgsConstructor
 public class SaleDetail_PK implements Serializable {
     private String oid;
     private String itemCode;
 
+    public String getOid() {
+        return oid;
+    }
+
+    public String getItemCode() {
+        return itemCode;
+    }
+
+    public void setOid(String oid) {
+        this.oid = oid;
+    }
+
+    public void setItemCode(String itemCode) {
+        this.itemCode = itemCode;
+    }
 }
