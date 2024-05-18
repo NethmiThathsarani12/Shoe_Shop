@@ -26,7 +26,7 @@ public class OrderController {
     @ResponseStatus(HttpStatus.CREATED)
     @PostMapping
     public ResponseUtil placeOrder(@RequestBody SalesDTO dto) {
-        System.out.println(dto.toString());
+//        System.out.println(dto.toString());
         service.placeOrder(dto);
         return new ResponseUtil("Ok", "Successfully Purchased.!", null);
     }

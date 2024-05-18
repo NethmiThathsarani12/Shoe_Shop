@@ -1,3 +1,4 @@
+
 let itemBaseUrl = "http://localhost:8080/Back_End/";
 
 
@@ -50,6 +51,14 @@ $("#btnAddInventory").click(function () {
     });
 });
 
+$("#inv_Supplier_Code").on("keypress", function (event) {
+    if (event.which === 13) {
+        // Enter key pressed
+        var search = $("#inv_Supplier_Code").val();
+        fetchSupplierName(search);
+    }
+});
+
 $("#inv_Supplier_Code").empty();
 $.ajax({
     url: itemBaseUrl + "supplier",
@@ -69,8 +78,12 @@ $.ajax({
 
 $("#inv_Supplier_Code").change(function () {
     var search = $("#inv_Supplier_Code").val();
+    fetchSupplierName(search);
+});
+
+function fetchSupplierName(code) {
     $.ajax({
-        url: itemBaseUrl + "supplier/searchSupplier?code=" + search,
+        url: itemBaseUrl + "supplier/searchSupplier?code=" + code,
         method: "GET",
         contentType: "application/json",
         dataType: "json",
@@ -80,9 +93,11 @@ $("#inv_Supplier_Code").change(function () {
         error: function (error) {
             let message = JSON.parse(error.responseText).message;
             console.log(message);
+            // Optionally, clear the supplier name field if the supplier code is invalid
+            $("#inv_Supplier_name").val('');
         }
     });
-});
+}
 
 function loadAllItem() {
     $("#inventoryTable").empty();

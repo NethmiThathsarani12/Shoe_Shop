@@ -22,8 +22,8 @@ public class EmployeeController {
     @ResponseStatus(HttpStatus.CREATED)
     @PostMapping
     public ResponseUtil saveEmployee(@ModelAttribute EmployeeDTO employeeDTO, Address address,String profilePic){
-        System.out.println(employeeDTO.toString());
-        System.out.println(employeeDTO.getAddress());
+//        System.out.println(employeeDTO.toString());
+//        System.out.println(employeeDTO.getAddress());
         employeeDTO.setAddress(address);
         service.saveEmployee(employeeDTO);
         return new ResponseUtil("OK", "Successfully Registered.!", null);
@@ -32,7 +32,7 @@ public class EmployeeController {
     @ResponseStatus(HttpStatus.CREATED)
     @PutMapping
     public ResponseUtil updateEmployee(@ModelAttribute EmployeeDTO employeeDTO,Address address){
-        System.out.println(employeeDTO.toString());
+//        System.out.println(employeeDTO.toString());
         employeeDTO.setAddress(address);
         service.updateEmployee(employeeDTO);
         return new ResponseUtil("OK", "Successfully Updated. :"+ employeeDTO.getCode(),null);

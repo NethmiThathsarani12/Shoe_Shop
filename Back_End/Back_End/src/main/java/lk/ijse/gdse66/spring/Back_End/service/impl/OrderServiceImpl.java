@@ -8,6 +8,7 @@ import lk.ijse.gdse66.spring.Back_End.entity.Customer;
 import lk.ijse.gdse66.spring.Back_End.entity.Item;
 import lk.ijse.gdse66.spring.Back_End.entity.SaleDetails;
 import lk.ijse.gdse66.spring.Back_End.entity.Sales;
+import lk.ijse.gdse66.spring.Back_End.enums.Level;
 import lk.ijse.gdse66.spring.Back_End.repo.CustomerRepo;
 import lk.ijse.gdse66.spring.Back_End.repo.ItemRepo;
 import lk.ijse.gdse66.spring.Back_End.repo.OrderDetailsRepo;
@@ -81,11 +82,25 @@ public class OrderServiceImpl implements OrderService {
                         new RuntimeException("Customer not found with code: " + dto.getCustomer().getCode())
                 );
                 customer.setLoyaltyPoints(customer.getLoyaltyPoints() + 1);
+                updateLoyaltyLevel(customer);
                 customerRepo.save(customer);
             }
         }
     }
 
+
+    private void updateLoyaltyLevel(Customer customer) {
+        int totalPoints = customer.getLoyaltyPoints();
+        if (totalPoints >= 200) {
+            customer.setLevel(Level.GOLD);
+        } else if (totalPoints >= 100) {
+            customer.setLevel(Level.SILVER);
+        } else if (totalPoints >= 50) {
+            customer.setLevel(Level.BRONZE);
+        } else {
+            customer.setLevel(Level.NEW);
+        }
+    }
 
 
 

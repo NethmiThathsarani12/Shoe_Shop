@@ -27,7 +27,7 @@ public class ItemController {
     @ResponseStatus(HttpStatus.CREATED)
     @PostMapping
     public ResponseUtil saveItem(@ModelAttribute ItemDTO itemDTO){
-        System.out.println(itemDTO.toString());
+//        System.out.println(itemDTO.toString());
         itemService.saveItem(itemDTO);
         return new ResponseUtil("200", "Successfully Registered.!", null);
     }

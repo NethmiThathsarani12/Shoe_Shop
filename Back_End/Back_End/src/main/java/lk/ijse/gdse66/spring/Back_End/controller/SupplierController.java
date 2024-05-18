@@ -27,7 +27,7 @@ public class SupplierController {
     @ResponseStatus(HttpStatus.CREATED)
     @PostMapping
     public ResponseUtil saveSupplier(@ModelAttribute SupplierDTO supplierDTO, Address address){
-        System.out.println(supplierDTO.toString());
+//        System.out.println(supplierDTO.toString());
         supplierDTO.setAddress(address);
         service.saveSupplier(supplierDTO);
         return new ResponseUtil("200", "Successfully Registered.!", null);

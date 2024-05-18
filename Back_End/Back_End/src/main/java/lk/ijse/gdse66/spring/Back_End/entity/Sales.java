@@ -24,7 +24,7 @@ public class Sales {
     private Integer totalPoints;
     private String cashier;
     @ManyToOne(cascade = {CascadeType.REFRESH, CascadeType.DETACH})
-    @JoinColumn(name = "customer_name",referencedColumnName = "code", nullable = false)
+    @JoinColumn(name = "customer_name",referencedColumnName = "code", nullable = true)
     private Customer customer;
 
     @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY, mappedBy = "sale")

@@ -39,7 +39,7 @@ public class Customer {
     private String recentPurchaseDate;
 
 //    @OneToMany(cascade = CascadeType.ALL,fetch = FetchType.LAZY,mappedBy = "customer")
-//    private List<Sales> sales = new ArrayList<>();
+//    private List<Sales> sales;
 
     public String getCode() {
         return code;

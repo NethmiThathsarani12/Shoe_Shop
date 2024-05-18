@@ -22,7 +22,7 @@ public class CustomerController {
     @ResponseStatus(HttpStatus.CREATED)
     @PostMapping
         public ResponseUtil saveCustomer(@ModelAttribute CustomerDTO dto, Address address){
-            System.out.println(dto.toString());
+//            System.out.println(dto.toString());
             dto.setAddress(address);
             service.saveCustomer(dto);
             return new ResponseUtil("200", "Successfully Registered.!", null);
