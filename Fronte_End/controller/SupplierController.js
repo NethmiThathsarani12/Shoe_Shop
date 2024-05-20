@@ -6,9 +6,14 @@ $(document).ready(function() {
 
 function generateSupplierID() {
     $("#Supplier_code").val("S00-001");
+    performAuthenticatedRequest();
+    const accessToken = localStorage.getItem('accessToken');
     $.ajax({
         url: supBaseUrl + "supplier/SupplierIdGenerate",
         method: "GET",
+        headers: {
+            'Authorization': 'Bearer ' + accessToken
+        },
         contentType: "application/json",
         dataType: "json",
         success: function(resp) {
@@ -31,9 +36,14 @@ function generateSupplierID() {
 
 $("#btnAddSupplier").click(function() {
     let formData = $("#supplierForm").serializeArray();
+    performAuthenticatedRequest();
+    const accessToken = localStorage.getItem('accessToken');
     $.ajax({
         url: supBaseUrl + "supplier",
         method: "POST",
+        headers: {
+            'Authorization': 'Bearer ' + accessToken
+        },
         data: formData,
         dataType: "json",
         success: function(res) {
@@ -48,9 +58,14 @@ $("#btnAddSupplier").click(function() {
 
 function loadAllSupplier() {
     $("#supplierTable").empty();
+    performAuthenticatedRequest();
+    const accessToken = localStorage.getItem('accessToken');
     $.ajax({
         url: supBaseUrl + "supplier",
         method: "GET",
+        headers: {
+            'Authorization': 'Bearer ' + accessToken
+        },
         dataType: "json",
         success: function(res) {
             for (let supplier of res.data) {
@@ -133,10 +148,14 @@ function blindClickEventsS() {
 
 $("#btnUpdateSupplier").click(function () {
     let formData = $("#supplierForm").serialize();
-
+    performAuthenticatedRequest();
+    const accessToken = localStorage.getItem('accessToken');
     $.ajax({
         url: supBaseUrl + "supplier",
         method: "PUT",
+        headers: {
+            'Authorization': 'Bearer ' + accessToken
+        },
         data: formData,
         dataType: "json",
         success: function (res) {
@@ -151,9 +170,14 @@ $("#btnUpdateSupplier").click(function () {
 
 $("#btnDeleteSupplier").click(function () {
     let id = $("#Supplier_code").val();
+    performAuthenticatedRequest();
+    const accessToken = localStorage.getItem('accessToken');
     $.ajax({
         url: supBaseUrl + "supplier?code=" + id,
         method: "DELETE",
+        headers: {
+            'Authorization': 'Bearer ' + accessToken
+        },
         dataType: "json",
         success: function (resp) {
             saveUpdateAlert("Supplier", resp.message);
@@ -168,12 +192,18 @@ $("#btnDeleteSupplier").click(function () {
 
 
 $("#search_Supplier").on("keypress", function (event) {
+    performAuthenticatedRequest();
+    const accessToken = localStorage.getItem('accessToken');
     if (event.which === 13) {
         var search = $("#search_Supplier").val();
+
         $("#supplierTable").empty();
         $.ajax({
             url: supBaseUrl + "supplier/searchSupplier?code=" + search,
             method: "GET",
+            headers: {
+                'Authorization': 'Bearer ' + accessToken
+            },
             contentType: "application/json",
             dataType: "json",
             data: { supplier_Id: search }, // Send the search parameter as an object

@@ -1,6 +1,11 @@
 
 let baseUrl = "http://localhost:8080/Back_End/";
-loadAllEmployee();
+
+$(document).ready(function (){
+    loadAllEmployee();
+});
+
+
 
 $("#btnAddEmployee").attr('disabled', false);
 $("#btnUpdateEmployee").attr('disabled', false);
@@ -9,9 +14,14 @@ $("#btnDeleteEmployee").attr('disabled', false);
 
 function generateEmployeeID() {
     $("#Employee_code").val("E00-001");
+    performAuthenticatedRequest();
+    const accessToken = localStorage.getItem('accessToken');
     $.ajax({
         url: baseUrl + "employee/EmployeeIdGenerate",
         method: "GET",
+        headers: {
+            'Authorization': 'Bearer ' + accessToken
+        },
         contentType: "application/json",
         dataType: "json",
         success: function (resp) {
@@ -49,9 +59,15 @@ $("#btnAddEmployee").click(function () {
 
     let formData = $("#employeeForm").serializeArray();
     // formData.push({name: "pic", value: imageUrl});
+
+    performAuthenticatedRequest();
+    const accessToken = localStorage.getItem('accessToken');
     $.ajax({
         url: baseUrl + "employee",
         method: "POST",
+        headers: {
+            'Authorization': 'Bearer ' + accessToken
+        },
         data: formData,
         dataType: "json",
         success: function (res) {
@@ -98,9 +114,15 @@ function setTextFieldValues(code, name, pic, gender,status,designation,role,birt
 
 function loadAllEmployee() {
     $("#employeeTable").empty();
+
+    performAuthenticatedRequest();
+    const accessToken = localStorage.getItem('accessToken');
     $.ajax({
         url: baseUrl + "employee",
         method: "GET",
+        headers: {
+            'Authorization': 'Bearer ' + accessToken
+        },
         dataType: "json",
         success: function (res) {
             console.log(res);
@@ -259,10 +281,15 @@ $("#btnUpdateEmployee").click(function () {
     // formData += "&code=" + empId;
     console.log(formData);
 
+    performAuthenticatedRequest();
+    const accessToken = localStorage.getItem('accessToken');
     // console.log(formData);
     $.ajax({
         url: baseUrl + "employee",
         method: "PUT",
+        headers: {
+            'Authorization': 'Bearer ' + accessToken
+        },
         data: formData,
         dataType: "json",
         success: function (res) {
@@ -280,8 +307,12 @@ $("#btnUpdateEmployee").click(function () {
 
 $("#btnDeleteEmployee").click(function () {
     let id = $("#Employee_code").val();
+    performAuthenticatedRequest();
+    const accessToken = localStorage.getItem('accessToken');
     $.ajax({
-        url: baseUrl + "employee?code=" + id , method: "delete", dataType: "json", success: function (resp) {
+        url: baseUrl + "employee?code=" + id , method: "delete",headers: {
+            'Authorization': 'Bearer ' + accessToken
+        }, dataType: "json", success: function (resp) {
             saveUpdateAlert("Employee", resp.message);
             loadAllEmployee();
         }, error: function (error) {
@@ -374,9 +405,14 @@ $("#search_EmployeeId").on("keypress", function (event) {
     if (event.which === 13) {
         var search = $("#search_EmployeeId").val();
         $("#employeeTable").empty();
+        performAuthenticatedRequest();
+        const accessToken = localStorage.getItem('accessToken');
         $.ajax({
             url: baseUrl + "employee/searchEmployee",
             method: "GET",
+            headers: {
+                'Authorization': 'Bearer ' + accessToken
+            },
             data: {
                 code: search, // Provide the 'code' parameter
                 name: search  // Provide the 'name' parameter

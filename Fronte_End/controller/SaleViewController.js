@@ -1,13 +1,24 @@
 let orderVBaseUrl = "http://localhost:8080/Back_End/";
 
-loadAllSales();
-loadAllOrderDetails();
+$(document).ready(function (){
+    loadAllSales();
+});
+
+$(document).ready(function (){
+    loadAllOrderDetails();
+});
+
 
 function loadAllSales() {
     $("#tblOrder").empty();
+    performAuthenticatedRequest();
+    const accessToken = localStorage.getItem('accessToken');
     $.ajax({
         url: orderVBaseUrl+ "orders/LoadOrders",
         method: "GET",
+        headers: {
+            'Authorization': 'Bearer ' + accessToken
+        },
         dataType: "json",
         success: function (res) {
             console.log(res);
@@ -40,9 +51,14 @@ function loadAllSales() {
 
 function loadAllOrderDetails() {
     $("#tblOrderDetails").empty();
+    performAuthenticatedRequest();
+    const accessToken = localStorage.getItem('accessToken');
     $.ajax({
         url: orderVBaseUrl+"orders/LoadOrderDetails",
         method: "GET",
+        headers: {
+            'Authorization': 'Bearer ' + accessToken
+        },
         dataType: "json",
         success: function (res) {
             console.log(res);

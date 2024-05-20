@@ -1,8 +1,10 @@
 
 let itemBaseUrl = "http://localhost:8080/Back_End/";
 
+$(document).ready(function (){
+    loadAllItem();
+});
 
-loadAllItem();
 
 function setTextFieldValueI(code, Name, qty, itemPicture, category, size, supplier, supName, salePrice, buyPrice, expectedProfit, profitMargin, status) {
     $("#item_code").val(code);
@@ -35,9 +37,14 @@ $("#btnAddInventory").click(function () {
 
     let formData = $("#InventoryForm").serializeArray();
     formData.push({name: "itemPicture", value: imageUrl});
+    performAuthenticatedRequest();
+    const accessToken = localStorage.getItem('accessToken');
     $.ajax({
         url: itemBaseUrl + "item",
         method: "POST",
+        headers: {
+            'Authorization': 'Bearer ' + accessToken
+        },
         data: formData,
         dataType: "json",
         success: function (res) {
@@ -60,9 +67,14 @@ $("#inv_Supplier_Code").on("keypress", function (event) {
 });
 
 $("#inv_Supplier_Code").empty();
+/*performAuthenticatedRequest();
+const accessToken = localStorage.getItem('accessToken');*/
 $.ajax({
     url: itemBaseUrl + "supplier",
     method: "GET",
+    /*headers: {
+        'Authorization': 'Bearer ' + accessToken
+    },*/
     dataType: "json",
     success: function (res) {
         for (let i of res.data) {
@@ -82,9 +94,14 @@ $("#inv_Supplier_Code").change(function () {
 });
 
 function fetchSupplierName(code) {
+    performAuthenticatedRequest();
+    const accessToken = localStorage.getItem('accessToken');
     $.ajax({
         url: itemBaseUrl + "supplier/searchSupplier?code=" + code,
         method: "GET",
+        headers: {
+            'Authorization': 'Bearer ' + accessToken
+        },
         contentType: "application/json",
         dataType: "json",
         success: function (res) {
@@ -101,9 +118,14 @@ function fetchSupplierName(code) {
 
 function loadAllItem() {
     $("#inventoryTable").empty();
+    performAuthenticatedRequest();
+    const accessToken = localStorage.getItem('accessToken');
     $.ajax({
         url: itemBaseUrl + "item",
         method: "GET",
+        headers: {
+            'Authorization': 'Bearer ' + accessToken
+        },
         dataType: "json",
         success: function (res) {
             for (let i of res.data) {
@@ -168,9 +190,14 @@ $("#btnUpdateInventory").click(function () {
 
     let formData = $("#InventoryForm").serializeArray();
     formData.push({name: "itemPicture", value: imageUrl});
+    performAuthenticatedRequest();
+    const accessToken = localStorage.getItem('accessToken');
     $.ajax({
         url: itemBaseUrl + "item",
         method: "PUT",
+        headers: {
+            'Authorization': 'Bearer ' + accessToken
+        },
         data: formData,
         dataType: "json",
         success: function (res) {
@@ -185,9 +212,14 @@ $("#btnUpdateInventory").click(function () {
 
 $("#btnDeleteInventory").click(function () {
     let code = $("#item_code").val();
+    performAuthenticatedRequest();
+    const accessToken = localStorage.getItem('accessToken');
     $.ajax({
         url: itemBaseUrl + "item?code=" + code,
         method: "DELETE",
+        headers: {
+            'Authorization': 'Bearer ' + accessToken
+        },
         dataType: "json",
         success: function (resp) {
             saveUpdateAlert("Item", resp.message);
@@ -258,10 +290,14 @@ $("#search_inv_Id").on("keypress", function (event) {
     if (event.which === 13) {
         var search = $("#search_inv_Id").val();
         $("#inventoryTable").empty();
-
+        performAuthenticatedRequest();
+        const accessToken = localStorage.getItem('accessToken');
         $.ajax({
             url: itemBaseUrl + "item/searchItem",
             method: "GET",
+            headers: {
+                'Authorization': 'Bearer ' + accessToken
+            },
             data: {
                 code: search,
                 name: search

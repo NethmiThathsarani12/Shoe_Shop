@@ -5,9 +5,14 @@ let cusBaseUrl = "http://localhost:8080/Back_End/";
 
     function generateCustomerID() {
         $("#customer_code").val("C00-001");
+        performAuthenticatedRequest();
+        const accessToken = localStorage.getItem('accessToken');
         $.ajax({
             url: cusBaseUrl + "customer/CustomerIdGenerate",
             method: "GET",
+            headers: {
+                'Authorization': 'Bearer ' + accessToken
+            },
             contentType: "application/json",
             dataType: "json",
             success: function (resp) {
@@ -39,9 +44,14 @@ let cusBaseUrl = "http://localhost:8080/Back_End/";
         $('#purchaseDate').val(new Date().toISOString().slice(0, 19).replace('T', ' '));
 
         let formData = $("#customerForm").serializeArray();
+        performAuthenticatedRequest();
+        const accessToken = localStorage.getItem('accessToken');
         $.ajax({
             url: cusBaseUrl + "customer",
             method: "POST",
+            headers: {
+                'Authorization': 'Bearer ' + accessToken
+            },
             data: formData,
             dataType: "json",
             success: function (res) {
@@ -81,10 +91,14 @@ let cusBaseUrl = "http://localhost:8080/Back_End/";
         $("#customerTable").empty();
         // Set purchaseDate field to current date and time
         $('#purchaseDate').val(new Date().toISOString().slice(0, 19).replace('T', ' '));
-
+        performAuthenticatedRequest();
+        const accessToken = localStorage.getItem('accessToken');
         $.ajax({
             url: cusBaseUrl + "customer",
             method: "GET",
+            headers: {
+                'Authorization': 'Bearer ' + accessToken
+            },
             dataType: "json",
             success: function (res) {
                 for (let i of res.data) {
@@ -173,10 +187,14 @@ let cusBaseUrl = "http://localhost:8080/Back_End/";
 
     $("#btnUpdateCustomer").click(function () {
         let formData = $("#customerForm").serialize();
-
+        performAuthenticatedRequest();
+        const accessToken = localStorage.getItem('accessToken');
         $.ajax({
             url: cusBaseUrl + "customer",
             method: "PUT",
+            headers: {
+                'Authorization': 'Bearer ' + accessToken
+            },
             data: formData,
             dataType: "json",
             success: function (res) {
@@ -191,9 +209,14 @@ let cusBaseUrl = "http://localhost:8080/Back_End/";
 
     $("#btnDeleteCustomer").click(function () {
         let id = $("#customer_code").val();
+        performAuthenticatedRequest();
+        const accessToken = localStorage.getItem('accessToken');
         $.ajax({
             url: cusBaseUrl + "customer?code=" + id,
             method: "DELETE",
+            headers: {
+                'Authorization': 'Bearer ' + accessToken
+            },
             dataType: "json",
             success: function (resp) {
                 saveUpdateAlert("Customer", resp.message);
@@ -255,10 +278,14 @@ let cusBaseUrl = "http://localhost:8080/Back_End/";
         if (event.which === 13) {
             var search = $("#search_CId").val();
             $("#customerTable").empty();
-
+            performAuthenticatedRequest();
+            const accessToken = localStorage.getItem('accessToken');
             $.ajax({
                 url: cusBaseUrl + "customer/searchCustomer",
                 method: "GET",
+                headers: {
+                    'Authorization': 'Bearer ' + accessToken
+                },
                 data: {
                     code: search,
                     name: search

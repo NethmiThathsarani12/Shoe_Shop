@@ -1,12 +1,20 @@
 let supBaseUrl = "http://localhost:8080/Back_End/";
 
-loadAllSupplierD();
+$(document).ready(function (){
+    loadAllSupplierD();
+});
+
 
 function loadAllSupplierD() {
     $("#supplierTable").empty();
+    performAuthenticatedRequest();
+    const accessToken = localStorage.getItem('accessToken');
     $.ajax({
         url: supBaseUrl + "supplier",
         method: "GET",
+        headers: {
+            'Authorization': 'Bearer ' + accessToken
+        },
         dataType: "json",
         success: function(res) {
             for (let supplier of res.data) {
@@ -43,9 +51,14 @@ $("#sup_d_id").on("keypress", function (event) {
     if (event.which === 13) {
         var search = $("#sup_d_id").val();
         $("#supplierTable").empty();
+        performAuthenticatedRequest();
+        const accessToken = localStorage.getItem('accessToken');
         $.ajax({
             url: supBaseUrl + "supplier/searchSupplier?code=" + search,
             method: "GET",
+            headers: {
+                'Authorization': 'Bearer ' + accessToken
+            },
             contentType: "application/json",
             dataType: "json",
             data: { supplier_Id: search }, // Send the search parameter as an object

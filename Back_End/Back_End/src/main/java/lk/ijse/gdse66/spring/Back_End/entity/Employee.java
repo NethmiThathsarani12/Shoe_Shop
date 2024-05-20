@@ -44,6 +44,4 @@ public class Employee {
     private String person;
     private String EmgContact;
 
-    @OneToOne(cascade = CascadeType.ALL)
-    private User user;
 }
