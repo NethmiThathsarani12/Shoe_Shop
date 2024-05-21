@@ -6,4 +6,6 @@ import org.springframework.security.core.userdetails.UserDetailsService;
 public interface UserService {
     UserDetailsService userDetailService();
     UserDTO searchUser(String id);
+    void updateUser(UserDTO dto);
+    void deleteUser(UserDTO dto);
 }
