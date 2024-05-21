@@ -331,4 +331,11 @@ let cusBaseUrl = "http://localhost:8080/Back_End/";
     });
 
 
+function clearDetails() {
+    $('#customer_name,#customer_gender,#customer_jdlc,#level,#total_point,#customer_dob,#c_address_01,#c_address_02,#c_address_03,#c_address_04,#c_address_05,#c_contact_num,#customer_email').val("");
 
+}
+
+$("#btnClearCustomer").click(function () {
+    clearDetails();
+});

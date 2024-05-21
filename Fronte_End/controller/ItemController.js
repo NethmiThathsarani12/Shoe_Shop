@@ -360,6 +360,13 @@ $("#unit_price_Buy").on("input", function() {
     profitMargin();
 });
 
+function clearDetails() {
+    $('#inv_Item_Desc,#inv_qty,#inv_Category,#size,#inv_Supplier_Code,#inv_Supplier_name,#inv_Unit_price,#unit_price_Buy,#Expected_Profit,#Profit_margin,#Inv_Status,#inv_Item_pic').val("");
 
+}
+
+$("#btnClearInventory").click(function () {
+    clearDetails();
+});
 
 

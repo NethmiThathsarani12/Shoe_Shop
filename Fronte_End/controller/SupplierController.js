@@ -247,3 +247,11 @@ $("#search_Supplier").on("keypress", function (event) {
 });
 
 
+function clearDetails() {
+    $('#supplier_name,#S_category,#supplier_address_01,#supplier_address_02,#supplier_address_03,#supplier_address_04,#supplier_address_05,#su_conatct_01,#su_conatct_02,#sup_email').val("");
+
+}
+
+$("#btnClearSupplier").click(function () {
+    clearDetails();
+});

@@ -1,12 +1,19 @@
 let baseUrl = "http://localhost:8080/Back_End/";
 
-loadAllEmployeeD();
+$(document).ready(function (){
+    loadAllEmployeeD();
+});
 
 function loadAllEmployeeD() {
     $("#employeeTable").empty();
+    performAuthenticatedRequest();
+    const accessToken = localStorage.getItem('accessToken');
     $.ajax({
         url: baseUrl + "employee",
         method: "GET",
+        headers: {
+            'Authorization': 'Bearer ' + accessToken
+        },
         dataType: "json",
         success: function (res) {
             console.log(res);
@@ -58,9 +65,14 @@ $("#search_EmployeeId").on("keypress", function (event) {
     if (event.which === 13) {
         var search = $("#search_EmployeeId").val();
         $("#employeeTable").empty();
+        performAuthenticatedRequest();
+        const accessToken = localStorage.getItem('accessToken');
         $.ajax({
             url: baseUrl + "employee/searchEmployee",
             method: "GET",
+            headers: {
+                'Authorization': 'Bearer ' + accessToken
+            },
             data: {
                 code: search, // Provide the 'code' parameter
                 name: search  // Provide the 'name' parameter

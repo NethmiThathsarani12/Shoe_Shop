@@ -469,6 +469,13 @@ $("#search_EmployeeId").on("keypress", function (event) {
     }
 });
 
+function clearDetails() {
+    $('#employee_name,#EProfile_pic,#E_gender,#E_status,#designation,#E_AccessRole,#E_dob,#E_DOF,#E_Attached,#E_address_1,#E_address_2,#E_address_3,#E_address_4,#E_address_5,#E_ContactNo,#E_email,#ICE,#E_E_contact').val("");
 
+}
+
+$("#btnClearEmplyee").click(function () {
+    clearDetails();
+});
 
 
