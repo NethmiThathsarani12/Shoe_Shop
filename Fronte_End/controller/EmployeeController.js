@@ -7,10 +7,11 @@ $(document).ready(function (){
 
 
 
-$("#btnAddEmployee").attr('disabled', false);
-$("#btnUpdateEmployee").attr('disabled', false);
-$("#btnDeleteEmployee").attr('disabled', false);
+$("#btnAddEmployee").attr('disabled', true);
+$("#btnUpdateEmployee").attr('disabled', true);
+$("#btnDeleteEmployee").attr('disabled', true);
 
+//Employee Id generate
 
 function generateEmployeeID() {
     $("#Employee_code").val("E00-001");
@@ -48,6 +49,8 @@ function generateEmployeeID() {
     });
 }
 
+//employee save
+
 $("#btnAddEmployee").click(function () {
 
         var image = $("#img");
@@ -81,6 +84,7 @@ $("#btnAddEmployee").click(function () {
     });
 });
 
+//clear text field
 
 function setTextFieldValues(code, name, pic, gender,status,designation,role,birth,joinDate,branch,E_address_1,E_address_2,E_address_3,E_address_4,E_address_5,contact,email,person,EmgContact) {
     $("#Employee_code").val(code);
@@ -217,7 +221,7 @@ function blindClickEventsE() {
         $("#E_E_contact").val(EmgContact);
     });
 
-    $("#btnAddEmployee").attr('disabled', false);
+    $("#btnAddEmployee").attr('disabled', true);
 }
 
 //
@@ -274,6 +278,7 @@ function blindClickEventsE() {
 //     }
 // });
 
+//update employee
 
 $("#btnUpdateEmployee").click(function () {
     let formData = $("#employeeForm").serialize();
@@ -304,6 +309,7 @@ $("#btnUpdateEmployee").click(function () {
 });
 
 
+//Delete employee
 
 $("#btnDeleteEmployee").click(function () {
     let id = $("#Employee_code").val();
@@ -478,4 +484,181 @@ $("#btnClearEmplyee").click(function () {
     clearDetails();
 });
 
+//Employee Validation
 
+
+$("#Employee_code").focus();
+const regExEmpID = /^(E00-)[0-9]{3,4}$/;
+const regExEmpName = /^[A-z ]{3,20}$/;
+const regExEmpStatus = /^[A-z ]{3,20}$/;
+const regExEmpBranch = /^[A-z ]{3,20}$/;
+const regExEmpAddress1 = /^[A-z0-9/ ]{4,30}$/;
+const regExEmpAddress2 = /^[A-z0-9/ ]{4,30}$/;
+const regExEmpAddress3 = /^[A-z0-9/ ]{4,30}$/;
+const regExEmpAddress4 = /^[A-z0-9/ ]{4,30}$/;
+const regExEmpAddress5 = /^[A-z0-9/ ]{4,30}$/;
+const regExEmpContactNum = /^(07(0|1|2|4|5|6|7|8)[0-9]{7})$/;
+const regExEmpEmailAddress = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
+const regExEmpInfo = /^[A-z ]{3,20}$/;
+const regExEmpContactNumEm = /^(07(0|1|2|4|5|6|7|8)[0-9]{7})$/;
+
+let employeeValidations = [];
+employeeValidations.push({
+    reg: regExEmpID, field: $('#Employee_code'), error: 'Employee ID Pattern is Wrong : C00-001'
+});
+
+employeeValidations.push({
+    reg: regExEmpName, field: $('#employee_name'), error: 'Employee Name Pattern is Wrong : A-z 3-20'
+});
+
+employeeValidations.push({
+    reg: regExEmpStatus, field: $('#E_status'), error: 'Employee Status Pattern is Wrong : A-z 3-20'
+});
+
+employeeValidations.push({
+    reg: regExEmpBranch, field: $('#E_Attached'), error: 'Employee Branch Pattern is Wrong : A-z 3-20'
+});
+
+employeeValidations.push({
+    reg: regExEmpAddress1, field: $('#E_address_1'), error: 'Employee Address Pattern is Wrong : A-z 3-20'
+});
+
+employeeValidations.push({
+    reg: regExEmpAddress2, field: $('#E_address_2'), error: 'Employee Address Pattern is Wrong : A-z 3-20'
+});
+
+employeeValidations.push({
+    reg: regExEmpAddress3, field: $('#E_address_3'), error: 'Employee Address Pattern is Wrong : A-z 3-20'
+});
+
+employeeValidations.push({
+    reg: regExEmpAddress4, field: $('#E_address_4'), error: 'Employee Address Pattern is Wrong : A-z 3-20'
+});
+
+employeeValidations.push({
+    reg: regExEmpAddress5, field: $('#E_address_5'), error: 'Employee Address Pattern is Wrong : A-z 3-20'
+});
+
+employeeValidations.push({
+    reg: regExEmpContactNum, field: $('#E_ContactNo'), error: 'Employee Contact Pattern is Wrong :  0-9'
+});
+
+employeeValidations.push({
+    reg: regExEmpEmailAddress, field: $('#E_email'), error: 'Employee Email Pattern is Wrong :  enter correct email with "@"'
+});
+
+employeeValidations.push({
+    reg: regExEmpInfo, field: $('#ICE'), error: 'Employee Info Pattern is Wrong :  enter correct '
+});
+
+employeeValidations.push({
+    reg: regExEmpContactNumEm, field: $('#E_E_contact'), error: 'Employee contact Pattern is Wrong :  enter correct '
+});
+
+$("#Employee_code,#employee_name,#E_status,#E_Attached,#E_address_1,#E_address_2,#E_address_3,#E_address_4,#E_address_5,#E_ContactNo,#E_email,#ICE,#E_E_contact").on('keydown', function (event) {
+    if (event.key === "Tab") {
+        event.preventDefault();
+    }
+});
+
+$("#Employee_code,#employee_name,#E_status,#E_Attached,#E_address_1,#E_address_2,#E_address_3,#E_address_4,#E_address_5,#E_ContactNo,#E_email,#ICE,#E_E_contact").on('keyup', function (event) {
+    checkValidity(employeeValidations);
+});
+
+$("#Employee_code,#employee_name,#E_status,#E_Attached,#E_address_1,#E_address_2,#E_address_3,#E_address_4,#E_address_5,#E_ContactNo,#E_email,#ICE,#E_E_contact").on('blur', function (event) {
+    checkValidity(employeeValidations);
+});
+
+$("#Employee_code").on('keydown', function (event) {
+    if (event.key === "Enter" && check(regExEmpID, $("#Employee_code"))) {
+        $("#employee_name").focus();
+    } else {
+        focusText($("#employee_name"));
+    }
+});
+
+$("#employee_name").on('keydown', function (event) {
+    if (event.key === "Enter" && check(regExEmpName, $("#employee_name"))) {
+        focusText($("#EProfile_pic"));
+    }
+});
+
+$("#E_status").on('keydown', function (event) {
+    if (event.key === "Enter" && check(regExEmpStatus, $("#E_status"))) {
+        focusText($("#designation"));
+    }
+});
+
+$("#E_Attached").on('keydown', function (event) {
+    if (event.key === "Enter" && check(regExEmpBranch, $("#E_Attached"))) {
+        focusText($("#E_address_1"));
+    }
+});
+
+$("#E_address_1").on('keydown', function (event) {
+    if (event.key === "Enter" && check(regExEmpAddress1, $("#E_address_1"))) {
+        focusText($("#E_address_2"));
+    }
+});
+
+$("#E_address_2").on('keydown', function (event) {
+    if (event.key === "Enter" && check(regExEmpAddress2, $("#E_address_2"))) {
+        focusText($("#E_address_3"));
+    }
+});
+
+$("#E_address_3").on('keydown', function (event) {
+    if (event.key === "Enter" && check(regExEmpAddress3, $("#E_address_3"))) {
+        focusText($("#E_address_4"));
+    }
+});
+
+$("#E_address_4").on('keydown', function (event) {
+    if (event.key === "Enter" && check(regExEmpAddress4, $("#E_address_4"))) {
+        focusText($("#E_address_5"));
+    }
+});
+
+$("#E_address_5").on('keydown', function (event) {
+    if (event.key === "Enter" && check(regExEmpAddress5, $("#E_address_5"))) {
+        focusText($("#E_ContactNo"));
+    }
+});
+
+$("#E_ContactNo").on('keydown', function (event) {
+    if (event.key === "Enter" && check(regExEmpContactNum, $("#E_ContactNo"))) {
+        focusText($("#E_email"));
+    }
+});
+
+$("#E_email").on('keydown', function (event) {
+    if (event.key === "Enter" && check(regExEmpEmailAddress, $("#E_email"))) {
+        focusText($("#ICE"));
+    }
+});
+
+$("#ICE").on('keydown', function (event) {
+    if (event.key === "Enter" && check(regExEmpInfo, $("#ICE"))) {
+        focusText($("#emgContact"));
+    }
+});
+
+$("#emgContact").on('keydown', function (event) {
+    if (event.key === "Enter" && check(regExEmpContactNumEm, $("#emgContact"))) {
+        if (event.which === 13) {
+            $('#btnAddEmployee').focus();
+        }
+    }
+});
+
+function setButtonState(value) {
+    if (value > 0) {
+        $("#btnAddEmployee").attr('disabled', true);
+        $("#btnUpdateEmployee").attr('disabled', true);
+        $("#btnDeleteEmployee").attr('disabled', true);
+    } else {
+        $("#btnAddEmployee").attr('disabled', false);
+        $("#btnUpdateEmployee").attr('disabled', false);
+        $("#btnDeleteEmployee").attr('disabled', false);
+    }
+}

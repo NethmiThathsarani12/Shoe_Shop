@@ -255,3 +255,135 @@ function clearDetails() {
 $("#btnClearSupplier").click(function () {
     clearDetails();
 });
+
+$("#Supplier_code").focus();
+const regExSupID = /^(S00-)[0-9]{3,4}$/;
+const regExSupName = /^[A-z ]{3,20}$/;
+const regExSupAddress1 = /^[A-z0-9/ ]{4,30}$/;
+const regExSupAddress2 = /^[A-z0-9/ ]{4,30}$/;
+const regExSupAddress3 = /^[A-z0-9/ ]{4,30}$/;
+const regExSupAddress4 = /^[A-z0-9/ ]{4,30}$/;
+const regExSupAddress5 = /^[A-z0-9/ ]{4,30}$/;
+const regExSupContactNum = /^(07(0|1|2|4|5|6|7|8)[0-9]{7})$/;
+const regExSupContactNum2 = /^(07(0|1|2|4|5|6|7|8)[0-9]{7})$/;
+const regExSupEmailSupAddress = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
+
+let supplierValidations = [];
+supplierValidations.push({
+    reg: regExSupID, field: $('#Supplier_code'), error: 'Supplier ID Pattern is Wrong : S00-001'
+});
+supplierValidations.push({
+    reg: regExSupName, field: $('#supplier_name'), error: 'Supplier Name Pattern is Wrong : A-z 3-20'
+});
+supplierValidations.push({
+    reg: regExSupAddress1, field: $('#supplier_address_01'), error: 'Supplier Address is Wrong : Enter address'
+});
+supplierValidations.push({
+    reg: regExSupAddress2, field: $('#supplier_address_02'), error: 'Supplier Address is Wrong : Enter address'
+});
+supplierValidations.push({
+    reg: regExSupAddress3, field: $('#supplier_address_03'), error: 'Supplier Address is Wrong : Enter address'
+});
+supplierValidations.push({
+    reg: regExSupAddress4, field: $('#supplier_address_04'), error: 'Supplier Address is Wrong : Enter address'
+});
+supplierValidations.push({
+    reg: regExSupAddress5, field: $('#supplier_address_05'), error: 'Supplier Address is Wrong : Enter address'
+});
+supplierValidations.push({
+    reg: regExSupContactNum, field: $('#su_conatct_01'), error: 'Supplier contact is Wrong : Enter email address'
+});
+supplierValidations.push({
+    reg: regExSupContactNum2, field: $('#su_conatct_02'), error: 'Employee contact is Wrong : Enter email address'
+});
+supplierValidations.push({
+    reg: regExSupEmailSupAddress, field: $('#sup_email'), error: 'Supplier email is Wrong : Enter email address'
+});
+
+$("#Supplier_code,#supplier_name,#supplier_address_01,#supplier_address_02,#supplier_address_03,#supplier_address_04,#supplier_address_05,#su_conatct_01,#su_conatct_02,#sup_email").on('keydown', function (event) {
+    if (event.key === "Tab") {
+        event.preventDefault();
+    }
+});
+
+$("#Supplier_code,#supplier_name,#supplier_address_01,#supplier_address_02,#supplier_address_03,#supplier_address_04,#supplier_address_05,#su_conatct_01,#su_conatct_02,#sup_email").on('keyup', function (event) {
+    checkValidity(supplierValidations);
+});
+
+$("#Supplier_code,#supplier_name,#supplier_address_01,#supplier_address_02,#supplier_address_03,#supplier_address_04,#supplier_address_05,#su_conatct_01,#su_conatct_02,#sup_email").on('blur', function (event) {
+    checkValidity(supplierValidations);
+});
+
+$("#Supplier_code").on('keydown', function (event) {
+    if (event.key === "Enter" && check(regExEmpID, $("#Supplier_code"))) {
+        $("#supplier_name").focus();
+    } else {
+        focusText($("#Supplier_code"));
+    }
+});
+
+$("#supplier_name").on('keydown', function (event) {
+    if (event.key === "Enter" && check(regExEmpName, $("#supplier_name"))) {
+        focusText($("#S_category"));
+    }
+});
+
+$("#supplier_address_01").on('keydown', function (event) {
+    if (event.key === "Enter" && check(regExSupAddress1, $("#supplier_address_01"))) {
+        focusText($("#supplier_address_02"));
+    }
+});
+
+$("#supplier_address_02").on('keydown', function (event) {
+    if (event.key === "Enter" && check(regExSupAddress2, $("#supplier_address_02"))) {
+        focusText($("#supplier_address_03"));
+    }
+});
+
+$("#supplier_address_03").on('keydown', function (event) {
+    if (event.key === "Enter" && check(regExSupAddress3, $("#supplier_address_03"))) {
+        focusText($("#supplier_address_04"));
+    }
+});
+
+$("#supplier_address_04").on('keydown', function (event) {
+    if (event.key === "Enter" && check(regExSupAddress4, $("#supplier_address_04"))) {
+        focusText($("#supplier_address_05"));
+    }
+});
+
+$("#supplier_address_05").on('keydown', function (event) {
+    if (event.key === "Enter" && check(regExSupAddress5, $("#supplier_address_05"))) {
+        focusText($("#su_conatct_01"));
+    }
+});
+
+$("#su_conatct_01").on('keydown', function (event) {
+    if (event.key === "Enter" && check(regExSupContactNum, $("#su_conatct_01"))) {
+        focusText($("#su_conatct_02"));
+    }
+});
+
+$("#su_conatct_02").on('keydown', function (event) {
+    if (event.key === "Enter" && check(regExSupContactNum2, $("#su_conatct_02"))) {
+        focusText($("#sup_email"));
+    }
+});
+
+$("#sup_email").on('keydown', function (event) {
+    if (event.key === "Enter" && check(regExSupEmailSupAddress, $("#sup_email"))) {
+        focusText($("#btnAddSupplier"));
+    }
+});
+
+function setButtonState(value) {
+    if (value > 0) {
+        $("#btnAddSupplier").attr('disabled', true);
+        $("#btnUpdateSupplier").attr('disabled', true);
+        $("#btnDeleteSupplier").attr('disabled', true);
+    } else {
+        $("#btnAddSupplier").attr('disabled', false);
+        $("#btnUpdateSupplier").attr('disabled', false);
+        $("#btnDeleteSupplier").attr('disabled',false);
+    }
+}

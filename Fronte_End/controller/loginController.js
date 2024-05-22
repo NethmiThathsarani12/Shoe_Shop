@@ -15,7 +15,13 @@ $("#btnSingUp").click(function() {
         contentType: "application/json",
         success: function (res, textStatus, jsXH) {
             localStorage.setItem('accessToken', res.token);
-            alert("Error User Added");
+            // alert("Error User Added");
+            Swal.fire({
+                icon: "error",
+                title: "Request True",
+                showConfirmButton: true,
+                timer: 1500
+            });
             // console.log(res);
             /* $("#inputEmail").val("");
              $("#inputPassword").val("");
@@ -23,6 +29,12 @@ $("#btnSingUp").click(function() {
         },
         error: function (ob, textStatus, error) {
             alert("Error User Not Added");
+            Swal.fire({
+                icon: "error",
+                title: "Request failed",
+                showConfirmButton: false,
+                timer: 1500
+            });
         }
     });
 
@@ -63,13 +75,13 @@ $("#btnLogin").click(function() {
                     }
                 },
                 error: function (ob, textStatus, error) {
-                    // swal("Error","Error Sign in", "error");
+                    swal("Error","Error Sign in", "error");
                 }
             });
 
         },
         error: function (ob, textStatus, error) {
-            // swal("Error", "Error Sign in", "error");
+            swal("Error", "Error Sign in", "error");
         }
     });
 });

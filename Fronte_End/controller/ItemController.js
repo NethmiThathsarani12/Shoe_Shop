@@ -369,4 +369,109 @@ $("#btnClearInventory").click(function () {
     clearDetails();
 });
 
+$("#item_code").focus();
+const regExItemID = /^[A-z0-9/ ]{3,20}$/;
+const regExItemName = /^[A-z ]{3,20}$/;
+const regExItemQty = /^[0-9]{0,}[.]?[0-9]{1,2}$/;
+const regExSupID = /^(S00-)[0-9]{3,4}$/;
+const regExItemUnitPriceSale = /^[0-9]{0,}[.]?[0-9]{1,2}$/;
+const regExItemUnitPriceBuy = /^[0-9]{0,}[.]?[0-9]{1,2}$/;
+const regExItemStatus = /^[A-z ]{3,20}$/;
+
+let itemValidations = [];
+itemValidations.push({
+    reg: regExItemID, field: $('#item_code'), error: 'Item ID Pattern is Wrong : type correct id'
+});
+itemValidations.push({
+    reg: regExItemName, field: $('#inv_Item_Desc'), error: 'Item Name Pattern is Wrong : A-z 3-20'
+});
+
+itemValidations.push({
+    reg: regExItemQty, field: $('#inv_qty'), error: 'Item Qty is Wrong : Enter Number'
+});
+
+itemValidations.push({
+    reg: regExSupID, field: $('#inv_Supplier_Code'), error: 'Supplier ID Pattern is Wrong : S00-001'
+});
+itemValidations.push({
+    reg: regExItemUnitPriceSale, field: $('#inv_Unit_price'), error: 'Item Unit Price is Wrong : Enter Number'
+});
+itemValidations.push({
+    reg: regExItemUnitPriceBuy, field: $('#unit_price_Buy'), error: 'Item Price Buy is Wrong : Enter Number'
+});
+itemValidations.push({
+    reg: regExItemStatus, field: $('#Inv_Status'), error: 'Item Status Pattern is Wrong : A-z 3-20'
+});
+
+$("#item_code,#inv_Item_Desc,#inv_qty,#inv_Supplier_Code,#inv_Unit_price,#unit_price_Buy,#Inv_Status").on('keydown', function (event) {
+    if (event.key === "Tab") {
+        event.preventDefault();
+    }
+});
+
+$("#item_code,#inv_Item_Desc,#inv_qty,#inv_Supplier_Code,#inv_Unit_price,#unit_price_Buy,#Inv_Status").on('keyup', function (event) {
+    checkValidity(itemValidations);
+});
+
+$("#item_code,#inv_Item_Desc,#inv_qty,#inv_Supplier_Code,#inv_Unit_price,#unit_price_Buy,#Inv_Status").on('blur', function (event) {
+    checkValidity(itemValidations);
+});
+
+
+$("#item_code").on('keydown', function (event) {
+    if (event.key === "Enter" && check(regExItemID, $("#item_code"))) {
+        $("#inv_Item_Desc").focus();
+    } else {
+        focusText($("#item_code"));
+    }
+});
+
+$("#inv_Item_Desc").on('keydown', function (event) {
+    if (event.key === "Enter" && check(regExItemName, $("#inv_Item_Desc"))) {
+        focusText($("#inv_qty"));
+    }
+});
+
+$("#inv_qty").on('keydown', function (event) {
+    if (event.key === "Enter" && check(regExItemName, $("#inv_qty"))) {
+        focusText($("#inv_Category"));
+    }
+});
+
+$("#inv_Supplier_Code").on('keydown', function (event) {
+    if (event.key === "Enter" && check(regExItemName, $("#inv_Supplier_Code"))) {
+        focusText($("#inv_Supplier_name"));
+    }
+});
+
+$("#inv_Unit_price").on('keydown', function (event) {
+    if (event.key === "Enter" && check(regExItemName, $("#inv_Unit_price"))) {
+        focusText($("#unit_price_Buy"));
+    }
+});
+
+$("#unit_price_Buy").on('keydown', function (event) {
+    if (event.key === "Enter" && check(regExItemName, $("#unit_price_Buy"))) {
+        focusText($("#Expected_Profit"));
+    }
+});
+
+$("#Inv_Status").on('keydown', function (event) {
+    if (event.key === "Enter" && check(regExItemName, $("#Inv_Status"))) {
+        focusText($("#btnAddInventory"));
+    }
+});
+
+function setButtonState(value) {
+    if (value > 0) {
+        $("#btnAddInventory").attr('disabled', true);
+        $("#btnUpdateInventory").attr('disabled', true);
+        $("#btnDeleteInventory").attr('disabled', true);
+    } else {
+        $("#btnAddInventory").attr('disabled', false);
+        $("#btnUpdateInventory").attr('disabled', false);
+        $("#btnDeleteInventory").attr('disabled',false);
+    }
+}
+
 
