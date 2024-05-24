@@ -8,6 +8,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
+
 @RestController
 @CrossOrigin(origins = "*")
 @RequestMapping("/orders")
@@ -44,6 +46,19 @@ public class OrderController {
         return new ResponseUtil("OK", "Successfully Loaded. :", service.LoadOrderDetails());
     }
 
+    @ResponseStatus(HttpStatus.OK)
+    @GetMapping(path = "/TodayOrders")
+    public ResponseUtil getTodayOrders() {
+        List<SalesDTO> todayOrders = service.getTodayCount();
+        return new ResponseUtil("OK", "Today's orders loaded successfully.", todayOrders);
+    }
 
-
+//    @ResponseStatus(HttpStatus.OK)
+//    @GetMapping("/totalProfit")
+//    public ResponseUtil getTotalProfit() {
+//        Double totalProfit = service.getTotalProfit();
+//        return new ResponseUtil("OK", "Total profit retrieved successfully.", totalProfit);
+//    }
 }
+
+

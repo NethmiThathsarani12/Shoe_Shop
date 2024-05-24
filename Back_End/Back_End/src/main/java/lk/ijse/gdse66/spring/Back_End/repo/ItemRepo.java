@@ -13,4 +13,7 @@ public interface ItemRepo extends JpaRepository<Item,String> {
 
     @Query(value = "SELECT * FROM item e WHERE e.code = :code OR e.name = :name", nativeQuery = true)
     Item findItemByCodeOrName(@Param("code") String code, @Param("name") String name);
+
+    @Query("SELECT SUM(i.expectedProfit) FROM Item i")
+    Double getTotalProfit();
 }

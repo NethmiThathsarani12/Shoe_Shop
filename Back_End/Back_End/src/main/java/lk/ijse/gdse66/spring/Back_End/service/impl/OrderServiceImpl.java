@@ -21,6 +21,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.ArrayList;
+import java.util.List;
 import java.util.Optional;
 
 @Service
@@ -142,4 +143,14 @@ public class OrderServiceImpl implements OrderService {
             throw new EntityNotFoundException("Order with id " + id + " not found");
         }
     }
+
+    public List<SalesDTO> getTodayCount() {
+        List<Sales> todayOrders = repo.findTodayOrders();
+        return mapper.map(todayOrders, new TypeToken<List<SalesDTO>>() {}.getType());
+    }
+
+//    @Override
+//    public Double getTotalProfit() {
+//        return repo.getTotalProfit();
+//    }
 }

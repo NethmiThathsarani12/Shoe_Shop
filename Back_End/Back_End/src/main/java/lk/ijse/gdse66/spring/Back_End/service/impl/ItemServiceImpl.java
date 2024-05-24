@@ -92,4 +92,10 @@ public class ItemServiceImpl implements ItemService {
         }
         return mapper.map(item, ItemDTO.class);
     }
+
+    @Override
+    public Double getTotalProfit() {
+        Double totalProfit = repo.getTotalProfit();
+        return totalProfit != null ? totalProfit : 0.0;
+    }
 }

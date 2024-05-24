@@ -74,5 +74,11 @@ public class CustomerController {
         return service.searchCustId(code);
     }
 
+    @ResponseStatus(HttpStatus.CREATED)
+    @GetMapping(path = "/customerCount")
+    public @ResponseBody CustomDTO getSumCustomer() {
+        return service.getSumCustomer();
+    }
+
 }
 

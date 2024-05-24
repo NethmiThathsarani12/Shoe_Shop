@@ -343,7 +343,7 @@ $(document).on("change keyup blur", "#txtCash", function () {
     $("#txtBalance").val(balance);
     if (balance < 0) {
         $("#lblCheckSubtotal").parent().children('strong').text(balance + " : plz enter valid Balance");
-        $("#btnPurchase").attr('disabled', true);
+        $("#btnPurchase").attr('disabled', false);
     } else {
         $("#lblCheckSubtotal").parent().children('strong').text("");
         $("#btnPurchase").attr('disabled', false);
@@ -425,11 +425,29 @@ $("#btnPurchase").click(function () {
 
     /*   clearDetails();*/
     $("#tblAddToCart").empty();
-    $("#btnPurchase").attr('disabled', true);
-    $("#btnAddToCart").attr('disabled', true);
+    $("#btnPurchase").attr('disabled', false);
+    $("#btnAddToCart").attr('disabled', false);
     total = 0;
 });
-
-
-
-
+//
+// const regExCusID = /^(C00-)[0-9]{3,4}$/;
+// const regExItemID = /^[A-z0-9/ ]{3,20}$/;
+// const regExBuyQty = /^[0-9]{0,}[.]?[0-9]{1,2}$/;
+// const regExCashierName = /^[A-z ]{3,20}$/;
+//
+// let orderValidations = [];
+// orderValidations.push({
+//     reg: regExCusID, field: $('#Customer_Id'), error: 'Customer ID Pattern is Wrong : C00-001'
+// });
+//
+// orderValidations.push({
+//     reg: regExItemID, field: $('#Item_Code'), error: 'Item ID Pattern is Wrong : enter correct item id'
+// });
+//
+// orderValidations.push({
+//     reg: regExBuyQty, field: $('#buyQty'), error: 'Buy QTY is Wrong : enter correct some qty'
+// });
+//
+// orderValidations.push({
+//     reg: regExCashierName, field: $('#cashierName'), error: 'Cashier name is wrong : enter correct cashier name'
+// });

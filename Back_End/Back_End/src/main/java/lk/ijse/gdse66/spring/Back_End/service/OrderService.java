@@ -8,6 +8,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import java.util.ArrayList;
+import java.util.List;
 
 public interface OrderService {
     void placeOrder(@RequestBody SalesDTO dto);
@@ -23,4 +24,8 @@ public interface OrderService {
     CustomDTO getSumOrders();
 
     SaleDetails getOrderById(String id);
+
+    List<SalesDTO> getTodayCount();
+
+//    Double getTotalProfit();
 }

@@ -60,4 +60,13 @@ public class ItemController {
     }
 
 
+
+    @ResponseStatus(HttpStatus.OK)
+    @GetMapping(path = "/totalProfit")
+    public ResponseUtil getTotalProfit() {
+        Double totalProfit = itemService.getTotalProfit();
+        return new ResponseUtil("200", "Total profit calculated successfully", totalProfit);
+    }
+
+
 }

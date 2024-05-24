@@ -21,4 +21,6 @@ public interface ItemService {
     CustomDTO getSumItem();
 
     ItemDTO searchItemId(String id);
+
+    Double getTotalProfit();
 }

@@ -29,6 +29,7 @@
   <link rel="stylesheet" href="../assets/vendor/fontawesome-free/css/all.css">
   <link rel="stylesheet" href="../assets/css/main.css">
 
+
 </head>
 <body>
 <!-- ======= Header ======= -->
@@ -88,11 +89,20 @@
     </li>
 
     <li class="nav-item">
+      <a class="nav-link collapsed" href="./adminPages/Return.html">
+        <i class="bi bi-kanban"></i>
+        <span>Return</span>
+      </a>
+    </li>
+
+    <li class="nav-item">
       <a class="nav-link collapsed" href="adminPages/AdminSetting.html">
         <i class="bi bi-kanban"></i>
         <span>User Setting</span>
       </a>
     </li>
+
+
 <!--    <li class="nav-item">-->
 <!--      <a class="nav-link collapsed" href="AdminSetting.html" id="myDetailsSection">-->
 <!--        <i class="bi bi-kanban"></i>-->
@@ -142,35 +152,32 @@
                 <h5 class="card-title" style="color: black">Total Sales</h5>
                 <div class="d-flex align-items-center">
                   <img src="../assets/img/money-bag.gif" height="70px" width="70px">
-<!--                  <div class="card-icon rounded-circle d-flex align-items-center justify-content-center">-->
-<!--                   <i class="fa-solid fa-truck"></i>-->
-<!--                  </div>-->
                   <div class="ps-3">
-                    <h6 id="carCount">0</h6>
+                    <h6 id="todaySales">0</h6>
                   </div>
                 </div>
               </div>
             </div>
           </div>
+
 
 
 
           <div class="col-xxl-4 col-md-6">
             <div class="card info-card car-card" style="background-color: #e6e6e6">
               <div class="card-body" style="background-color: #e6e6e6">
-                <h5 class="card-title" style="color: black" >Total Profit</h5>
+                <h5 class="card-title" style="color: black">Total Profit</h5>
                 <div class="d-flex align-items-center">
                   <img src="../assets/img/checklist.gif" height="70px" width="70px">
-<!--                  <div class="card-icon rounded-circle d-flex align-items-center justify-content-center">-->
-<!--&lt;!&ndash;                    <i class="bi bi-car-front-fill"></i>&ndash;&gt;-->
-<!--                  </div>-->
                   <div class="ps-3">
-                    <h6 id="availableCarCount">0</h6>
+                    <h6 id="totalProfit">0</h6>
                   </div>
                 </div>
               </div>
             </div>
           </div>
+
+
 
 
 
@@ -191,6 +198,21 @@
               </div>
             </div>
           </div>
+
+          <div class="col-xxl-4 col-md-6">
+            <div class="card info-card car-card" style="background-color: #e6e6e6">
+              <div class="card-body" style="background-color: #e6e6e6">
+                <h5 class="card-title" style="color: black">Total Loyalty Customer</h5>
+                <div class="d-flex align-items-center">
+                  <img src="../assets/img/diagram.gif" height="70px" width="70px">
+                  <div class="ps-3">
+                    <h6 id="totalCustomer">0</h6>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
           <!-- End Car Card -->
         </div>
         <img id="img" src="../assets/img/yello-shoe-removebg-preview.png" width="300px">
@@ -226,7 +248,8 @@
 <script src="../assets/js/dashboardMain.js"></script>
 
 <!-- Controller JS File -->
-<script src="../controller/DashBoardController.js"></script>
+<script src="../controller/loginController.js"></script>
+<script src="../controller/AdminDashboardController.js"></script>
 
 </body>
 </html>

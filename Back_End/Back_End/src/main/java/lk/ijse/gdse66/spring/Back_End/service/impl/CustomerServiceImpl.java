@@ -88,8 +88,8 @@ public class CustomerServiceImpl implements CustomerService {
     }
 
     @Override
-    public SupplierDTO getSumCustomer() {
-        return null;
+    public CustomDTO getSumCustomer() {
+        return new CustomDTO(repo.getSumCustomer());
     }
 
     @Override

@@ -22,7 +22,7 @@ CustomerDTO searchCusId(String code, String name);
     @ResponseBody
     CustomDTO customerIdGenerate();
     @ResponseBody
-    SupplierDTO getSumCustomer();
+    CustomDTO getSumCustomer();
 
     CustomerDTO searchCustId(String id);
 }
