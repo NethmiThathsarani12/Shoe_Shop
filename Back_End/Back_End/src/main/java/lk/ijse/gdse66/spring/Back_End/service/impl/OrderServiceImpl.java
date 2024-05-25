@@ -1,13 +1,11 @@
 package lk.ijse.gdse66.spring.Back_End.service.impl;
 
 import jakarta.persistence.EntityNotFoundException;
+import lk.ijse.gdse66.spring.Back_End.dto.AdminPanelDTO;
 import lk.ijse.gdse66.spring.Back_End.dto.CustomDTO;
 import lk.ijse.gdse66.spring.Back_End.dto.SaleDetailsDTO;
 import lk.ijse.gdse66.spring.Back_End.dto.SalesDTO;
-import lk.ijse.gdse66.spring.Back_End.entity.Customer;
-import lk.ijse.gdse66.spring.Back_End.entity.Item;
-import lk.ijse.gdse66.spring.Back_End.entity.SaleDetails;
-import lk.ijse.gdse66.spring.Back_End.entity.Sales;
+import lk.ijse.gdse66.spring.Back_End.entity.*;
 import lk.ijse.gdse66.spring.Back_End.enums.Level;
 import lk.ijse.gdse66.spring.Back_End.repo.CustomerRepo;
 import lk.ijse.gdse66.spring.Back_End.repo.ItemRepo;
@@ -17,11 +15,14 @@ import lk.ijse.gdse66.spring.Back_End.service.OrderService;
 import org.modelmapper.ModelMapper;
 import org.modelmapper.TypeToken;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.crossstore.ChangeSetPersister;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 import java.util.Optional;
 
 @Service
@@ -148,6 +149,55 @@ public class OrderServiceImpl implements OrderService {
         List<Sales> todayOrders = repo.findTodayOrders();
         return mapper.map(todayOrders, new TypeToken<List<SalesDTO>>() {}.getType());
     }
+
+    @Override
+    public AdminPanelDTO getAdminPanelDetails() {
+
+        AdminPanel panel = getAdminPanel();
+        if (panel != null) {
+            return mapper.map(panel, AdminPanelDTO.class);
+        } else {
+            throw new RuntimeException();
+        }
+    }
+
+    @Override
+    public AdminPanel getAdminPanel() {
+        Map<String, Object> mostPurchasedItem = saleDetailsRepo.findMostPurchasedItem();
+        if (mostPurchasedItem != null && !mostPurchasedItem.isEmpty()) {
+            String itemCode = (String) mostPurchasedItem.get("itemCode");
+            BigDecimal totalQuantityBigDecimal = (BigDecimal) mostPurchasedItem.get("totalQuantity");
+
+            // Convert BigDecimal to Long
+            Long totalQuantity = totalQuantityBigDecimal != null ? totalQuantityBigDecimal.longValue() : null;
+
+            // Fetch item details from itemRepo
+            Item inventory = itemRepo.findById(itemCode).orElse(null);
+
+            // Calculate total buy cost
+            BigDecimal totalBuyBigDecimal = (BigDecimal) saleDetailsRepo.getTotalCost().get("totalCost");
+            Double totalBuy = totalBuyBigDecimal != null ? totalBuyBigDecimal.doubleValue() : null;
+
+            // Handle the case where totalSales is null
+            Double totalSales = saleDetailsRepo.getItmTotal();
+            if (totalSales == null) {
+                totalSales = 0.0; // Assign a default value
+            }
+
+            // Calculate profit
+            Double profit = totalSales - (totalBuy != null ? totalBuy : 0.0);
+
+            // Create and return AdminPanel object
+            return new AdminPanel("dash", totalSales, profit, itemCode, inventory != null ? inventory.getItemPicture() : null, totalQuantity != null ? totalQuantity.intValue() : null);
+        }
+        return null;
+    }
+
+    @Override
+    public Integer totalSalesCount() {
+        return repo.totalSalesCount();
+    }
+
 
 //    @Override
 //    public Double getTotalProfit() {

@@ -23,4 +23,6 @@ public interface ItemService {
     ItemDTO searchItemId(String id);
 
     Double getTotalProfit();
+
+    Integer getTotalItemCount();
 }

@@ -28,6 +28,8 @@ public class SaleDetails {
     @JoinColumn(name = "code",referencedColumnName = "code")
     private Item items;
 
+    private Double itmTotal;
+
  public String getOid() {
   return oid;
  }
@@ -74,5 +76,13 @@ public class SaleDetails {
 
  public void setItems(Item items) {
   this.items = items;
+ }
+
+ public Double getItmTotal() {
+  return itmTotal;
+ }
+
+ public void setItmTotal(Double itmTotal) {
+  this.itmTotal = itmTotal;
  }
 }

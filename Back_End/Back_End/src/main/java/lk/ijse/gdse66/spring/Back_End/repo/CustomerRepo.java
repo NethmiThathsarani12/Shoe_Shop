@@ -16,4 +16,7 @@ public interface CustomerRepo extends JpaRepository<Customer,String> {
 
     @Query(value = "SELECT * FROM customer e WHERE e.code = :code OR e.name = :name", nativeQuery = true)
     Customer findCustomerByCodeOrName(@Param("code") String code, @Param("name") String name);
+
+    @Query(value ="SELECT COUNT(c) FROM Customer c")
+    Integer totalCustomerCount();
 }

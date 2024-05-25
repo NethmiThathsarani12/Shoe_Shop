@@ -14,6 +14,9 @@ public interface OrderRepo extends JpaRepository<Sales,String> {
     @Query(value = "SELECT * FROM sales WHERE DATE(purchase_date) = CURDATE()", nativeQuery = true)
     List<Sales> findTodayOrders();
 
+    @Query(value ="SELECT COUNT(s) FROM Sales s")
+    Integer totalSalesCount();
+
 //    @Query("SELECT SUM(s.total) FROM Sales s")
 //    Double getTotalProfit();
 

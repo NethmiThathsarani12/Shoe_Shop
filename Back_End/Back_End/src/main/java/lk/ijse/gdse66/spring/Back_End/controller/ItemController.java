@@ -68,5 +68,11 @@ public class ItemController {
         return new ResponseUtil("200", "Total profit calculated successfully", totalProfit);
     }
 
+    @ResponseStatus(HttpStatus.OK)
+    @GetMapping(path = "/total")
+    public Integer getTotalItemCount() {
+        return itemService.getTotalItemCount();
+    }
+
 
 }

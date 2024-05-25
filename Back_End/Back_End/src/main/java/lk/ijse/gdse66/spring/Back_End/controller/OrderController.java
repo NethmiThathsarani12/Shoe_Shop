@@ -53,6 +53,12 @@ public class OrderController {
         return new ResponseUtil("OK", "Today's orders loaded successfully.", todayOrders);
     }
 
+    @ResponseStatus(HttpStatus.OK)
+    @GetMapping(path = "/total")
+    public Integer getTotalSalecount() {
+        return service.totalSalesCount();
+    }
+
 //    @ResponseStatus(HttpStatus.OK)
 //    @GetMapping("/totalProfit")
 //    public ResponseUtil getTotalProfit() {

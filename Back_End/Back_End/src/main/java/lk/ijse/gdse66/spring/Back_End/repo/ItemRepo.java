@@ -16,4 +16,7 @@ public interface ItemRepo extends JpaRepository<Item,String> {
 
     @Query("SELECT SUM(i.expectedProfit) FROM Item i")
     Double getTotalProfit();
+
+    @Query(value ="SELECT COUNT(c) FROM Item c")
+    Integer totalItemCount();
 }

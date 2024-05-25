@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <title>Admin Dashboard</title>
@@ -14,8 +15,9 @@
 
     <!-- Google Fonts -->
     <link href="https://fonts.gstatic.com" rel="preconnect">
-    <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,600,600i,700,700i|Nunito:300,300i,400,400i,600,600i,700,700i|Poppins:300,300i,400,400i,500,500i,600,600i,700,700i"
-          rel="stylesheet">
+    <link
+            href="https://fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,600,600i,700,700i|Nunito:300,300i,400,400i,600,600i,700,700i|Poppins:300,300i,400,400i,500,500i,600,600i,700,700i"
+            rel="stylesheet">
 
     <!-- Vendor CSS Files -->
     <link href="../assets/vendor/bootstrap-5.2.1-dist/css/bootstrap.min.css" rel="stylesheet">
@@ -31,32 +33,36 @@
 
 
 </head>
+<div id="preloader"></div>
 
-<body style="background-color: #FF5F00">
+<body style="background-color: white">
+<div class="image">
+    <img class="img" src="../assets/img/wel_shoe.gif">
+</div>
+
+<div class="right">
+    <h1 class="hello1">Hello Shoe</h1>
+    <h1 class="hello2">PVT</h1>
+
+    <div class="buttons">
+        <a href="#"><button class="btn">SignIn</button></a>
+        <a href="#"><button class="btn">LogIn</button></a>
+    </div>
+</div>
+
+<iframe width="560" height="315" src="https://www.youtube.com/embed/yJg-Y5byMMw?si=XITUxwJo2rpD_giz"
+        title="YouTube video player" frameborder="0"
+        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+        referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
 
 
-<header id="header" class="header fixed-top d-flex align-items-center" style="background-color: #FF5F00">
+<script>
+    var loader = document.getElementById("preloader");
+    window.addEventListener("load", function () {
+        loader.style.display = "none";
+    })
+</script>
 
-</header>
-
-
-<main id="main" class="main">
-    <section>
-        <div>
-            <img  class="img" src="../assets/img/wallpaperflare-cropped-removebg-preview.png">
-
-            <h1 class="hello1">Hello Shoe<br> PVT</h1>
-
-            <div class="mt-4 mb-3 d-grid gap-2 d-sm-flex justify-content-md-center">
-<!--                <button class="btn btn-success me-md-1" id="btnAddCustomer" type="button">Add</button>-->
-<!--                <button class="btn btn-warning me-md-1" id="btnUpdateCustomer" type="button">Update</button>-->
-                <button type="button" class="btn btn-danger me-md-1" id="btnMainS">SignUp</button>
-                <button type="button" class="btn btn-danger me-md-1" id="btnMainL">Login</button>
-
-            </div>
-        </div>
-    </section>
-</main>
 </body>
 
 </html>

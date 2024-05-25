@@ -25,4 +25,6 @@ CustomerDTO searchCusId(String code, String name);
     CustomDTO getSumCustomer();
 
     CustomerDTO searchCustId(String id);
+
+    Integer getTotalCustomerCount();
 }

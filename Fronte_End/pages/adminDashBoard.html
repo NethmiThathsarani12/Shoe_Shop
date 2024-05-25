@@ -4,7 +4,7 @@
 <head>
   <meta charset="UTF-8">
   <title>Admin Dashboard</title>
-  <link href="../assets/icon/logo.png" rel="icon">
+<!--  <link href="../assets/icon/logo.png" rel="icon">-->
 
   <meta content="hello shoe pvt" name="keywords">
   <meta content="This is hello shoe pvt web project" name="description">
@@ -132,20 +132,15 @@
 
 <!-- ======= Main ======= -->
 <main id="main" class="main">
-
   <div class="pageTitle" id="pageOne">
     <h1 style="font-size: 40px; color: black">Admin Panel</h1>
-
   </div>
   <!-- End Page Title -->
   <section class="section dashboard">
     <div class="row">
-
-
       <div class="col-lg-12">
         <div class="row">
-
-          <!-- Car Card -->
+          <!-- Total Sales Card -->
           <div class="col-xxl-4 col-md-6">
             <div class="card info-card car-card" style="background-color: #e6e6e6">
               <div class="card-body" style="background-color: #e6e6e6">
@@ -153,16 +148,13 @@
                 <div class="d-flex align-items-center">
                   <img src="../assets/img/money-bag.gif" height="70px" width="70px">
                   <div class="ps-3">
-                    <h6 id="todaySales">0</h6>
+                    <h6 id="totalSales">0</h6>
                   </div>
                 </div>
               </div>
             </div>
           </div>
-
-
-
-
+          <!-- Total Profit Card -->
           <div class="col-xxl-4 col-md-6">
             <div class="card info-card car-card" style="background-color: #e6e6e6">
               <div class="card-body" style="background-color: #e6e6e6">
@@ -176,29 +168,21 @@
               </div>
             </div>
           </div>
-
-
-
-
-
+          <!-- Most Sale Item QTY Card -->
           <div class="col-xxl-4 col-md-6">
             <div class="card info-card car-card" style="background-color: #e6e6e6">
               <div class="card-body" style="background-color: #e6e6e6">
-                <h5 class="card-title" style="color:black;">The most sale item QTY</h5>
+                <h5 class="card-title" style="color: black">The most sale item QTY</h5>
                 <div class="d-flex align-items-center">
                   <img src="../assets/img/menu.gif" height="70px" width="70px">
-<!--                  <div class="card-icon rounded-circle d-flex align-items-center justify-content-center">-->
-<!--&lt;!&ndash;                    <i class="bi bi-car-front-fill"></i>&ndash;&gt;-->
-
-<!--                  </div>-->
                   <div class="ps-3">
-                    <h6 id="reservedCarCount">0</h6>
+                    <h6 id="mostSaleItemQTY">0</h6>
                   </div>
                 </div>
               </div>
             </div>
           </div>
-
+          <!-- Total Loyalty Customer Card -->
           <div class="col-xxl-4 col-md-6">
             <div class="card info-card car-card" style="background-color: #e6e6e6">
               <div class="card-body" style="background-color: #e6e6e6">
@@ -206,30 +190,38 @@
                 <div class="d-flex align-items-center">
                   <img src="../assets/img/diagram.gif" height="70px" width="70px">
                   <div class="ps-3">
-                    <h6 id="totalCustomer">0</h6>
+                    <h6 id="totalCustomers">0</h6>
                   </div>
                 </div>
               </div>
             </div>
           </div>
 
-          <!-- End Car Card -->
+          <div class="col-xxl-4 col-md-6">
+            <div class="card info-card car-card" style="background-color: #e6e6e6">
+              <div class="card-body" style="background-color: #e6e6e6">
+                <h5 class="card-title" style="color: black">Total Items</h5>
+                <div class="d-flex align-items-center">
+                  <img src="../assets/img/diagram.gif" height="70px" width="70px">
+                  <div class="ps-3">
+                    <h6 id="totalItems">0</h6>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
         </div>
-        <img id="img" src="../assets/img/yello-shoe-removebg-preview.png" width="300px">
-
-        <div class="shadow-lg p-3 mb-5 bg-body-tertiary rounded" style="position: absolute; width: 400px; height: 60px; right: 50vh; bottom: 36vh"; id="divL">Item code</div>
-        <div class="shadow-lg p-3 mb-5 bg-body-tertiary rounded" style="position: absolute; width: 400px; height: 60px; right: 50vh; bottom: 26vh"; id="divL1">Item name</div>
-        <div class="shadow-lg p-3 mb-5 bg-body-tertiary rounded" style="position: absolute; width: 400px; height: 60px; right: 50vh; bottom: 16vh"; id="divL2">Sale price</div>
-        <div class="shadow-lg p-3 mb-5 bg-body-tertiary rounded" style="position: absolute; width: 400px; height: 60px; right: 50vh; bottom: 6vh"; id="div3">Sale QTY</div>
-<!--      <div>-->
-<!--        <h1>Item code</h1>-->
-<!--      </div>-->
-
+        <img id="panelImg" src="../assets/img/yello-shoe-removebg-preview.png" width="300px">
+        <div class="shadow-lg p-3 mb-5 bg-body-tertiary rounded" style="position: absolute; width: 400px; height: 60px; right: 30vh; bottom: 10vh;" id="itemCodeDiv">Item code: <span id="dashItemCode"></span></div>
+        <div class="shadow-lg p-3 mb-5 bg-body-tertiary rounded" style="position: absolute; width: 400px; height: 60px; right: 30vh; bottom: 0vh;" id="itemNameDiv">Item name: <span id="dashItemDesc"></span></div>
+        <div class="shadow-lg p-3 mb-5 bg-body-tertiary rounded" style="position: absolute; width: 400px; height: 60px; right: 30vh; bottom: -10vh;" id="itemSalePriceDiv">Sale price: <span id="dashItemSale"></span></div>
+        <div class="shadow-lg p-3 mb-5 bg-body-tertiary rounded" style="position: absolute; width: 400px; height: 60px; right: 30vh; bottom: -20vh;" id="itemSaleQTYDiv">Sale QTY: <span id="dashItemQTY"></span></div>
       </div>
-
     </div>
   </section>
 </main>
+
+
 <!-- End #main -->
 
 <!-- ======= Footer ======= -->

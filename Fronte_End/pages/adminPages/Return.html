@@ -343,98 +343,47 @@
                 <div class="card info-card" style="background-color: #e6e6e6">
                     <div class="search-bar mt-4">
                         <div class="search-form d-flex align-items-center">
-                            <input type="search" name="inv_id" id="search_inv_Id" placeholder="Search" title="Enter search keyword">
+                            <input type="search" name="return" id="search_return" placeholder="Search" title="Enter search keyword">
                             <button type="button" title="Search"><i class="bi bi-search"></i></button>
                         </div>
                     </div>
                     <!-- End Search Bar -->
                     <div class="col-12 m-3 p-1">
-                        <form class="row" id="InventoryForm">
-                            <section id="sec1Inventory" class="col-md-4 mt-3">
+                        <form class="row" id="returnForm">
+                            <section id="sec1Return" class="col-md-4 mt-3">
                                 <div class="mb-sm-0 mt-3">
-                                    <label class="form-label" for="item_code">Item Code</label>
-                                    <input type="text" name="code" class="form-control" id="item_code"
-                                           placeholder="Item Code">
+                                    <label class="form-label" for="order_code">Order Code</label>
+                                    <input type="text" name="code" class="form-control" id="order_code"
+                                           >
                                     <span class="control-error"></span>
                                 </div>
                                 <div class="mb-sm-0 mt-3">
-                                    <label class="form-label" for="inv_Item_Desc">Item Desc</label>
-                                    <input type="text" name="Name" class="form-control" id="inv_Item_Desc"
-                                           placeholder="Item Desc">
-                                    <span class="control-error"></span>
-                                </div>
-                                <div class="mb-sm-0 mt-3">
-                                    <label class="form-label" for="inv_qty">Item Desc</label>
-                                    <input type="text" name="qty" class="form-control" id="inv_qty"
-                                           placeholder="Item QTY">
-                                    <span class="control-error"></span>
-                                </div>
-                                <div class="mb-sm-0 mt-3 col-md-11">
-                                    <label class="form-label" for="inv_Item_pic">Item picture</label>
-                                    <input class="form-control" id="inv_Item_pic" type="file" name="itemPicture">
-                                    <span class="control-error"></span>
-                                </div>
-                                <div class="mb-sm-0 mt-3">
-                                    <label class="form-label" for="inv_Category">Category</label>
-                                    <select class="form-control" id="inv_Category" name="shoeType">
-                                        <option value="MEN">MEN</option>
-                                        <option value="WOMEN">WOMEN</option>
+                                    <label class="form-label" for="option">Option</label>
+                                    <select class="form-control" id="option" name="shoeType">
+                                        <option value="MEN">FullOrder</option>
+                                        <option value="WOMEN">OneItem</option>
 
                                     </select>
                                     <span class="control-error"></span>
                                 </div>
                                 <div class="mb-sm-0 mt-3">
-                                    <label class="form-label" for="size">Category</label>
-                                    <input type="text" name="size" class="form-control" id="size"
-                                           placeholder="SIZE">
+                                    <label class="form-label" for="return_item_code">Item code</label>
+                                    <input type="text" name="code" class="form-control" id="return_item_code"
+                                           >
                                     <span class="control-error"></span>
                                 </div>
-                                <div class="mb-sm-0">
-                                    <label class="form-label" for="inv_Supplier_Code">Supplier Code</label>
-                                    <input type="text" name="supplier" class="form-control"  id="inv_Supplier_Code"
-                                           placeholder="Supplier name">
+                                <div class="mb-sm-0 mt-3">
+                                    <label class="form-label" for="inv_size">Item size</label>
+                                    <input type="text" name="size" class="form-control" id="inv_size"
+                                           placeholder="Item QTY">
                                     <span class="control-error"></span>
                                 </div>
-                                <div class="mb-sm-0">
-                                    <label class="form-label" for="inv_Supplier_name">Supplier name</label>
-                                    <input type="text" name="supName" class="form-control"  id="inv_Supplier_name"
-                                           placeholder="Supplier name">
-                                    <span class="control-error"></span>
-                                </div>
+
 
                             </section>
 
                             <section id="sec2Inventory" class="col-md-4 mt-3">
-                                <div class="mb-sm-0">
-                                    <label class="form-label" for="inv_Unit_price">Unit price-Sale</label>
-                                    <input type="text" name="salePrice" class="form-control" id="inv_Unit_price"
-                                           placeholder="Unit price-Sale">
-                                    <span class="control-error"></span>
-                                </div>
-                                <div class="mb-sm-0 mt-3">
-                                    <label class="form-label" for="unit_price_Buy">unit price-Buy</label>
-                                    <input type="text" name="buyPrice" class="form-control" id="unit_price_Buy"
-                                           placeholder="unit price-Buy">
-                                    <span class="control-error"></span>
-                                </div>
-                                <div class="mb-sm-0 mt-3">
-                                    <label class="form-label" for="Expected_Profit">Expected Profit</label>
-                                    <input type="text" name="expectedProfit" class="form-control"  id="Expected_Profit">
-                                    <span class="control-error"></span>
-                                </div>
-                                <div class="mb-sm-0 mt-3">
-                                    <label class="form-label" for="Profit_margin">Profit margin</label>
-                                    <input type="text" name="profitMargin" class="form-control"  id="Profit_margin">
-                                    <span class="control-error"></span>
-                                </div>
-                                <div class="mb-sm-0 mt-3">
-                                    <label class="form-label" for="Inv_Status">Status</label>
-                                    <input type="text" name="status" class="form-control" id="Inv_Status">
-                                    <span class="control-error"></span>
-                                </div>
-                                <img id="img" src="../../assets/img/nethmi.jpg" width="300px">
 
-                                <input type="file" id="imgInput" accept="image/*" style="display: none">
 
                             </section>
 
@@ -462,17 +411,10 @@
                                 <table class="table table-light table-striped table-bordered table-hover">
                                     <thead class="text-dark table-dark text-white text-center  table-bordered sticky-top">
                                     <tr>
-                                        <th scope="col">Item code</th>
-                                        <th scope="col">Item Desc</th>
-                                        <th scope="col">QTY</th>
-                                        <th scope="col">Category</th>
-                                        <th scope="col">Size</th>
-                                        <th scope="col">Supplier Code</th>
-                                        <th scope="col">Supplier name</th>
-                                        <th scope="col">Unit price-Sale</th>
-                                        <th scope="col">unit price-Buy</th>
-                                        <th scope="col">Expected Profit</th>
-                                        <th scope="col">Profit margin</th>
+                                        <th scope="col">Order Id</th>
+                                        <th scope="col">Purchase Date</th>
+                                        <th scope="col">Cashier Name</th>
+                                        <th scope="col">Total Price</th>
                                         <th scope="col">Status</th>
                                     </tr>
                                     </thead>

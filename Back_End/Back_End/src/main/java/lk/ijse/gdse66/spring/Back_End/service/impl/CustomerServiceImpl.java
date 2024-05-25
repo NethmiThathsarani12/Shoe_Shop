@@ -100,4 +100,9 @@ public class CustomerServiceImpl implements CustomerService {
         }
         return mapper.map(customer, CustomerDTO.class);
     }
+
+    @Override
+    public Integer getTotalCustomerCount() {
+        return repo.totalCustomerCount();
+    }
 }

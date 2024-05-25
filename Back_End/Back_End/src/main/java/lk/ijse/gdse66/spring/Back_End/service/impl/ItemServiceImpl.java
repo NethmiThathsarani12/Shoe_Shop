@@ -98,4 +98,9 @@ public class ItemServiceImpl implements ItemService {
         Double totalProfit = repo.getTotalProfit();
         return totalProfit != null ? totalProfit : 0.0;
     }
+
+    @Override
+    public Integer getTotalItemCount() {
+        return repo.totalItemCount();
+    }
 }

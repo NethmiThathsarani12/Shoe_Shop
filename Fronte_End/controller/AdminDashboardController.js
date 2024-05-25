@@ -1,78 +1,168 @@
 const adminBaseUrl = "http://localhost:8080/Back_End/";
 
+setAdminPanel();
 
-    performAuthenticatedRequest();
-    setTotalProfit();
+// function performAuthenticatedRequest() {
+//     // Placeholder for authentication logic
+// }
 
-    function performAuthenticatedRequest() {
+function getAdminPanel() {
+    return new Promise(function (resolve, reject) {
+        performAuthenticatedRequest();
         const accessToken = localStorage.getItem('accessToken');
+        console.log(accessToken);
         $.ajax({
-            url: adminBaseUrl + "orders/TodayOrders",
+            url: adminBaseUrl + "api/v1/panel/getAll",
             method: "GET",
             headers: {
                 'Authorization': 'Bearer ' + accessToken
             },
-            contentType: "application/json",
             dataType: "json",
-            success: function(resp) {
-                console.log("Response received:", resp); // Log the response for debugging
-                if (resp.state === "OK") { // Check for 'state' instead of 'status'
-                    let num = resp.data.length; // Assuming 'data' is an array of today's orders
-                    $("#todaySales").text(num);
-                } else {
-                    console.error("Unexpected response format:", resp);
-                }
+            success: function (res, textStatus, xhr) {
+                console.log(res);
+                resolve(res);
             },
-            error: function(ob, statusText, error) {
-                console.error("Error fetching today's sales:", statusText, error);
+            error: function (ob, textStatus, error) {
+                resolve(error);
             }
         });
-
-
-    }
-function setTotalProfit() {
-    const accessToken = localStorage.getItem('accessToken');
-    $.ajax({
-        url: adminBaseUrl + "item/totalProfit",
-        method: "GET",
-        headers: {
-            'Authorization': 'Bearer ' + accessToken
-        },
-        contentType: "application/json",
-        dataType: "json",
-        success: function(resp) {
-            console.log("Response received:", resp); // Log the response for debugging
-            if (resp.status === "200") { // Check for 'status' of '200' as expected
-                let totalProfit = resp.data; // Total profit value
-                $("#totalProfit").text(totalProfit); // Update the element with id="totalProfit" to display the total profit
-            } else {
-                console.error("Unexpected response format:", resp);
-            }
-        },
-        error: function(ob, statusText, error) {
-            console.error("Error fetching total profit:", statusText, error);
-        }
     });
 }
 
+function getOrderCount() {
+    return new Promise(function (resolve, reject) {
+        performAuthenticatedRequest();
+        const accessToken = localStorage.getItem('accessToken');
+        console.log(accessToken);
+        $.ajax({
+            url: adminBaseUrl + "orders/total",
+            method: "GET",
+            headers: {
+                'Authorization': 'Bearer ' + accessToken
+            },
+            dataType: "json",
+            success: function (res, textStatus, xhr) {
+                resolve(res);
+            },
+            error: function (ob, textStatus, error) {
+                resolve(error);
+            }
+        });
+    });
+}
 
-$("#totalCustomer").val("00");
-performAuthenticatedRequest();
-const accessToken = localStorage.getItem('accessToken');
-$.ajax({
-    url: adminBaseUrl + "customer/customerCount",
-    method: "GET",
-    headers: {
-        'Authorization': 'Bearer ' + accessToken
-    },
-    contentType: "application/json",
-    dataType: "json",
-    success: function (resp) {
-        let num = resp.count;
-        $("#totalCustomer").text(num);
+function getCustomerCount() {
+    return new Promise(function (resolve, reject) {
+        performAuthenticatedRequest();
+        const accessToken = localStorage.getItem('accessToken');
+        console.log(accessToken);
+        $.ajax({
+            url: adminBaseUrl + "customer/total",
+            method: "GET",
+            headers: {
+                'Authorization': 'Bearer ' + accessToken
+            },
+            dataType: "json",
+            success: function (res, textStatus, xhr) {
+                resolve(res);
+            },
+            error: function (ob, textStatus, error) {
+                resolve(error);
+            }
+        });
+    });
+}
 
-    },
-    error: function (ob, statusText, error) {
+function getItemCount() {
+    return new Promise(function (resolve, reject) {
+        performAuthenticatedRequest();
+        const accessToken = localStorage.getItem('accessToken');
+        console.log(accessToken);
+        $.ajax({
+            url: adminBaseUrl + "item/total",
+            method: "GET",
+            headers: {
+                'Authorization': 'Bearer ' + accessToken
+            },
+            dataType: "json",
+            success: function (res, textStatus, xhr) {
+                resolve(res);
+            },
+            error: function (ob, textStatus, error) {
+                resolve(error);
+            }
+        });
+    });
+}
 
-    }
-});
+function searchItem(code) {
+    return new Promise(function (resolve, reject) {
+        performAuthenticatedRequest();
+        const accessToken = localStorage.getItem('accessToken');
+        console.log(accessToken);
+        $.ajax({
+            url: adminBaseUrl + "item/searchItemId?code=" + code,
+            method: "GET",
+            headers: {
+                'Authorization': 'Bearer ' + accessToken
+            },
+            dataType: "json",
+            success: function (res, textStatus, xhr) {
+                console.log(res);
+                resolve(res);
+            },
+            error: function (ob, textStatus, error) {
+                resolve(error);
+            }
+        });
+    });
+}
+
+function setAdminPanel() {
+    getAdminPanel().then(function (value) {
+        if (Object.keys(value).length !== 0) {
+            searchItem(value.mostSaleItem).then(function (itm) {
+                if (Object.keys(itm).length !== 0) {
+                    $("#panelImg").attr('src', value.mostSaleItemPicture);
+                    $("#dashItemCode").text(value.mostSaleItem);
+                    $("#dashItemDesc").text(itm.name);
+                    $("#dashItemSale").text("$" + itm.salePrice);
+                    $("#dashItemQTY").text(value.mostSaleItemQuantity);
+
+                    $("#totalSales").text("$" + value.totalSales);
+                    $("#totalProfit").text("$" + value.totalProfit);
+
+                    getOrderCount().then(function (count) {
+                        $("#totalOrders").text(count);
+                    });
+                }
+            });
+        } else {
+            $("#panelImg").attr('src', "../assets/img/yello-shoe-removebg-preview-png;base64"+value.pic);
+            $("#dashItemCode").text("");
+            $("#dashItemDesc").text("");
+            $("#dashItemSale").text("");
+            $("#dashItemQTY").text("");
+
+            $("#totalSales").text("$0.00");
+            $("#totalProfit").text("$0.00");
+            $("#totalOrders").text(0);
+        }
+    });
+
+    getCustomerCount().then(function (count) {
+        if (count !== 0 || count !== null) {
+            $("#totalCustomers").text(count);
+        } else {
+            $("#totalCustomers").text("0");
+        }
+    });
+
+    getItemCount().then(function (count) {
+        if (count !== 0 || count !== null) {
+            $("#totalItems").text(count);
+        } else {
+            $("#totalItems").text("0");
+        }
+    });
+}

@@ -80,5 +80,11 @@ public class CustomerController {
         return service.getSumCustomer();
     }
 
+    @ResponseStatus(HttpStatus.OK)
+    @GetMapping(path = "/total")
+    public Integer getTotalCustomerCount() {
+        return service.getTotalCustomerCount();
+    }
+
 }
 
