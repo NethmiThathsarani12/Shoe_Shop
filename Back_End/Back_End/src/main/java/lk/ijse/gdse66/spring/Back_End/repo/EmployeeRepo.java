@@ -19,5 +19,8 @@ public interface EmployeeRepo extends JpaRepository<Employee,String> {
     @Query(value = "SELECT * FROM employee e WHERE e.code = :code OR e.name = :name", nativeQuery = true)
     Employee findEmployeeByCodeOrName(@Param("code") String code, @Param("name") String name);
 
+    @Query(value ="SELECT COUNT(e) FROM Employee e")
+    Integer totalEmployeeCount();
+
 
 }

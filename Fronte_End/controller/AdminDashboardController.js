@@ -73,6 +73,29 @@ function getCustomerCount() {
     });
 }
 
+
+function getEmployeeCount() {
+    return new Promise(function (resolve, reject) {
+        performAuthenticatedRequest();
+        const accessToken = localStorage.getItem('accessToken');
+        console.log(accessToken);
+        $.ajax({
+            url: adminBaseUrl + "employee/total",
+            method: "GET",
+            headers: {
+                'Authorization': 'Bearer ' + accessToken
+            },
+            dataType: "json",
+            success: function (res, textStatus, xhr) {
+                resolve(res);
+            },
+            error: function (ob, textStatus, error) {
+                resolve(error);
+            }
+        });
+    });
+}
+
 function getItemCount() {
     return new Promise(function (resolve, reject) {
         performAuthenticatedRequest();
@@ -133,7 +156,7 @@ function setAdminPanel() {
                     $("#totalProfit").text("$" + value.totalProfit);
 
                     getOrderCount().then(function (count) {
-                        $("#totalOrders").text(count);
+                        $("#totalSales").text(count);
                     });
                 }
             });
@@ -146,7 +169,7 @@ function setAdminPanel() {
 
             $("#totalSales").text("$0.00");
             $("#totalProfit").text("$0.00");
-            $("#totalOrders").text(0);
+            $("#totalSales").text(0);
         }
     });
 
@@ -163,6 +186,22 @@ function setAdminPanel() {
             $("#totalItems").text(count);
         } else {
             $("#totalItems").text("0");
+        }
+    });
+
+    getOrderCount().then(function (count) {
+        if (count !== 0 || count !== null) {
+            $("#totalSales").text(count);
+        } else {
+            $("#totalSales").text("0");
+        }
+    });
+
+    getEmployeeCount().then(function (count) {
+        if (count !== 0 || count !== null) {
+            $("#totalEmployee").text(count);
+        } else {
+            $("#totalEmployee").text("0");
         }
     });
 }

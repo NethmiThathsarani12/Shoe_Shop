@@ -21,5 +21,7 @@ EmployeeDTO searchEmpId(String code, String name);
     @ResponseBody
     CustomDTO getSumEmployee();
 
+    Integer getTotalEmployeeCount();
+
 
 }
