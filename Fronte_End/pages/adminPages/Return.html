@@ -352,37 +352,44 @@
                         <form class="row" id="returnForm">
                             <section id="sec1Return" class="col-md-4 mt-3">
                                 <div class="mb-sm-0 mt-3">
-                                    <label class="form-label" for="order_code">Order Code</label>
-                                    <input type="text" name="code" class="form-control" id="order_code"
-                                           >
+                                    <label class="form-label" for="return_order_code">Order Code</label>
+                                    <input type="text" name="code" class="form-control" id="return_order_code">
                                     <span class="control-error"></span>
                                 </div>
+
+
                                 <div class="mb-sm-0 mt-3">
                                     <label class="form-label" for="option">Option</label>
                                     <select class="form-control" id="option" name="shoeType">
-                                        <option value="MEN">FullOrder</option>
-                                        <option value="WOMEN">OneItem</option>
+                                        <option value="FullOrder">FullOrder</option>
+                                        <option value="OneItem">OneItem</option>
 
                                     </select>
                                     <span class="control-error"></span>
                                 </div>
-                                <div class="mb-sm-0 mt-3">
+                                <div class="mb-sm-0 mt-3 d-none" id="return_code">
                                     <label class="form-label" for="return_item_code">Item code</label>
-                                    <input type="text" name="code" class="form-control" id="return_item_code"
-                                           >
-                                    <span class="control-error"></span>
-                                </div>
-                                <div class="mb-sm-0 mt-3">
-                                    <label class="form-label" for="inv_size">Item size</label>
-                                    <input type="text" name="size" class="form-control" id="inv_size"
+                                    <input type="text" name="size" class="form-control" id="return_item_code"
                                            placeholder="Item QTY">
                                     <span class="control-error"></span>
                                 </div>
+
+                                <div class="mb-sm-0 mt-3 d-none" id="return_qty">
+                                    <label class="form-label" for="return_item_qty">Item qty</label>
+                                    <input type="text" name="code" class="form-control" id="return_item_qty"
+                                           >
+                                    <span class="control-error"></span>
+                                </div>
+
+
+
 
 
                             </section>
 
                             <section id="sec2Inventory" class="col-md-4 mt-3">
+
+
 
 
                             </section>
@@ -392,10 +399,8 @@
                             </section>
                             <section>
                                 <div class="mt-4 mb-3 d-grid gap-2 d-sm-flex justify-content-md-center">
-                                    <button class="btn btn-success me-md-1" id="btnAddInventory" type="button">Add</button>
-                                    <button class="btn btn-warning me-md-1" id="btnUpdateInventory" type="button">Update</button>
-                                    <button type="button" class="btn btn-danger me-md-1" id="btnDeleteInventory">Delete</button>
-                                    <button type="button" class="btn btn-primary me-md-1" id="btnClearInventory">Clear</button>
+                                    <button class="btn btn-success me-md-1" id="btnAddReturn" type="button">Return</button>
+                                    <button type="button" class="btn btn-primary me-md-1" id="btnClearReturn">Clear</button>
 
                                 </div>
                             </section>
@@ -412,13 +417,13 @@
                                     <thead class="text-dark table-dark text-white text-center  table-bordered sticky-top">
                                     <tr>
                                         <th scope="col">Order Id</th>
-                                        <th scope="col">Purchase Date</th>
-                                        <th scope="col">Cashier Name</th>
-                                        <th scope="col">Total Price</th>
+                                        <th scope="col">Item code</th>
+                                        <th scope="col">Order qty</th>
+                                        <th scope="col">Return qty</th>
                                         <th scope="col">Status</th>
                                     </tr>
                                     </thead>
-                                    <tbody id="inventoryTable"></tbody>
+                                    <tbody id="returnTable"></tbody>
                                 </table>
                             </div>
                         </div>
@@ -431,6 +436,13 @@
     <!-- End Customer Manage -->
 
 </main>
+<script src="../../assets/vendor/apexcharts/apexcharts.min.js"></script>
+<script src="../../assets/vendor/bootstrap-5.2.1-dist/js/bootstrap.bundle.min.js"></script>
+<script src="../../assets/vendor/jQuery/jquery-3.6.1.min.js "></script>
+<script rel="script" src="../../assets/vendor/sweetalert2-11.6.16/sweetalert2.min.js"></script>
+
+<script src="../../controller/ReturnController.js"></script>
+<script src="../../controller/loginController.js"></script>
 
 </body>
 </html>

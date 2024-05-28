@@ -146,7 +146,7 @@ function setAdminPanel() {
         if (Object.keys(value).length !== 0) {
             searchItem(value.mostSaleItem).then(function (itm) {
                 if (Object.keys(itm).length !== 0) {
-                    $("#panelImg").attr('src', value.mostSaleItemPicture);
+                    $("#panelImg").attr('src', value.itemPicture);
                     $("#dashItemCode").text(value.mostSaleItem);
                     $("#dashItemDesc").text(itm.name);
                     $("#dashItemSale").text("$" + itm.salePrice);

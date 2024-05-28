@@ -1,9 +1,11 @@
 package lk.ijse.gdse66.spring.Back_End.repo;
 
 import lk.ijse.gdse66.spring.Back_End.entity.SaleDetails;
+import lk.ijse.gdse66.spring.Back_End.entity.Sales;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 
+import java.util.List;
 import java.util.Map;
 
 public interface OrderDetailsRepo extends JpaRepository<SaleDetails,String> {
@@ -36,4 +38,9 @@ public interface OrderDetailsRepo extends JpaRepository<SaleDetails,String> {
 
     @Query("SELECT SUM(sd.items.buyPrice * sd.qty) AS totalCost FROM SaleDetails sd")
     Map<String, Object> getTotalCost();
+
+
+    List<SaleDetails> findAllBySale(Sales sales);
+
+    List<SaleDetails> findAllByStatus(String status);
 }

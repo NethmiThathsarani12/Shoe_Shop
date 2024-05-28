@@ -20,6 +20,9 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.math.BigDecimal;
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
+import java.time.format.DateTimeParseException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
@@ -50,6 +53,7 @@ public class OrderServiceImpl implements OrderService {
             throw new RuntimeException("Order Id " + dto.getOid() + " already exists. Please enter another id!");
         }
 
+        dto.setStatus("ACTIVE");
         Sales sales = mapper.map(dto, Sales.class);
         Sales save = repo.save(sales);
 
@@ -74,6 +78,7 @@ public class OrderServiceImpl implements OrderService {
             Item item = itemRepo.findById(sd.getItemCode()).orElseThrow(() ->
                     new RuntimeException("Item not found with code: " + sd.getItemCode())
             );
+            sd.setStatus("ACTIVE");
             item.setQty(item.getQty() - sd.getQty());
             itemRepo.save(item);
 
@@ -196,6 +201,69 @@ public class OrderServiceImpl implements OrderService {
     @Override
     public Integer totalSalesCount() {
         return repo.totalSalesCount();
+    }
+
+    @Override
+    public boolean canBeReturned(String orderNo) {
+        Sales sales = repo.findById(orderNo).orElse(null);
+        if (sales == null) {
+            // Handle case where order with given orderNo does not exist
+            return false;
+        }
+
+        // Assuming the purchase date is stored in a standard format like "yyyy-MM-dd"
+        String purchaseDateStr = sales.getPurchaseDate();
+        String[] split = purchaseDateStr.split(" ");
+        String date = split[0];
+        System.out.println(date);
+        LocalDate purchaseDate;
+
+        try {
+            purchaseDate = LocalDate.parse(date);
+        } catch (DateTimeParseException e) {
+            // Handle parsing error, e.g., log it and return false
+            System.err.println("Failed to parse purchase date: " + e.getMessage());
+            return false;
+        }
+
+        // Calculate the date three days from the purchase date
+        LocalDate threeDaysFromPurchase = purchaseDate.plusDays(3);
+
+        // Get the current date
+        LocalDate currentDate = LocalDate.now();
+
+        // Check if the current date is within three days from the purchase date
+        return !currentDate.isAfter(threeDaysFromPurchase);
+    }
+
+    @Override
+    public ArrayList<SaleDetailsDTO> returnFullOrder(String id) {
+
+        Sales oid = repo.findByOid(id);
+        if (!oid.getStatus().equals("RETURNED")){
+            oid.setStatus("RETURNED");
+            Sales sales = new Sales();
+            sales.setOid(id);
+            System.out.println(sales.getOid());
+            List<SaleDetails> allByOid = saleDetailsRepo.findAllBySale(sales);
+            for (SaleDetails saleDetails:allByOid) {
+                int qty = saleDetails.getQty();
+                saleDetails.setReturn_qty(qty);
+                saleDetails.setQty(0);
+                Item item = itemRepo.findByCode(saleDetails.getItemCode());
+                item.setQty(item.getQty()+qty);
+                saleDetails.setStatus("RETURNED");
+            }
+
+            return mapper.map(allByOid,new TypeToken<List<SaleDetailsDTO>>(){}.getType());
+        }else {
+            throw new  RuntimeException("This order already return");
+        }
+    }
+
+    @Override
+    public ArrayList<SaleDetailsDTO> loadReturnOrders() {
+        return mapper.map(saleDetailsRepo.findAllByStatus("RETURNED"),new TypeToken<ArrayList<SaleDetailsDTO>>(){}.getType());
     }
 
 

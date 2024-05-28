@@ -59,6 +59,27 @@ public class OrderController {
         return service.totalSalesCount();
     }
 
+    @ResponseStatus(HttpStatus.CREATED)
+    @GetMapping("/{code}")
+    public ResponseUtil orderCanBeReturned(@PathVariable("code") String code){
+        return new ResponseUtil("200","Successfully Fetch Can Be Returned",
+                service.canBeReturned(code));
+    }
+
+    @ResponseStatus(HttpStatus.CREATED)
+    @PostMapping("/{code}")
+    public ResponseUtil returnFullOrder(@PathVariable("code")String code){
+        return new ResponseUtil("200","Successfully Fetch Can Be Returned", service.returnFullOrder(code));
+
+    }
+
+    @ResponseStatus(HttpStatus.CREATED)
+    @GetMapping("/loadData")
+    public ResponseUtil loadOrderReturn(){
+        return new ResponseUtil("200","Successfully Fetch Can Be Returned",
+                service.loadReturnOrders());
+    }
+
 //    @ResponseStatus(HttpStatus.OK)
 //    @GetMapping("/totalProfit")
 //    public ResponseUtil getTotalProfit() {

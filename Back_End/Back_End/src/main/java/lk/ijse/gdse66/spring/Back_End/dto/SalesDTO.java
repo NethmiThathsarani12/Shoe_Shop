@@ -22,6 +22,7 @@ public class SalesDTO {
     private Integer totalPoints;
     private String cashier;
     private CustomerDTO customer;
+    private String status;
 
     private List<SaleDetailsDTO> saleDetails = new ArrayList<>();
 }

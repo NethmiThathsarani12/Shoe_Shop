@@ -17,6 +17,8 @@ public interface OrderRepo extends JpaRepository<Sales,String> {
     @Query(value ="SELECT COUNT(s) FROM Sales s")
     Integer totalSalesCount();
 
+    Sales findByOid(String id);
+
 //    @Query("SELECT SUM(s.total) FROM Sales s")
 //    Double getTotalProfit();
 

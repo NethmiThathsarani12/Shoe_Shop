@@ -337,8 +337,6 @@ $("#search_inv_Id").on("keypress", function (event) {
 });
 
 
-
-
 function profitMargin() {
     let salePrice = parseFloat($("#inv_Unit_price").val());
     let buyPrice = parseFloat($("#unit_price_Buy").val());

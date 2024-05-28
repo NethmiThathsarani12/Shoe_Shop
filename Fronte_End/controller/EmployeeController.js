@@ -61,7 +61,7 @@ $("#btnAddEmployee").click(function () {
         }
 
     let formData = $("#employeeForm").serializeArray();
-    // formData.push({name: "pic", value: imageUrl});
+    formData.push({name: "pic", value: imageUrl});
 
     performAuthenticatedRequest();
     const accessToken = localStorage.getItem('accessToken');
@@ -281,6 +281,12 @@ function blindClickEventsE() {
 //update employee
 
 $("#btnUpdateEmployee").click(function () {
+
+    var image = $("#img");
+    var imageUrl = image.attr('src');
+    if (!imageUrl || imageUrl === '../../assets/img/nethmi.jpg') {
+        // Handle error scenario
+    }
     let formData = $("#employeeForm").serialize();
     // let empId = $("#Employee_code").val();
     // formData += "&code=" + empId;

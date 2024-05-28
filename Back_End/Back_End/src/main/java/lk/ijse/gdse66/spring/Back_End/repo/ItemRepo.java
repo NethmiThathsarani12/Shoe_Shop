@@ -19,4 +19,6 @@ public interface ItemRepo extends JpaRepository<Item,String> {
 
     @Query(value ="SELECT COUNT(c) FROM Item c")
     Integer totalItemCount();
+
+    Item findByCode(String id);
 }

@@ -1,5 +1,6 @@
 package lk.ijse.gdse66.spring.Back_End.entity;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -20,6 +21,7 @@ public class SaleDetails {
     private int qty;
     private double unitPrice;
 
+    @JsonBackReference
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "oid",referencedColumnName = "oid",insertable = false, updatable = false)
     private Sales sale;
@@ -29,6 +31,26 @@ public class SaleDetails {
     private Item items;
 
     private Double itmTotal;
+
+    private String status;
+
+    private int return_qty;
+
+ public int getReturn_qty() {
+  return return_qty;
+ }
+
+ public void setReturn_qty(int return_qty) {
+  this.return_qty = return_qty;
+ }
+
+ public String getStatus() {
+  return status;
+ }
+
+ public void setStatus(String status) {
+  this.status = status;
+ }
 
  public String getOid() {
   return oid;

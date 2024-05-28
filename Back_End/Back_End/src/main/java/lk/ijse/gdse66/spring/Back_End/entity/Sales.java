@@ -1,5 +1,6 @@
 package lk.ijse.gdse66.spring.Back_End.entity;
 
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import jakarta.persistence.*;
 import lk.ijse.gdse66.spring.Back_End.enums.Payment;
 import lombok.AllArgsConstructor;
@@ -27,6 +28,9 @@ public class Sales {
     @JoinColumn(name = "customer_name",referencedColumnName = "code", nullable = true)
     private Customer customer;
 
+    private String status;
+
+    @JsonManagedReference
     @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY, mappedBy = "sale")
     private List<SaleDetails> saleDetails = new ArrayList<>();
 
@@ -60,6 +64,14 @@ public class Sales {
 
     public List<SaleDetails> getSaleDetails() {
         return saleDetails;
+    }
+
+    public String getStatus() {
+        return status;
+    }
+
+    public void setStatus(String status) {
+        this.status = status;
     }
 
     public void setOid(String oid) {

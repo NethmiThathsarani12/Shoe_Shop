@@ -35,5 +35,11 @@ public interface OrderService {
 
     Integer totalSalesCount();
 
+    boolean canBeReturned(String orderNo);
+
+    ArrayList<SaleDetailsDTO> returnFullOrder(String id);
+
+    ArrayList<SaleDetailsDTO> loadReturnOrders();
+
 //    Double getTotalProfit();
 }
