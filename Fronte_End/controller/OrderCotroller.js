@@ -359,7 +359,10 @@ $("#btnPurchase").click(function () {
             oid: $("#oid").val(),
             itemCode: $("#tblAddToCart tr").children(':nth-child(1)')[i].innerText,
             qty: $("#tblAddToCart tr").children(':nth-child(4)')[i].innerText,
-            unitPrice: $("#tblAddToCart tr").children(':nth-child(5)')[i].innerText
+            unitPrice: $("#tblAddToCart tr").children(':nth-child(5)')[i].innerText,
+            // return_qty: $("#tblAddToCart tr").children(':nth-child(6)')[i].innerText
+
+
         }
         SaleDetails.push(detailOb);
     }

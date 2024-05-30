@@ -69,6 +69,7 @@ function loadAllOrderDetails() {
                 let itemCode = i.itemCode;
                 let qty = i.qty;
                 let unitPrice = i.unitPrice;
+                // let return_qty = i.return_qty;
 
                 let row = "<tr><td>" + oid + "</td><td>" + itemCode + "</td><td>" + qty + "</td><td>" + unitPrice + "</td></tr>";
                 $("#tblOrderDetails").append(row);

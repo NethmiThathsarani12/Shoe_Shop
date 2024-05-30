@@ -1,5 +1,6 @@
 package lk.ijse.gdse66.spring.Back_End.repo;
 
+import lk.ijse.gdse66.spring.Back_End.entity.Item;
 import lk.ijse.gdse66.spring.Back_End.entity.SaleDetails;
 import lk.ijse.gdse66.spring.Back_End.entity.Sales;
 import org.springframework.data.jpa.repository.JpaRepository;
@@ -43,4 +44,10 @@ public interface OrderDetailsRepo extends JpaRepository<SaleDetails,String> {
     List<SaleDetails> findAllBySale(Sales sales);
 
     List<SaleDetails> findAllByStatus(String status);
+
+    boolean existsByOidAndItemCode(String oid,String itemCode);
+
+    SaleDetails findByOidAndItemCode(String oid,String itemCode);
+
+    List<SaleDetails> findAllByOid(String oid);
 }

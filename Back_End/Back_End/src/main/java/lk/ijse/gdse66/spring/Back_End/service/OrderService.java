@@ -41,5 +41,7 @@ public interface OrderService {
 
     ArrayList<SaleDetailsDTO> loadReturnOrders();
 
+    void returnOneOrder(SaleDetailsDTO saleDetailsDTO);
+
 //    Double getTotalProfit();
 }

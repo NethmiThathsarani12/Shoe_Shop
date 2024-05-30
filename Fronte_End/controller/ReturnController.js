@@ -29,8 +29,20 @@ $('#btnAddReturn').click(function (){
             if (resp.data){
             returnOrder(code);
 
+                // Swal.fire({
+                //     icon: "success",
+                //     title: "Returned the full order",
+                //     showConfirmButton: true,
+                //     timer: 2500
+                // });
+
             }else {
-                alert("can not return")
+                Swal.fire({
+                    icon: "error",
+                    title: "Can not return. It is expire to three days",
+                    showConfirmButton: false,
+                    timer: 2500
+                });
             }
 
         },
@@ -43,23 +55,53 @@ $('#btnAddReturn').click(function (){
 function returnOrder(code) {
     performAuthenticatedRequest();
     const accessToken = localStorage.getItem('accessToken');
-    $.ajax({
-        url: returnBaseUrl + "orders/" + code,
-        method: "POST",
-        headers: {
-            'Authorization': 'Bearer ' + accessToken
-        },
-        contentType: "application/json",
-        dataType: "json",
-        success: function (resp) {
-            loadReturnOrders();
-        },
-        error: function (ob, statusText, error) {
-            let message = JSON.parse(error.responseText).message;
-            console.log(message);
+    if ($("#option").val()==='FullOrder'){
+
+        $.ajax({
+            url: returnBaseUrl + "orders/" + code,
+            method: "POST",
+            headers: {
+                'Authorization': 'Bearer ' + accessToken
+            },
+            contentType: "application/json",
+            dataType: "json",
+            success: function (resp) {
+                loadReturnOrders();
+            },
+            error: function (ob, statusText, error) {
+                let message = JSON.parse(error.responseText).message;
+                console.log(message);
+
+            }
+        });
+    }else {
+        const data = {
+            oid : code,
+            itemCode : $("#return_item_code").val(),
+            qty: $("#return_item_qty").val()
 
         }
-    });
+        console.log("not work");
+        $.ajax({
+            url: returnBaseUrl + "orders/returnOneOrder" ,
+            method: "POST",
+            data: JSON.stringify(data),
+            headers: {
+                'Authorization': 'Bearer ' + accessToken
+            },
+            contentType: "application/json",
+            // dataType: "json",
+            success: function (resp) {
+                loadReturnOrders();
+            },
+            error: function (ob, statusText, error) {
+                // let message = JSON.parse(error.responseText).message;
+                // console.log(message);
+
+            }
+        });
+    }
+
 
 }
 
@@ -99,3 +141,4 @@ function loadReturnOrders(){
 
 
 }
+

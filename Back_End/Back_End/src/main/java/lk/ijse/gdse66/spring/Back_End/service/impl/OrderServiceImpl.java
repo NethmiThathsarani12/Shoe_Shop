@@ -266,6 +266,49 @@ public class OrderServiceImpl implements OrderService {
         return mapper.map(saleDetailsRepo.findAllByStatus("RETURNED"),new TypeToken<ArrayList<SaleDetailsDTO>>(){}.getType());
     }
 
+    @Override
+    public void returnOneOrder(SaleDetailsDTO saleDetailsDTO) {
+        if (saleDetailsRepo.existsByOidAndItemCode(saleDetailsDTO.getOId(),saleDetailsDTO.getItemCode())){
+            SaleDetails byOidAndItemCode = saleDetailsRepo.findByOidAndItemCode(saleDetailsDTO.getOId(), saleDetailsDTO.getItemCode());
+            if (!byOidAndItemCode.getStatus().equals("RETURNED")){
+                if (byOidAndItemCode.getQty()>=saleDetailsDTO.getQty()){
+                    int qty= byOidAndItemCode.getQty();
+                    byOidAndItemCode.setQty(byOidAndItemCode.getQty()-saleDetailsDTO.getQty());
+                    byOidAndItemCode.setReturn_qty(byOidAndItemCode.getReturn_qty()+saleDetailsDTO.getQty());
+                    Item byCode = itemRepo.findByCode(saleDetailsDTO.getItemCode());
+                    byCode.setQty(byCode.getQty()+saleDetailsDTO.getQty());
+
+                    List<SaleDetails> allByOid = saleDetailsRepo.findAllByOid(saleDetailsDTO.getOId());
+
+
+                    if (qty == saleDetailsDTO.getQty()){
+                        byOidAndItemCode.setStatus("RETURNED");
+                        int count = 0;
+                        for (SaleDetails saleDetails:allByOid) {
+                            if (saleDetails.getStatus().equals("RETURNED")){
+                                count++;
+                            }
+
+                        }
+                        if (count==allByOid.size()){
+                            Sales byOid = repo.findByOid(saleDetailsDTO.getOId());
+                            byOid.setStatus("RETURNED");
+                        }
+                    }
+
+                }else {
+                    throw new RuntimeException("This qty you entered is too high");
+                }
+
+            }else {
+                throw new RuntimeException("This order already returned");
+            }
+        }else {
+            throw new RuntimeException("Order Not Found");
+        }
+    }
+
+
 
 //    @Override
 //    public Double getTotalProfit() {

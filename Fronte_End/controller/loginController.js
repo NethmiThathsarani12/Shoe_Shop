@@ -179,6 +179,12 @@ $("#btnLogin").click(function() {
     });
 });
 
+$(document).ready(function() {
+    var username = localStorage.getItem('email');
+    $("#greeting").text("Welcome, " +username);
+    $("#cashierName").val(username);
+});
+
 function fetchUserDetails(email, token) {
     $.ajax({
         url: lBaseUrl + "search/" + email,
@@ -204,7 +210,9 @@ function fetchUserDetails(email, token) {
                     }
                 }
             });
+            // clearTextField("","");
         },
+
         error: function (ob, textStatus, error) {
             Swal.fire({
                 icon: "error",
@@ -242,5 +250,12 @@ function performAuthenticatedRequest() {
             }
         });
     }
+}
+
+function clearTextField(email,password){
+    $("#user_Name").val(email)
+    $("#password").val(password)
+
+    $("#btnLogin").focus();
 }
 

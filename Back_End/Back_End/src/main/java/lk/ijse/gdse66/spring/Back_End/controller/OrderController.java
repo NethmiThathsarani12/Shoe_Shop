@@ -1,6 +1,7 @@
 package lk.ijse.gdse66.spring.Back_End.controller;
 
 import lk.ijse.gdse66.spring.Back_End.dto.CustomDTO;
+import lk.ijse.gdse66.spring.Back_End.dto.SaleDetailsDTO;
 import lk.ijse.gdse66.spring.Back_End.dto.SalesDTO;
 import lk.ijse.gdse66.spring.Back_End.service.OrderService;
 import lk.ijse.gdse66.spring.Back_End.utill.ResponseUtil;
@@ -78,6 +79,16 @@ public class OrderController {
     public ResponseUtil loadOrderReturn(){
         return new ResponseUtil("200","Successfully Fetch Can Be Returned",
                 service.loadReturnOrders());
+    }
+
+
+    @ResponseStatus(HttpStatus.CREATED)
+    @PostMapping("/returnOneOrder")
+    public ResponseUtil returnOneItemOrder(@RequestBody SaleDetailsDTO saleDetailsDTO){
+        System.out.println(saleDetailsDTO);
+        service.returnOneOrder(saleDetailsDTO);
+        return new ResponseUtil("200","Successfully Fetch Can Be Returned",null);
+
     }
 
 //    @ResponseStatus(HttpStatus.OK)
