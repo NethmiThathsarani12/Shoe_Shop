@@ -350,9 +350,16 @@ $(document).on("change keyup blur", "#txtCash", function () {
     }
 });
 
+$("#btnPurchase").click(function (){
+  purchase();
+});
 
-$("#btnPurchase").click(function () {
 
+$("#btnPurchaseC").click(function () {
+    purchase();
+});
+
+function purchase(){
     var SaleDetails = [];
     for (let i = 0; i < $("#tblAddToCart tr").length; i++) {
         var detailOb = {
@@ -383,7 +390,7 @@ $("#btnPurchase").click(function () {
     var date = $("#oDate").val();
     var payment = $("#Payment").val();
     var total = $("#txtTotal").val();
-    var totalPoint = $("#point").val();
+    var totalPoints = $("#point").val();
     var cashierName = $("#cashierName").val();
 
 
@@ -391,6 +398,7 @@ $("#btnPurchase").click(function () {
         oid: saleId,
         purchaseDate: date,
         total: total,
+        totalPoints: totalPoints,
         paymentMethod:payment,
         cashier: cashierName,
         customer: {
@@ -431,7 +439,8 @@ $("#btnPurchase").click(function () {
     $("#btnPurchase").attr('disabled', false);
     $("#btnAddToCart").attr('disabled', false);
     total = 0;
-});
+}
+
 //
 // const regExCusID = /^(C00-)[0-9]{3,4}$/;
 // const regExItemID = /^[A-z0-9/ ]{3,20}$/;

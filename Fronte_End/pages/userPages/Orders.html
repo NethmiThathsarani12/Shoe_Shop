@@ -18,6 +18,7 @@
     <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,600,600i,700,700i|Nunito:300,300i,400,400i,600,600i,700,700i|Poppins:300,300i,400,400i,500,500i,600,600i,700,700i"
           rel="stylesheet">
 
+    <link  href="https://unpkg.com/boxicons@latest/css/boxicons.min.css" rel="stylesheet">
     <!-- Vendor CSS Files -->
     <link href="../../assets/vendor/bootstrap-5.2.1-dist/css/bootstrap.min.css" rel="stylesheet">
     <link href="../../assets/vendor/bootstrap-icons/bootstrap-icons.css" rel="stylesheet">
@@ -26,7 +27,7 @@
 
     <!-- Template Dashboard CSS File -->
     <link href="../../assets/css/dashboardStyle.css" rel="stylesheet">
-
+    <link rel="stylesheet" href="../../assets/css/payment.css">
 
 
 </head>
@@ -268,7 +269,7 @@
                     </div>
                 </div>
 
-                <div class="row mt-1">
+                <!--<div class="row mt-1">
                     <div class="col-12 col-md-6 col-lg-6">
                         <label class="fw-bold" for="txtCardId">Card No</label>
                         <input class="form-control border-dark" id="txtCardId" type="text">
@@ -278,7 +279,7 @@
                         <input class="form-control border-dark" id="txtBankName" type="text">
                     </div>
 
-                </div>
+                </div>-->
 
 
                 <div class="row mt-1">
@@ -287,11 +288,63 @@
                         </button>
                     </div>
 
-                    <div class="d-grid col-12 col-md-5 mt-4">
-                        <button class="btn btn-primary rounded-2 bold sectionBorder" id="btnCard" type="button">Card
+                    <div class="d-grid col-12 col-md-5 mt-4 ms-3">
+                        <button class="btn btn-primary rounded-2 bold sectionBorder" id="card" type="button">Card
                         </button>
                     </div>
                 </div>
+                    <div id="myPopup" class="popup">
+                        <div class="popup-content">
+                            <button id="closePopup" ><i class='bx bxs-x-circle'></i></button>
+                            <h4 class="mt-8 mb-6">Credit Card Info</h4>
+                            <div class="todo-o">
+
+                                <div class=" row">
+                                    <img style="padding: 20px; height: 100px" class="img-responsive cc-img" src="http://www.prepbootstrap.com/Content/images/shared/misc/creditcardicons.png">
+                                </div>
+
+                                <hr>
+
+                                <div class="row">
+                                    <label>Card Number</label>
+                                    <div class="input-group">
+                                        <input type="tel" class="form-control" placeholder="Valid Card Number" />
+                                    </div>
+                                </div>
+
+                                <div class="row mb-3">
+                                    <div class="col-xs-7 col-md-7">
+                                        <div class="form-group">
+                                            <label><span class="hidden-xs">Expiration</span><span class="visible-xs-inline">EXP</span> Date</label>
+                                            <input type="tel" class="form-control" placeholder="MM / YY" />
+                                        </div>
+                                    </div>
+                                    <div class="col-xs-5 col-md-5 pull-right">
+                                        <div class="form-group">
+                                            <label>CV Code</label>
+                                            <input type="tel" class="form-control" placeholder="CVC" />
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="row">
+                                    <div class="col-xs-12">
+                                        <div class="form-group">
+                                            <label>Card Owner</label>
+                                            <input type="text" class="form-control" placeholder="Card Owner Names" />
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <button class="btn btn-primary rounded-2 bold sectionBorder" id="btnPurchaseC" type="button">Purchase
+                                </button>
+
+
+
+                            </div>
+                        </div>
+                    </div>
+
 
             </div>
             <!-- Order Details Section End -->
@@ -363,7 +416,7 @@
 <script src="../../controller/OrderCotroller.js"></script>
 <script src="../../controller/loginController.js"></script>
 
-
+<script src="../../assets/js/popup.js"></script>
 <!-- Util JS File -->
 <script src="../../util/alert.js" rel="script"></script>
 <script src="../../util/validation.js" rel="script"></script>

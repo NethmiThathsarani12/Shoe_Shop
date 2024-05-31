@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Diagram>
+  <ID>DATABASE</ID>
+  <OriginalElement>ffae9a2c-2700-4a8a-bb4c-eeca0bf44b4f</OriginalElement>
+  <nodes>
+    <node x="380.625" y="876.5">ffae9a2c-2700-4a8a-bb4c-eeca0bf44b4f.TABLE:hello_shoe_shop_pvt.supplier_items</node>
+    <node x="354.125" y="44.0">ffae9a2c-2700-4a8a-bb4c-eeca0bf44b4f.TABLE:hello_shoe_shop_pvt.supplier</node>
+    <node x="270.18586874445765" y="392.7412155975584">ffae9a2c-2700-4a8a-bb4c-eeca0bf44b4f.TABLE:hello_shoe_shop_pvt.item</node>
+    <node x="0.0" y="0.0">ffae9a2c-2700-4a8a-bb4c-eeca0bf44b4f.TABLE:hello_shoe_shop_pvt.customer</node>
+    <node x="1131.125" y="0.0">ffae9a2c-2700-4a8a-bb4c-eeca0bf44b4f.TABLE:hello_shoe_shop_pvt.admin_panel</node>
+    <node x="0.0" y="1066.0">ffae9a2c-2700-4a8a-bb4c-eeca0bf44b4f.TABLE:hello_shoe_shop_pvt.user</node>
+    <node x="630.125" y="0.0">ffae9a2c-2700-4a8a-bb4c-eeca0bf44b4f.TABLE:hello_shoe_shop_pvt.employee</node>
+    <node x="164.25" y="810.0">ffae9a2c-2700-4a8a-bb4c-eeca0bf44b4f.TABLE:hello_shoe_shop_pvt.sale_details</node>
+    <node x="5.5" y="481.0">ffae9a2c-2700-4a8a-bb4c-eeca0bf44b4f.TABLE:hello_shoe_shop_pvt.sales</node>
+  </nodes>
+  <notes />
+  <edges>
+    <edge source="ffae9a2c-2700-4a8a-bb4c-eeca0bf44b4f.TABLE:hello_shoe_shop_pvt.sale_details" target="ffae9a2c-2700-4a8a-bb4c-eeca0bf44b4f.TABLE:hello_shoe_shop_pvt.sales" relationship="REFERENCES">
+      <point x="-39.75" y="-105.5" />
+      <point x="204.0" y="784.0" />
+      <point x="123.0" y="784.0" />
+      <point x="0.0" y="105.5" />
+    </edge>
+    <edge source="ffae9a2c-2700-4a8a-bb4c-eeca0bf44b4f.TABLE:hello_shoe_shop_pvt.item" target="ffae9a2c-2700-4a8a-bb4c-eeca0bf44b4f.TABLE:hello_shoe_shop_pvt.supplier" relationship="REFERENCES">
+      <point x="0.0" y="-171.5" />
+      <point x="469.625" y="392.7412155975584" />
+      <point x="0.0" y="138.5" />
+    </edge>
+    <edge source="ffae9a2c-2700-4a8a-bb4c-eeca0bf44b4f.TABLE:hello_shoe_shop_pvt.sale_details" target="ffae9a2c-2700-4a8a-bb4c-eeca0bf44b4f.TABLE:hello_shoe_shop_pvt.item" relationship="REFERENCES">
+      <point x="39.75" y="-105.5" />
+      <point x="283.5" y="784.0" />
+      <point x="374.18586874445765" y="784.0" />
+      <point x="0.0" y="171.5" />
+    </edge>
+    <edge source="ffae9a2c-2700-4a8a-bb4c-eeca0bf44b4f.TABLE:hello_shoe_shop_pvt.supplier_items" target="ffae9a2c-2700-4a8a-bb4c-eeca0bf44b4f.TABLE:hello_shoe_shop_pvt.item" relationship="REFERENCES">
+      <point x="-44.5" y="-39.0" />
+      <point x="425.125" y="784.0" />
+      <point x="374.18586874445765" y="784.0" />
+      <point x="0.0" y="171.5" />
+    </edge>
+    <edge source="ffae9a2c-2700-4a8a-bb4c-eeca0bf44b4f.TABLE:hello_shoe_shop_pvt.sales" target="ffae9a2c-2700-4a8a-bb4c-eeca0bf44b4f.TABLE:hello_shoe_shop_pvt.customer" relationship="REFERENCES">
+      <point x="0.0" y="-105.5" />
+      <point x="0.0" y="182.5" />
+    </edge>
+    <edge source="ffae9a2c-2700-4a8a-bb4c-eeca0bf44b4f.TABLE:hello_shoe_shop_pvt.supplier_items" target="ffae9a2c-2700-4a8a-bb4c-eeca0bf44b4f.TABLE:hello_shoe_shop_pvt.supplier" relationship="REFERENCES">
+      <point x="44.5" y="-39.0" />
+      <point x="514.125" y="784.0" />
+      <point x="526.875" y="784.0" />
+      <point x="526.875" y="390.0" />
+      <point x="469.625" y="390.0" />
+      <point x="0.0" y="138.5" />
+    </edge>
+  </edges>
+  <settings layout="Hierarchic" zoom="0.854177005789909" showDependencies="false" x="185.9328076881278" y="778.6570682516905" />
+  <SelectedNodes>
+    <node>ffae9a2c-2700-4a8a-bb4c-eeca0bf44b4f.TABLE:hello_shoe_shop_pvt.item</node>
+  </SelectedNodes>
+  <Categories>
+    <Category>Columns</Category>
+    <Category>Key columns</Category>
+    <Category>Virtual foreign keys</Category>
+  </Categories>
+</Diagram>
+
